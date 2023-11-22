@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://lgpc7dqg0ecp"]
+
+[ext_resource type="Script" path="res://ServerBrowser.gd" id="1_r05t6"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ServerBrowser" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_r05t6")
+
+[node name="BroadcastTimer" type="Timer" parent="ServerBrowser"]
+autostart = true
+
+[connection signal="timeout" from="ServerBrowser/BroadcastTimer" to="ServerBrowser" method="_on_broadcast_timer_timeout"]
