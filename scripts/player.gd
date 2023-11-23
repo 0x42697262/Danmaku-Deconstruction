@@ -55,6 +55,8 @@ func move(delta):
 	position.x = clamp(position.x, 0, 600)
 	
 ## Sets the default values of the scene when it's called.
+##
+## Adds collision shape children and sprite.
 func _ready():
 	graze_area = CollisionShape2D.new()
 	hitbox = CollisionShape2D.new()
