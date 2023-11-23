@@ -30,6 +30,7 @@ extends Node2D
 ## @Tutorial(Tutorial 2): https://docs.godotengine.org/en/stable/classes/class_inputeventkey.html
 ## @Tutorial(Tutorial 3): https://docs.godotengine.org/en/stable/classes/class_inputeventwithmodifiers.html
 func set_keybinds():
+	InputMap.load_from_project_settings() # resets the key binds
 	for key in keybinds:
 		var ev: InputEventKey = InputEventKey.new()
 		ev.physical_keycode = keybinds[key]
