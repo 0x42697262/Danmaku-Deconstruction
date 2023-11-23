@@ -42,7 +42,7 @@ func move(delta):
 	if Input.is_action_pressed(&"move_dash"):
 		speed_multiplier = 2
 
-	if Input.is_action_just_released(&"move_slow"):
+	if Input.is_action_just_released(&"move_focus"):
 		speed_multiplier = 1
 	if Input.is_action_just_released(&"move_dash"):
 		speed_multiplier = 1
