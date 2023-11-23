@@ -1,27 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwuhco7ccys8m"]
+[gd_scene load_steps=7 format=3 uid="uid://bwuhco7ccys8m"]
 
 [ext_resource type="Texture2D" uid="uid://54udlbh1876o" path="res://assets/idle-1.png" id="1_7m1np"]
 
+[sub_resource type="Gradient" id="Gradient_aati2"]
+offsets = PackedFloat32Array(0, 0.0642458, 0.617318, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.824015, 0.0722761, 0.450756, 0.603922, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_76dtc"]
+gradient = SubResource("Gradient_aati2")
+
+[sub_resource type="Curve" id="Curve_ra247"]
+_data = [Vector2(0, 0.48421), 0.0, 0.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_prnw6"]
+curve = SubResource("Curve_ra247")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_683at"]
 particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
+gravity = Vector3(0, 0, 0)
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_prnw6")
+color_ramp = SubResource("GradientTexture1D_76dtc")
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="Area2D" parent="."]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(279, 215)
-texture = ExtResource("1_7m1np")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="CharacterBody2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Player"]
 z_index = -1
-position = Vector2(349, 220)
+position = Vector2(297, 234)
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_683at")
 texture = ExtResource("1_7m1np")
 speed_scale = 2.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(279, 215)
+texture = ExtResource("1_7m1np")
