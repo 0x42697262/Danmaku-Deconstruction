@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cr1b6patcb4wa"]
+
+[node name="Multiplayer" type="Node2D"]
+
+[node name="Join" type="Button" parent="."]
+offset_left = 71.0
+offset_top = 49.0
+offset_right = 223.0
+offset_bottom = 104.0
+text = "Join"
+
+[node name="Host" type="Button" parent="."]
+offset_left = 245.0
+offset_top = 48.0
+offset_right = 396.0
+offset_bottom = 103.0
+text = "Host
+"
