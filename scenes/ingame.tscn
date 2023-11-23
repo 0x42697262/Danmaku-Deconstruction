@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwuhco7ccys8m"]
+
+[ext_resource type="Script" path="res://scripts/PlayArea.gd" id="1_0qp5v"]
+[ext_resource type="Texture2D" uid="uid://54udlbh1876o" path="res://assets/idle-1.png" id="1_tmtl5"]
+[ext_resource type="Script" path="res://scenes/Player.gd" id="2_q82c0"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_11q6l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ch1w"]
+radius = 8.0
+height = 42.0
+
+[node name="Ingame" type="Node2D"]
+
+[node name="PlayArea" type="Control" parent="."]
+top_level = true
+layout_mode = 3
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_right = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0qp5v")
+
+[node name="ColorRect" type="ColorRect" parent="PlayArea"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 648.0
+
+[node name="Player" type="Area2D" parent="PlayArea"]
+position = Vector2(300, 627)
+script = ExtResource("2_q82c0")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayArea/Player"]
+texture = ExtResource("1_tmtl5")
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="PlayArea/Player"]
+material = SubResource("CanvasItemMaterial_11q6l")
+shape = SubResource("CapsuleShape2D_8ch1w")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
