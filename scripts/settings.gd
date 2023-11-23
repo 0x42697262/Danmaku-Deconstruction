@@ -1,11 +1,10 @@
-extends Node2D
-
 ## Settings Scene
 ##
 ## This scene serves as a singleton to manage game settings such as volume levels
 ## and key bindings. It provides a central point for accessing and modifying these
 ## settings throughout the game.
 ## The settings that have been provided are default values.
+extends Node2D
 
 ## Volume settings
 @export var volume: float = 1.0
