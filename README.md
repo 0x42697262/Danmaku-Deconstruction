@@ -9,3 +9,7 @@ To contribute, fork the repository and clone it to your local machine. After mak
 # Documentation
 
 Any changes made to the game project settings and game mechanics should be documented in the `docs` directory.
+
+You can start documenting your scripts with [GDScript documentation comments](https://docs.godotengine.org/en/4.0/tutorials/scripting/gdscript/gdscript_documentation_comments.html).
+
+`docs` directory is generated using [gdscripts-docs-maker](https://github.com/GDQuest/gdscript-docs-maker#writing-your-code-reference).
