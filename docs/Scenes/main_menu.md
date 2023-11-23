@@ -4,4 +4,5 @@
 
 - Singleplayer
 - Multiplayer
+- Settings
 - Exit or Quit
