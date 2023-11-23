@@ -16,6 +16,14 @@ Max FPS: `60`
 
 ### Window
 
+#### Size
+
 Viewport Width: `1152`
 
 Viewport Height: `648`
+
+#### Stretch
+
+Mode: `canvas_items`
+
+Aspect: `keep`
