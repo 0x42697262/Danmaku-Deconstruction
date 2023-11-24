@@ -1,17 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6uvii5t4lp0p"]
+[gd_scene load_steps=2 format=3 uid="uid://c6uvii5t4lp0p"]
 
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_vuuu2"]
-[ext_resource type="Texture2D" uid="uid://bp7dikct7duer" path="res://assets/Characters/orange_character.png" id="2_j8ak3"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_w2v2q"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_apbvq"]
-radius = 45.0111
-
-[node name="player" type="CharacterBody2D"]
-script = ExtResource("1_vuuu2")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_j8ak3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_apbvq")
+[node name="player" type="Area2D"]
+position = Vector2(216, 186)
+script = ExtResource("1_w2v2q")
