@@ -10,7 +10,22 @@ config_version=5
 
 [application]
 
+<<<<<<< HEAD
 config/name="Danmaku-deconstruction"
 run/main_scene="res://platform.tscn"
+=======
+config/name="Danmaku Deconstruction"
+config/description="A simple bullet hell game."
+run/main_scene="res://scenes/game_init.tscn"
+>>>>>>> c829664cf3fba8f21611c171650e205bad8aa8d2
 config/features=PackedStringArray("4.1", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
+
+[autoload]
+
+Settings="*res://scripts/settings.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
