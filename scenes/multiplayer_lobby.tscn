@@ -1,3 +1,86 @@
-[gd_scene format=3 uid="uid://c8vyjbvmogbdb"]
+[gd_scene load_steps=5 format=3 uid="uid://c8vyjbvmogbdb"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Theme" uid="uid://ba5kplk6mf3lw" path="res://assets/themes/button.tres" id="1_hnj6p"]
+[ext_resource type="Theme" uid="uid://b8ofkw57etf4m" path="res://assets/themes/text_input.tres" id="2_xbg64"]
+[ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="3_xjene"]
+[ext_resource type="Script" path="res://scenes/server_browser.gd" id="4_rnkrb"]
+
+[node name="Mode Selection" type="Node2D"]
+
+[node name="Create Lobby" type="Button" parent="."]
+offset_left = 701.0
+offset_top = 164.0
+offset_right = 943.0
+offset_bottom = 228.0
+theme = ExtResource("1_hnj6p")
+text = "Create Lobby
+"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 703.0
+offset_top = 106.0
+offset_right = 944.0
+offset_bottom = 158.0
+scale = Vector2(0.977749, 1.17928)
+theme = ExtResource("2_xbg64")
+placeholder_text = "Enter Lobby Name"
+alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 76.0
+offset_top = 86.0
+offset_right = 166.0
+offset_bottom = 112.0
+theme = ExtResource("3_xjene")
+text = "Server List :"
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 77.0
+offset_top = 116.0
+offset_right = 574.0
+offset_bottom = 598.0
+
+[node name="server_label" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 496.0
+offset_bottom = 45.0
+
+[node name="server_name" type="Label" parent="Panel/server_label"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_xjene")
+text = "Server Name"
+horizontal_alignment = 1
+
+[node name="server_ip" type="Label" parent="Panel/server_label"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_xjene")
+text = "IP"
+horizontal_alignment = 1
+
+[node name="player_number" type="Label" parent="Panel/server_label"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_xjene")
+text = "Number of Players
+"
+horizontal_alignment = 1
+
+[node name="server_list" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_top = 44.0
+offset_right = 495.0
+offset_bottom = 484.0
+
+[node name="server_browser" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_rnkrb")
+
+[node name="broadcast_timer" type="Timer" parent="server_browser"]
+autostart = true
+
+[connection signal="timeout" from="server_browser/broadcast_timer" to="server_browser" method="_on_broadcast_timer_timeout"]
