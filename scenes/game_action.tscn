@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://ddj4cpmidvvbn"]
+
+[node name="game_action" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="game_action_container" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="left_ui_container" type="VBoxContainer" parent="game_action_container"]
+custom_minimum_size = Vector2(270, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="game_action_container/left_ui_container"]
+custom_minimum_size = Vector2(0, 648)
+layout_mode = 2
+color = Color(0.819608, 0.619608, 0.282353, 1)
+
+[node name="play_area_container" type="VBoxContainer" parent="game_action_container"]
+custom_minimum_size = Vector2(610, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="game_action_container/play_area_container"]
+custom_minimum_size = Vector2(0, 648)
+layout_mode = 2
+
+[node name="right_ui_container" type="VBoxContainer" parent="game_action_container"]
+custom_minimum_size = Vector2(264, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="game_action_container/right_ui_container"]
+custom_minimum_size = Vector2(0, 648)
+layout_mode = 2
+color = Color(0.894118, 0.372549, 0.360784, 1)
