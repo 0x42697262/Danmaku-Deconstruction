@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://ddj4cpmidvvbn"]
+[gd_scene load_steps=2 format=3 uid="uid://8rsylcgel122"]
+
+[ext_resource type="Script" path="res://scripts/play_area_container.gd" id="1_m06ba"]
 
 [node name="game_action" type="Control"]
 layout_mode = 3
@@ -17,7 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="left_ui_container" type="VBoxContainer" parent="game_action_container"]
-custom_minimum_size = Vector2(270, 0)
+custom_minimum_size = Vector2(270, 648)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="game_action_container/left_ui_container"]
@@ -26,15 +28,12 @@ layout_mode = 2
 color = Color(0.819608, 0.619608, 0.282353, 1)
 
 [node name="play_area_container" type="VBoxContainer" parent="game_action_container"]
-custom_minimum_size = Vector2(610, 0)
+custom_minimum_size = Vector2(610, 648)
 layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="game_action_container/play_area_container"]
-custom_minimum_size = Vector2(0, 648)
-layout_mode = 2
+script = ExtResource("1_m06ba")
 
 [node name="right_ui_container" type="VBoxContainer" parent="game_action_container"]
-custom_minimum_size = Vector2(264, 0)
+custom_minimum_size = Vector2(264, 648)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="game_action_container/right_ui_container"]
