@@ -11,11 +11,11 @@ extends Node2D
 @export var volume: float = 1.0
 ## Key bindings settings
 @export var keybinds: Dictionary = {
-	"move_dash"     : KEY_Z,
-	"move_left"     : KEY_LEFT,
-	"move_right"    : KEY_RIGHT,
+	"move_dash"     : KEY_J,
+	"move_left"     : KEY_A,
+	"move_right"    : KEY_D,
 	"move_focus"    : KEY_SHIFT,
-	"move_skill"    : KEY_SPACE,
+	"move_skill"    : KEY_K,
   }
 
 

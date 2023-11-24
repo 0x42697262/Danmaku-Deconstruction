@@ -14,8 +14,8 @@ extends Area2D
 ## - Normal: 1.0
 ## - Dash: 2.0
 @export var speed_multiplier: float = 1.0
-@export var DASH_MULTIPLIER: float = 3.0
-@export var FOCUS_MULTIPLIER: float = 0.33
+@export var DASH_MULTIPLIER: float = 4.0
+@export var FOCUS_MULTIPLIER: float = 0.5
 ## Graze collision shape 2d
 ##
 ## Used for detecting player collisions against another player.
