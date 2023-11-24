@@ -16,7 +16,7 @@ func _ready():
 	
 func setup_broadcast(name, count):
 	room_info.name = name
-	room_info.player_count = game_manager.Players.size()
+	#room_info.player_count = game_manager.Players.size()
 	
 
 
