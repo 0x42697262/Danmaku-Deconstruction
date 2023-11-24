@@ -11,6 +11,12 @@
 ## - Networking Multiplayer
 ## - Audio
 ## - Modules
+##
+## Autoloads should be added in the /scripts/autoloads directory then add the
+## script on the project settings autoload
+## 
+## The /scripts directory should be independent of any scenes. Scripts for the
+## scenes should be placed on the same directory as the scene itself.
 
 extends Node
 
