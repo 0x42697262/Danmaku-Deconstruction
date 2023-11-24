@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://ba5kplk6mf3lw" path="res://assets/themes/button.tres" id="1_hnj6p"]
 [ext_resource type="Theme" uid="uid://b8ofkw57etf4m" path="res://assets/themes/text_input.tres" id="2_xbg64"]
 [ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="3_xjene"]
-[ext_resource type="Script" path="res://scenes/server_browser.gd" id="4_rnkrb"]
+[ext_resource type="Script" path="res://scenes/_temp(for_deletion)/server_browser.gd" id="4_rnkrb"]
 
 [node name="Mode Selection" type="Node2D"]
 
