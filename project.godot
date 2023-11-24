@@ -19,8 +19,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Settings="*res://scripts/handlers/settings_handler.gd"
-game_manager="*res://game_manager.gd"
+Settings="*res://scripts/autoloads/settings.gd"
 
 [display]
 
