@@ -4,7 +4,7 @@
 extends Area2D
 
 ## Player speed (pixels per second)
-@export var speed: int = 200
+@export var speed: float = 300.0
 ## Player speed multiplier
 ##
 ## Can be used for dash and focus.
@@ -12,8 +12,8 @@ extends Area2D
 ## Multipliers:
 ## - Focus: 0.5
 ## - Normal: 1.0
-## - Dash: 2.0
-@export var speed_multiplier: float = 1.0
+## - Dash: 4.0
+@export var SPEED_MULTIPLIER: float = 1.0
 @export var DASH_MULTIPLIER: float = 4.0
 @export var FOCUS_MULTIPLIER: float = 0.5
 ## Graze collision shape 2d
@@ -38,11 +38,9 @@ var body_sprite: Sprite2D
 @export var body_radius: int = 14
 ## Hitbox radius
 @export var hitbox_radius: float = 3
-## Player color
-@export var color: Color = Color.RED
 ## Map Area
-@export var area_min: Vector2 = Vector2(10, 16)
-@export var area_max: Vector2 = Vector2(600, 632)
+@export var area_min: Vector2 = Vector2.ZERO
+@export var area_max: Vector2 = Vector2(800, 598)
 
 ## Player movement
 ##
@@ -62,17 +60,17 @@ func move(delta):
 		velocity.y += 1
 
 	if Input.is_action_pressed(&"move_focus"):
-		speed_multiplier = FOCUS_MULTIPLIER
+		SPEED_MULTIPLIER = FOCUS_MULTIPLIER
 	if Input.is_action_pressed(&"move_dash"):
-		speed_multiplier = DASH_MULTIPLIER
+		SPEED_MULTIPLIER = DASH_MULTIPLIER
 
 	if Input.is_action_just_released(&"move_focus"):
-		speed_multiplier = 1
+		SPEED_MULTIPLIER = 1
 	if Input.is_action_just_released(&"move_dash"):
-		speed_multiplier = 1
+		SPEED_MULTIPLIER = 1
 
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed * speed_multiplier
+		velocity = velocity.normalized() * speed * SPEED_MULTIPLIER
 		
 	position += velocity * delta
 
@@ -97,34 +95,20 @@ func _ready():
 	add_child(hitbox)
 
 	body_sprite = Sprite2D.new()
-	var texture: Texture = preload("res://assets/Characters/red_character.png")
+	var texture: Texture = preload("res://assets/Characters/gray_character.png")
 	body_sprite.texture = texture
 	body_sprite.scale = Vector2(body_radius*2+5,body_radius*2+5) / texture.get_size()
+	
+	area_min.x += body_radius+1
+	area_min.y += body_radius+1
+	area_max.x -= body_radius+1
+	area_max.y -= body_radius+1
 
 	add_child(body_sprite)
-
+	
+func set_sprite_texture(texture: Texture):
+	body_sprite.texture = texture
 
 ## Updates the player every frame.
 func _process(delta):
 	move(delta)
-
-## Sets the position area of the player
-func set_area_size(a_max: Vector2, a_min: Vector2 = Vector2.ZERO):
-	area_max = a_max
-	area_min = a_min
-
-## adds body to the player
-## 
-## this is an unused function since we are currently using sprites
-func _add_body(clr: Color, radius: int):
-	body = Polygon2D.new()
-	var polygon_array = PackedVector2Array()
-	for i in range(361):
-		var angle = deg_to_rad(i)
-		var point = Vector2(cos(angle), sin(angle)) * radius
-		polygon_array.push_back(point)
-	body.polygon = polygon_array
-	body.color = clr
-
-	add_child(body)
-

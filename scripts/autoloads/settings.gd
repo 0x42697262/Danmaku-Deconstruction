@@ -8,9 +8,9 @@ extends Node2D
 ## The settings that have been provided are default values.
 
 ## Volume settings
-@export var volume: float = 1.0
+var volume: float = 1.0
 ## Key bindings settings
-@export var keybinds: Dictionary = {
+var keybinds: Dictionary = {
 	"move_dash"     : KEY_J,
 	"move_left"     : KEY_A,
 	"move_right"    : KEY_D,
