@@ -11,11 +11,12 @@ var players: Array = []
 
 func _ready():
 	print('loading: lobby system')
-	for i in range(3):
-		create_player()
+	for i in range(8):
+		create_player(i)
 	
-
-func create_player():
-	var player = PLAYER_SCENE.instantiate()
+## Instantiates a new player with an ID
+func create_player(id: int):
+	var player: Node = PLAYER_SCENE.instantiate()
+	player.id = id
 	players.append(player)
 	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://de3fcc1ng16a7"]
 
-[ext_resource type="Script" path="res://scenes/_temp(for_deletion)/play_area_container.gd" id="1_q075y"]
+[ext_resource type="Script" path="res://scenes/world/play_area_container.gd" id="1_os3t6"]
 
 [node name="gameplay" type="Control"]
 layout_mode = 3
@@ -45,7 +45,7 @@ grow_vertical = 2
 [node name="play_area_container" type="VBoxContainer" parent="hud/game_action_container"]
 custom_minimum_size = Vector2(800, 598)
 layout_mode = 2
-script = ExtResource("1_q075y")
+script = ExtResource("1_os3t6")
 
 [node name="ColorRect" type="ColorRect" parent="hud/game_action_container/play_area_container"]
 custom_minimum_size = Vector2(0, 598)
