@@ -27,6 +27,7 @@ var hitbox: CollisionShape2D
 ## Polygon body circle
 var body: Polygon2D
 var body_sprite: Sprite2D
+var texture: Texture
 
 ## Player settings
 ##
@@ -54,10 +55,10 @@ func move(delta):
 		velocity.x += 1
 	if Input.is_action_pressed(&"move_left"):
 		velocity.x -= 1
-	if Input.is_action_pressed(&"ui_up"):
-		velocity.y -= 1
-	if Input.is_action_pressed(&"ui_down"):
-		velocity.y += 1
+	#if Input.is_action_pressed(&"ui_up"):
+	#	velocity.y -= 1
+	#if Input.is_action_pressed(&"ui_down"):
+	#	velocity.y += 1
 
 	if Input.is_action_pressed(&"move_focus"):
 		SPEED_MULTIPLIER = FOCUS_MULTIPLIER
@@ -95,7 +96,23 @@ func _ready():
 	add_child(hitbox)
 
 	body_sprite = Sprite2D.new()
-	var texture: Texture = preload("res://assets/Characters/gray_character.png")
+	match id:
+		0:
+			texture = preload("res://assets/Characters/red_character.png")
+		1:
+			texture = preload("res://assets/Characters/orange_character.png")
+		2:
+			texture = preload("res://assets/Characters/yellow_character.png")
+		3:
+			texture = preload("res://assets/Characters/green_character.png")
+		4:
+			texture = preload("res://assets/Characters/blue_character.png")
+		5:
+			texture = preload("res://assets/Characters/pink_character.png")
+		6:
+			texture = preload("res://assets/Characters/violet_character.png")
+		_:
+			texture = preload("res://assets/Characters/gray_character.png")
 	body_sprite.texture = texture
 	body_sprite.scale = Vector2(body_radius*2+5,body_radius*2+5) / texture.get_size()
 	
@@ -105,9 +122,6 @@ func _ready():
 	area_max.y -= body_radius+1
 
 	add_child(body_sprite)
-	
-func set_sprite_texture(texture: Texture):
-	body_sprite.texture = texture
 
 ## Updates the player every frame.
 func _process(delta):
