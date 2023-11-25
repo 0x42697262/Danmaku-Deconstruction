@@ -8,7 +8,7 @@ func _ready():
 ## Replace GUI
 ##
 ## replaces all gui with a new gui
-func replace_gui(node: Node):
+func replace(node: Node):
 	remove_all_children()
 	add_child(node)
 
