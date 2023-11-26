@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://4mb37tol2l2s"]
+
+[ext_resource type="Texture2D" uid="uid://ci0k33rqmwrop" path="res://assets/Screen 4.png" id="1_y7v1y"]
+[ext_resource type="Theme" uid="uid://d26hyohpn50a2" path="res://assets/themes/landingbutton.tres" id="2_qweai"]
+[ext_resource type="Texture2D" uid="uid://dixn36xt3680y" path="res://assets/Group 14.png" id="3_cxy7i"]
+
+[node name="Landing_page" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Screen4" type="Sprite2D" parent="."]
+position = Vector2(575, 324)
+scale = Vector2(0.800694, 0.635742)
+texture = ExtResource("1_y7v1y")
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -99.0
+offset_top = 463.0
+offset_right = 104.0
+offset_bottom = 519.0
+grow_horizontal = 2
+theme = ExtResource("2_qweai")
+text = "Exit"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 476.0
+offset_top = 404.0
+offset_right = 679.0
+offset_bottom = 459.0
+theme = ExtResource("2_qweai")
+text = "Options"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.502
+anchor_right = 0.502
+offset_left = -101.304
+offset_top = 346.0
+offset_right = 101.696
+offset_bottom = 400.0
+theme = ExtResource("2_qweai")
+text = "Play"
+
+[node name="Group14" type="Sprite2D" parent="."]
+position = Vector2(584, 251)
+scale = Vector2(0.487531, 0.487531)
+texture = ExtResource("3_cxy7i")
