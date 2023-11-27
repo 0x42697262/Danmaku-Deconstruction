@@ -18,6 +18,8 @@ var keybinds: Dictionary = {
 	"move_skill"    : KEY_K,
   }
 
+## LAN Port
+var port: int = 42069
 
 ## Key Bindings Settings
 ##
