@@ -42,6 +42,7 @@ var texture: Texture
 ## Map Area
 @export var area_min: Vector2 = Vector2.ZERO
 @export var area_max: Vector2 = Vector2(800, 598)
+@export var y_movement: int = 0
 
 ## Player movement
 ##
@@ -55,10 +56,10 @@ func move(delta):
 		velocity.x += 1
 	if Input.is_action_pressed(&"move_left"):
 		velocity.x -= 1
-	#if Input.is_action_pressed(&"ui_up"):
-	#	velocity.y -= 1
-	#if Input.is_action_pressed(&"ui_down"):
-	#	velocity.y += 1
+	if Input.is_action_pressed(&"move_up"):
+		velocity.y -= y_movement
+	if Input.is_action_pressed(&"move_down"):
+		velocity.y += y_movement
 
 	if Input.is_action_pressed(&"move_focus"):
 		SPEED_MULTIPLIER = FOCUS_MULTIPLIER
