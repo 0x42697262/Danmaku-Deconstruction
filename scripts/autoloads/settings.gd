@@ -15,9 +15,13 @@ var keybinds: Dictionary = {
 	"move_left"     : KEY_A,
 	"move_right"    : KEY_D,
 	"move_focus"    : KEY_SHIFT,
-	"move_skill"    : KEY_K,
+	"move_special"  : KEY_SPACE,
+	"move_up"       : KEY_W,
+	"move_down"     : KEY_S,
   }
 
+## LAN Address
+var address: String = "0.0.0.0"
 ## LAN Port
 var port: int = 42069
 
