@@ -28,6 +28,7 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_scene_position()
+	get_tree().change_scene_to_file("res://scenes/_temp(for_deletion)/1_main_menu.tscn")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

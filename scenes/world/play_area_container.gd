@@ -2,7 +2,7 @@ extends VBoxContainer
 
 
 func _ready():
-	add_players(Lobby.players)
+	add_players(LobbyManager.players)
 	
 
 ## Adds new player as a child to the play area

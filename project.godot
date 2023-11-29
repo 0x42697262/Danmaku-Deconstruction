@@ -21,7 +21,7 @@ config/icon="res://icon.svg"
 
 SceneSwitcher="*res://scripts/autoloads/scene_switcher.gd"
 Settings="*res://scripts/autoloads/settings.gd"
-Lobby="*res://scripts/autoloads/lobby.gd"
+LobbyManager="*res://scripts/autoloads/lobby_manager.gd"
 
 [debug]
 
