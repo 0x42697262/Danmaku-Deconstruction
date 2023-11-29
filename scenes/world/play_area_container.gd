@@ -13,6 +13,7 @@ func add_players(players):
 	
 	var i = 0
 	for player in players:
+		player = players[player]
 		add_child(player)
 		var location = spots.pop_back()
 		player.position = Vector2(location, 598)

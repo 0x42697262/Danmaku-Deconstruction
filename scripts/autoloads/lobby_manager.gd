@@ -7,7 +7,7 @@
 extends Node
 
 var PLAYER_SCENE: PackedScene = preload("res://scenes/entities/player.tscn")
-var players: Array = []
+var players: Dictionary = {}
 
 func _ready():
 	print('loading: lobby system')
@@ -18,5 +18,5 @@ func _ready():
 func create_player(id: int):
 	var player: Node = PLAYER_SCENE.instantiate()
 	player.id = id
-	players.append(player)
+	players[id] = player
 	

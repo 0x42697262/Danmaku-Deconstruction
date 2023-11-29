@@ -6,4 +6,4 @@ func _on_exit_pressed():
 
 
 func _on_play_pressed():
-	SceneSwitcher.switch('lobby_list')
+	SceneSwitcher.switch('multiplayer_lobby')
