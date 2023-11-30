@@ -17,6 +17,6 @@ func _ready():
 ## Instantiates a new player with an ID
 func create_player(id: int):
 	var player: Node = PLAYER_SCENE.instantiate()
-	player.id = id
+	player.id = str(id)
 	players[id] = player
 	

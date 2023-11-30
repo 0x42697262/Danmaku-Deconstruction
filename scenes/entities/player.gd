@@ -50,34 +50,35 @@ var texture: Texture
 ## 
 ## Left and right movements should be exclusive. Dash takes priority than focus.
 func move(delta):
-	var velocity: Vector2 = Vector2.ZERO
+	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		var velocity: Vector2 = Vector2.ZERO
 
-	if Input.is_action_pressed(&"move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed(&"move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed(&"move_up"):
-		velocity.y -= y_movement
-	if Input.is_action_pressed(&"move_down"):
-		velocity.y += y_movement
+		if Input.is_action_pressed(&"move_right"):
+			velocity.x += 1
+		if Input.is_action_pressed(&"move_left"):
+			velocity.x -= 1
+		if Input.is_action_pressed(&"move_up"):
+			velocity.y -= y_movement
+		if Input.is_action_pressed(&"move_down"):
+			velocity.y += y_movement
 
-	if Input.is_action_pressed(&"move_focus"):
-		SPEED_MULTIPLIER = FOCUS_MULTIPLIER
-	if Input.is_action_pressed(&"move_dash"):
-		SPEED_MULTIPLIER = DASH_MULTIPLIER
+		if Input.is_action_pressed(&"move_focus"):
+			SPEED_MULTIPLIER = FOCUS_MULTIPLIER
+		if Input.is_action_pressed(&"move_dash"):
+			SPEED_MULTIPLIER = DASH_MULTIPLIER
 
-	if Input.is_action_just_released(&"move_focus"):
-		SPEED_MULTIPLIER = 1
-	if Input.is_action_just_released(&"move_dash"):
-		SPEED_MULTIPLIER = 1
+		if Input.is_action_just_released(&"move_focus"):
+			SPEED_MULTIPLIER = 1
+		if Input.is_action_just_released(&"move_dash"):
+			SPEED_MULTIPLIER = 1
 
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed * SPEED_MULTIPLIER
-		
-	position += velocity * delta
+		if velocity.length() > 0:
+			velocity = velocity.normalized() * speed * SPEED_MULTIPLIER
+			
+		position += velocity * delta
 
-	position.x = clamp(position.x, area_min.x, area_max.x)
-	position.y = clamp(position.y, area_min.y, area_max.y)
+		position.x = clamp(position.x, area_min.x, area_max.x)
+		position.y = clamp(position.y, area_min.y, area_max.y)
 	
 ## Sets the default values of the scene when it's called.
 ##
@@ -123,6 +124,8 @@ func _ready():
 	area_max.y -= body_radius+1
 
 	add_child(body_sprite)
+	
+	$MultiplayerSynchronizer.set_multiplayer_authority(str(id).to_int())
 
 ## Updates the player every frame.
 func _process(delta):
