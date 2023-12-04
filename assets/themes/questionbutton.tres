@@ -1,9 +1,9 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://fo1x1as2qt4l"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://86g371j1l8kt"]
 
 [ext_resource type="FontFile" uid="uid://d6iib252kl1w" path="res://assets/Fonts/Gaegu-Bold.ttf" id="1_66gnm"]
-[ext_resource type="Texture2D" uid="uid://48y3moiejkgd" path="res://assets/Buttons/Group 7.png" id="2_15fr5"]
-[ext_resource type="Texture2D" uid="uid://dutfub003bg10" path="res://assets/Buttons/question button.png" id="4_4fk3s"]
-[ext_resource type="Texture2D" uid="uid://udtc501uspci" path="res://assets/Buttons/question pressed.png" id="5_68u7v"]
+[ext_resource type="Texture2D" path="res://assets/Buttons/Group 7.png" id="2_15fr5"]
+[ext_resource type="Texture2D" path="res://assets/Buttons/question button.png" id="4_4fk3s"]
+[ext_resource type="Texture2D" path="res://assets/Buttons/question pressed.png" id="5_68u7v"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y03px"]
 texture = ExtResource("2_15fr5")

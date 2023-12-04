@@ -9,7 +9,7 @@ extends Control
 @onready var TutorialMenu = $TutorialMenu as TutorialsMenu
 @onready var margin_container = $MarginContainer as MarginContainer
 
-@onready var next = preload("res://scenes/main.tscn") as PackedScene
+@onready var next = preload("res://scenes/multiplayer_lobby.tscn") as PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	handle_connecting_signal()
