@@ -1,7 +1,7 @@
 extends Node2D
 
-const BULLET_COUNT_MAX  = 2500
-const SPEED_MIN         = 200
+const BULLET_COUNT_MAX  = 3500
+const SPEED_MIN         = 20
 const SPEED_MAX         = 500
 const BULLET_IMAGE      = preload("res://assets/Characters/bullet.png")
 
@@ -61,7 +61,9 @@ func instantiate_bullets():
 		PhysicsServer2D.body_set_collision_mask(bullet.body, 0)
 
 		spawner.progress    = randi()
-		bullet.position     = Vector2(0,0)
+		bullet.position     = Vector2(randi_range(10, 1152) + 1152,
+			randi_range(0, 648)
+			)
 		
 		var transform2d     = Transform2D()
 		transform2d.origin  = bullet.position
@@ -78,40 +80,41 @@ func clean_up_memory():
 
 func spawn_bullet(delta):
 	var transform2d: Transform2D = Transform2D()
+	var offset = get_viewport_rect().size.x + 16
 	for bullet in bullets:
 		if bullet.enabled == false:
 			continue
 		
-		spawner.progress = randi()
-		var vector = Vector2(0, bullet.speed)
-		# right side
-		if spawner.progress_ratio > 0.25:
-			vector = Vector2(-bullet.speed, 0)
-		# bottom
-		elif spawner.progress_ratio > 0.50:
-			vector = Vector2(0, -bullet.speed)
-		# left side
-		elif spawner.progress_ratio > 0.50:
-			vector = Vector2(bullet.speed, 0)
-		bullet.position += Vector2(bullet.speed, 0) * delta
+		var c = randi_range(0, 1000)
+		var y = 1
+		if c == 0:
+			y = -1
+		if c == 1:
+			bullet.position.x += 100
+			
+		bullet.position -= Vector2(bullet.speed, 0) * delta * y
+
+		if bullet.position.x < -16:
+			bullet.position.x = offset
 			
 		transform2d.origin = bullet.position
 		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)
 	
 func reset_bullet_position(bullet):
-		spawner.progress = randi()
-		bullet.position = spawner.position
+		#spawner.progress = randi()
+		#bullet.position = spawner.position
+		bullet.position.x = get_viewport_rect().size.x + 16
 		
 func _on_touched_signal(body_rid):
-	reset_bullet_position(body_rid)
+	reset_bullet_position(rids[body_rid])
 
 func _on_timer_timeout():
-	if difficulty >= 500:
+	if difficulty >= 250:
 		$timer.stop()
 	bullets[difficulty].enabled = true
 	bullets[difficulty].speed += difficulty
 	
-	#difficulty += 1
+	difficulty += 1
 
 
 func _on_area_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):

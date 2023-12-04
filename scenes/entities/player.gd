@@ -46,6 +46,8 @@ func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index)
 			$sprite.texture = texture_orange
 		0:
 			gameover.emit(self)
+		_:
+			$sprite.texture = texture_green
 	# game over
 	if health_points <= 0:
 		is_alive = false
