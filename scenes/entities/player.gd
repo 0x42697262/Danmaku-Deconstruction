@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 signal gameover(player)
 signal touched(body_rid)
@@ -33,23 +33,20 @@ func hide_mouse(value: bool):
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-
-
-
-func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	health_points -= 1
-	touched.emit(body_rid)
-	match health_points:
-		1:
-			$sprite.texture = texture_red
-		2:
-			$sprite.texture = texture_orange
-		0:
-			gameover.emit(self)
-		_:
-			$sprite.texture = texture_green
+func take_damage():
+	if is_alive == true:
+		health_points -= 1
+		match health_points:
+			1:
+				$sprite.texture = texture_red
+			2:
+				$sprite.texture = texture_orange
+			0:
+				gameover.emit(self)
+			_:
+				$sprite.texture = texture_green
 	# game over
 	if health_points <= 0:
 		is_alive = false
 		hide_mouse(false)
-		print('dead')
+		print('Player ', self, ' has died!')

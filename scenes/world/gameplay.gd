@@ -5,7 +5,6 @@ func _ready():
 	# James, change thiss part sa spawning.
 	var player = preload("res://scenes/entities/player.tscn").instantiate()
 	var area = size
-	$bullets_manager.connect_player(player)
 	add_child(player)
 	var children = get_children()
 	
