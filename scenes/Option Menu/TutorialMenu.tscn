@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://q3non506qyqo"]
+
+[ext_resource type="Script" path="res://scenes/Option Menu/TutorialMenu.gd" id="1_paj2v"]
+[ext_resource type="FontFile" uid="uid://d6iib252kl1w" path="res://assets/Fonts/Gaegu-Bold.ttf" id="2_oebwq"]
+[ext_resource type="Theme" uid="uid://d26hyohpn50a2" path="res://assets/themes/landingbutton.tres" id="4_u2b0t"]
+
+[node name="TutorialMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_paj2v")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_oebwq")
+theme_override_font_sizes/font_size = 30
+tab_alignment = 1
+
+[node name="Tutorial A" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="Tutorial B" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Tutorial C" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Tutorial D" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+offset_left = 142.0
+offset_top = 122.0
+offset_right = 1010.0
+offset_bottom = 166.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_oebwq")
+theme_override_font_sizes/font_size = 40
+text = "Tutorial"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitTutorial" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+offset_left = 476.0
+offset_top = 476.0
+offset_right = 676.0
+offset_bottom = 526.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("4_u2b0t")
+text = "Exit"
+
+[connection signal="button_down" from="ExitTutorial" to="." method="_on_exit_tutorial_button_down"]

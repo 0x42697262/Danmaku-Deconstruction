@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjqfu5j5wlxk3"]
+
+[ext_resource type="Script" path="res://scenes/Option Menu/AudioSetting.gd" id="1_c6faj"]
+[ext_resource type="FontFile" uid="uid://d6iib252kl1w" path="res://assets/Fonts/Gaegu-Bold.ttf" id="2_7gb0f"]
+
+[node name="AudioSetting" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c6faj")
+bus_name = "Master"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="AudioName" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_7gb0f")
+theme_override_font_sizes/font_size = 35
+text = "Master Volume"
+
+[node name="MasterSlider" type="HSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="AudioNum" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_7gb0f")
+theme_override_font_sizes/font_size = 35
+text = "99"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
