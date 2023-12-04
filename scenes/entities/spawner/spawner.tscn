@@ -7,9 +7,7 @@
 script = ExtResource("1_fado2")
 bullet_scene = ExtResource("2_bc4qp")
 number_of_bullets = 16
-spawn_rate = 0.1
 bullet_speed = 200
-bullet_lifetime = 3.0
 
 [node name="Timer" type="Timer" parent="."]
 
