@@ -17,6 +17,10 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
 
+[autoload]
+
+Helper="*res://scripts/autoloads/helper.gd"
+
 [debug]
 
 file_logging/enable_file_logging=true
@@ -24,6 +28,10 @@ file_logging/enable_file_logging=true
 [display]
 
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/BulletUpHell/plugin.cfg")
 
 [input]
 

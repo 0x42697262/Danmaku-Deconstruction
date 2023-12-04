@@ -1,25 +1,28 @@
 extends Node2D
 
 const BULLET_COUNT_MAX  = 2500
-const SPEED_MIN         = 20
+const SPEED_MIN         = 200
 const SPEED_MAX         = 500
 const BULLET_IMAGE      = preload("res://assets/Characters/bullet.png")
 
 
 var bullets: Array[Bullet]      = []
 var rids: Dictionary            = {}
-@export var bullet_count: int   = 1
-@export var difficulty: int     = 1 
+@export var difficulty: int     = 0
 @export var shape: RID
+@onready var spawner: Node      = get_node(^"spawner/spawner")
 
 class Bullet:
 	var position: Vector2   = Vector2()
 	var speed: float        = 1.0
 	var body: RID           = RID()
+	var enabled: bool       = false
+	var from_bomb: bool     = false
 
 func _ready():
 	instantiate_bullets()
-
+	$timer.start()
+	
 func connect_player(player):
 	player.touched.connect(_on_touched_signal)
 	print('signal connected! ', player)
@@ -31,18 +34,7 @@ func _process(_delta):
 
 
 func _physics_process(delta):
-	var transform2d = Transform2D()
-	var offset = get_viewport_rect().size.x + 16
-	for bullet in bullets:
-		bullet.position.x -= bullet.speed * delta
-
-		if bullet.position.x < -16:
-			# Move the bullet back to the right when it left the screen.
-			bullet.position.x = offset
-
-		transform2d.origin = bullet.position
-		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)
-	
+	spawn_bullet(delta)
 
 # Instead of drawing each bullet individually in a script attached to each bullet,
 # we are drawing *all* the bullets at once here.
@@ -68,11 +60,9 @@ func instantiate_bullets():
 		PhysicsServer2D.body_add_shape(bullet.body, shape)
 		PhysicsServer2D.body_set_collision_mask(bullet.body, 0)
 
-		bullet.position     = Vector2.ZERO
-		bullet.position = Vector2(
-			randf_range(0, get_viewport_rect().size.x) + get_viewport_rect().size.x,
-			randf_range(0, get_viewport_rect().size.y)
-		)
+		spawner.progress    = randi()
+		bullet.position     = Vector2(0,0)
+		
 		var transform2d     = Transform2D()
 		transform2d.origin  = bullet.position
 		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)
@@ -86,5 +76,44 @@ func clean_up_memory():
 	PhysicsServer2D.free_rid(shape)
 	bullets.clear()
 
+func spawn_bullet(delta):
+	var transform2d: Transform2D = Transform2D()
+	for bullet in bullets:
+		if bullet.enabled == false:
+			continue
+		
+		spawner.progress = randi()
+		var vector = Vector2(0, bullet.speed)
+		# right side
+		if spawner.progress_ratio > 0.25:
+			vector = Vector2(-bullet.speed, 0)
+		# bottom
+		elif spawner.progress_ratio > 0.50:
+			vector = Vector2(0, -bullet.speed)
+		# left side
+		elif spawner.progress_ratio > 0.50:
+			vector = Vector2(bullet.speed, 0)
+		bullet.position += Vector2(bullet.speed, 0) * delta
+			
+		transform2d.origin = bullet.position
+		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)
+	
+func reset_bullet_position(bullet):
+		spawner.progress = randi()
+		bullet.position = spawner.position
+		
 func _on_touched_signal(body_rid):
-	rids[body_rid].position.x = get_viewport_rect().size.x + 16
+	reset_bullet_position(body_rid)
+
+func _on_timer_timeout():
+	if difficulty >= 500:
+		$timer.stop()
+	bullets[difficulty].enabled = true
+	bullets[difficulty].speed += difficulty
+	
+	#difficulty += 1
+
+
+func _on_area_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
+	reset_bullet_position(rids[body_rid])
+	

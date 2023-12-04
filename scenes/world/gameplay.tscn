@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://de3fcc1ng16a7"]
+[gd_scene load_steps=5 format=3 uid="uid://de3fcc1ng16a7"]
 
 [ext_resource type="Script" path="res://scenes/world/gameplay.gd" id="1_ggn7s"]
 [ext_resource type="Script" path="res://scenes/world/bullets_manager.gd" id="2_mekei"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igejv"]
+size = Vector2(1200, 700)
+
+[sub_resource type="Curve2D" id="Curve2D_4y8ma"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 1152, 648, 0, 0, 0, 0, 0, 648, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="gameplay" type="Control"]
 layout_mode = 3
@@ -11,6 +20,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ggn7s")
+
+[node name="area" type="Area2D" parent="."]
+
+[node name="area" type="CollisionShape2D" parent="area"]
+position = Vector2(576, 324)
+shape = SubResource("RectangleShape2D_igejv")
 
 [node name="background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -22,3 +37,13 @@ grow_vertical = 2
 
 [node name="bullets_manager" type="Node2D" parent="."]
 script = ExtResource("2_mekei")
+
+[node name="spawner" type="Path2D" parent="bullets_manager"]
+curve = SubResource("Curve2D_4y8ma")
+
+[node name="spawner" type="PathFollow2D" parent="bullets_manager/spawner"]
+
+[node name="timer" type="Timer" parent="bullets_manager"]
+
+[connection signal="body_shape_exited" from="area" to="bullets_manager" method="_on_area_body_shape_exited"]
+[connection signal="timeout" from="bullets_manager/timer" to="bullets_manager" method="_on_timer_timeout"]

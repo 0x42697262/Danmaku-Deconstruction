@@ -50,3 +50,4 @@ func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index)
 	if health_points <= 0:
 		is_alive = false
 		hide_mouse(false)
+		print('dead')

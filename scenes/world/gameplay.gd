@@ -16,4 +16,3 @@ func _ready():
 
 func _on_gameover_signal(player):
 	player.queue_free()
-
