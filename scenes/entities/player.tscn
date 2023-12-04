@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6uvii5t4lp0p"]
+[gd_scene load_steps=5 format=3 uid="uid://clwyik8h1klp0"]
 
-[ext_resource type="Script" path="res://scenes/entities/player.gd" id="1_ntsfe"]
+[ext_resource type="Texture2D" uid="uid://dkcgsmiedscnq" path="res://assets/Characters/blue_character.png" id="1_jo1re"]
+[ext_resource type="Script" path="res://scenes/entities/player.gd" id="1_t6ev6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jb7jw"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2t6vk"]
+radius = 14.0
 
 [node name="player" type="Area2D"]
-script = ExtResource("1_ntsfe")
+script = ExtResource("1_t6ev6")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(-2.25194e-06, 6.85453e-07)
+scale = Vector2(0.0802005, 0.0851064)
+texture = ExtResource("1_jo1re")
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jb7jw")
+debug_color = Color(0.929412, 0, 0, 0.419608)
+
+[node name="graze" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2t6vk")

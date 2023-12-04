@@ -18,3 +18,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_gk2uj")
+
+[node name="Button" type="Button" parent="gui"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 45.0
+offset_right = 94.0
+offset_bottom = 76.0
+text = "play"
+
+[connection signal="pressed" from="gui/Button" to="gui" method="_on_button_pressed"]

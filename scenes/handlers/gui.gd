@@ -5,14 +5,7 @@ extends Control
 func _ready():
 	pass
 
-## Replace GUI
-##
-## replaces all gui with a new gui
-func replace_gui(node: Node):
-	remove_all_children()
-	add_child(node)
+var game = preload("res://scenes/world/gameplay.tscn")
 
-## Remove all children
-func remove_all_children():
-	for existing_child in get_children():
-		existing_child.queue_free()
+func _on_button_pressed():
+	get_tree().change_scene_to_packed(game)

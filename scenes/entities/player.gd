@@ -1,10 +1,7 @@
-## Player scene
-##
-## 
 extends Area2D
 
 ## Player speed (pixels per second)
-@export var speed: float = 300.0
+@export var SPEED: float = 300.0
 ## Player speed multiplier
 ##
 ## Can be used for dash and focus.
@@ -14,34 +11,24 @@ extends Area2D
 ## - Normal: 1.0
 ## - Dash: 4.0
 @export var SPEED_MULTIPLIER: float = 1.0
-@export var DASH_MULTIPLIER: float = 4.0
+@export var DASH_MULTIPLIER: float  = 4.0
 @export var FOCUS_MULTIPLIER: float = 0.5
-## Graze collision shape 2d
-##
-## Used for detecting player collisions against another player.
-var graze_area: CollisionShape2D
-## Player hitbox collision shape 2d
-##
-## Used for detecting collisions with a bullet.
-var hitbox: CollisionShape2D
-## Polygon body circle
-var body: Polygon2D
-var body_sprite: Sprite2D
-var texture: Texture
+@export var Y_AXIS: int             = 1
+@export var velocity: Vector2 = Vector2.ZERO
+@export var area_min = Vector2(0, 0)
+@export var area_max = Vector2(800, 598)
 
-## Player settings
-##
-## Allow to be change in multiplayer
-@export_group("Settings")
-## Player ID
-@export var id: int = 0
-## Player radius
-@export var body_radius: int = 14
-## Hitbox radius
-@export var hitbox_radius: float = 3
-## Map Area
-@export var area_min: Vector2 = Vector2.ZERO
-@export var area_max: Vector2 = Vector2(800, 598)
+var id: int = 1
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	move(delta)
 
 ## Player movement
 ##
@@ -49,16 +36,15 @@ var texture: Texture
 ## 
 ## Left and right movements should be exclusive. Dash takes priority than focus.
 func move(delta):
-	var velocity: Vector2 = Vector2.ZERO
-
+	velocity = Vector2.ZERO
 	if Input.is_action_pressed(&"move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed(&"move_left"):
 		velocity.x -= 1
-	#if Input.is_action_pressed(&"ui_up"):
-	#	velocity.y -= 1
-	#if Input.is_action_pressed(&"ui_down"):
-	#	velocity.y += 1
+	if Input.is_action_pressed(&"move_up"):
+		velocity.y -= 1 * Y_AXIS
+	if Input.is_action_pressed(&"move_down"):
+		velocity.y += 1  * Y_AXIS
 
 	if Input.is_action_pressed(&"move_focus"):
 		SPEED_MULTIPLIER = FOCUS_MULTIPLIER
@@ -71,58 +57,9 @@ func move(delta):
 		SPEED_MULTIPLIER = 1
 
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed * SPEED_MULTIPLIER
+		velocity = velocity.normalized() * SPEED * SPEED_MULTIPLIER
 		
 	position += velocity * delta
 
-	position.x = clamp(position.x, area_min.x, area_max.x)
-	position.y = clamp(position.y, area_min.y, area_max.y)
-	
-## Sets the default values of the scene when it's called.
-##
-## Adds collision shape children and sprite.
-func _ready():
-	# add collisions
-	graze_area = CollisionShape2D.new()
-	hitbox = CollisionShape2D.new()
-	var graze_area_shape: CircleShape2D	= CircleShape2D.new()
-	var hitbox_shape: CircleShape2D	= CircleShape2D.new()
-	graze_area_shape.radius	= body_radius
-	hitbox_shape.radius	= hitbox_radius
-	graze_area.shape = graze_area_shape
-	hitbox.shape = hitbox_shape
-
-	add_child(graze_area)
-	add_child(hitbox)
-
-	body_sprite = Sprite2D.new()
-	match id:
-		0:
-			texture = preload("res://assets/Characters/red_character.png")
-		1:
-			texture = preload("res://assets/Characters/orange_character.png")
-		2:
-			texture = preload("res://assets/Characters/yellow_character.png")
-		3:
-			texture = preload("res://assets/Characters/green_character.png")
-		4:
-			texture = preload("res://assets/Characters/blue_character.png")
-		5:
-			texture = preload("res://assets/Characters/pink_character.png")
-		6:
-			texture = preload("res://assets/Characters/violet_character.png")
-		_:
-			texture = preload("res://assets/Characters/gray_character.png")
-	body_sprite.texture = texture
-	body_sprite.scale = Vector2(body_radius*2+5,body_radius*2+5) / texture.get_size()
-	
-	area_min.x += body_radius+1
-	area_min.y += body_radius+1
-	area_max.x -= body_radius+1
-	area_max.y -= body_radius+1
-
-	add_child(body_sprite)
-
-## Updates the player every frame.
-func _process(delta):
-	move(delta)
+	position.x = clamp(position.x, area_min.x + 14, area_max.x - 14)
+	position.y = clamp(position.y, area_min.y + 14, area_max.y - 14)

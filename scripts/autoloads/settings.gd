@@ -14,6 +14,8 @@ var keybinds: Dictionary = {
 	"move_dash"     : KEY_J,
 	"move_left"     : KEY_A,
 	"move_right"    : KEY_D,
+	"move_up"       : KEY_W,
+	"move_down"     : KEY_S,
 	"move_focus"    : KEY_SHIFT,
 	"move_skill"    : KEY_K,
   }

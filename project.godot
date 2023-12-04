@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Settings="*res://scripts/autoloads/settings.gd"
-Lobby="*res://scripts/autoloads/lobby.gd"
 
 [debug]
 

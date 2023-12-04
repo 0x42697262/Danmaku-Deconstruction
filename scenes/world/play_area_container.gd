@@ -2,12 +2,8 @@ extends VBoxContainer
 
 
 func _ready():
-	var lobby = get_node("/root/Lobby")
+	pass
 	
-	var players = lobby.players
-	add_players(players)
-	
-
 ## Adds new player as a child to the play area
 func add_players(players):
 	var spots: Array = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550,

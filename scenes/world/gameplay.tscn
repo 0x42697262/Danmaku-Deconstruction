@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://de3fcc1ng16a7"]
+[gd_scene load_steps=3 format=3 uid="uid://de3fcc1ng16a7"]
 
+[ext_resource type="Script" path="res://scenes/world/gameplay.gd" id="1_ggn7s"]
 [ext_resource type="Script" path="res://scenes/world/play_area_container.gd" id="1_os3t6"]
 
 [node name="gameplay" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ggn7s")
 
 [node name="backround" type="ColorRect" parent="."]
 layout_mode = 1

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6uvii5t4lp0p"]
-
-[ext_resource type="Script" path="res://scenes/_temp(for_deletion)/player.gd" id="1_02s6o"]
-
-[node name="player" type="Area2D"]
-script = ExtResource("1_02s6o")
