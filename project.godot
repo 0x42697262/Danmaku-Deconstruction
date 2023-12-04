@@ -17,10 +17,6 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
 
-[autoload]
-
-Settings="*res://scripts/autoloads/settings.gd"
-
 [debug]
 
 file_logging/enable_file_logging=true

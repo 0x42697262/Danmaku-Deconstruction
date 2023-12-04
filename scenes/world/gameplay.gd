@@ -4,7 +4,16 @@ extends Control
 func _ready():
 	# James, change thiss part sa spawning.
 	var player = preload("res://scenes/entities/player.tscn").instantiate()
-	var gameplay = get_node('hud/game_action_container/play_area_container')
-	var area = gameplay.size
-	player.position = Vector2(randi_range(0, area.x), area.y - 14)
-	gameplay.add_child(player)
+	var area = size
+	$bullets_manager.connect_player(player)
+	add_child(player)
+	var children = get_children()
+	
+	# DON'T CHANGE THIS PART
+	for child in children:
+		if child.has_signal("gameover"):
+			child.gameover.connect(_on_gameover_signal)
+
+func _on_gameover_signal(player):
+	player.queue_free()
+
