@@ -1,0 +1,115 @@
+[gd_scene load_steps=9 format=3 uid="uid://4mb37tol2l2s"]
+
+[ext_resource type="Texture2D" uid="uid://ci0k33rqmwrop" path="res://assets/Screen 4.png" id="1_y7v1y"]
+[ext_resource type="Script" path="res://scenes/Landing Page/Landing_page.gd" id="1_yrunr"]
+[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="2_qweai"]
+[ext_resource type="Texture2D" uid="uid://dixn36xt3680y" path="res://assets/Group 14.png" id="3_cxy7i"]
+[ext_resource type="PackedScene" uid="uid://bstsg8hhpsw81" path="res://scenes/Option Menu/OptionsMenu.tscn" id="5_21aid"]
+[ext_resource type="Theme" uid="uid://86g371j1l8kt" path="res://assets/themes/questionbutton.tres" id="5_j6mip"]
+[ext_resource type="AudioStream" uid="uid://cdbip6yu0jxp8" path="res://assets/Audio/JEON SOMI - Fast Forward  Instrumental.mp3" id="6_rltqo"]
+[ext_resource type="PackedScene" uid="uid://q3non506qyqo" path="res://scenes/Option Menu/TutorialMenu.tscn" id="7_e5p8d"]
+
+[node name="Landing_page" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yrunr")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_y7v1y")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Group14" type="Sprite2D" parent="MarginContainer/VBoxContainer"]
+position = Vector2(572, 239)
+scale = Vector2(0.487531, 0.487531)
+texture = ExtResource("3_cxy7i")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 250
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme = ExtResource("2_qweai")
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme = ExtResource("2_qweai")
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme = ExtResource("2_qweai")
+text = "Exit"
+
+[node name="Tutorial" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("5_j6mip")
+text = "?"
+
+[node name="OptionMenu" parent="." instance=ExtResource("5_21aid")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 1140.0
+offset_bottom = 636.0
+mouse_filter = 1
+
+[node name="TutorialMenu" parent="." instance=ExtResource("7_e5p8d")]
+visible = false
+layout_mode = 1
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_rltqo")
+volume_db = -13.671
+autoplay = true

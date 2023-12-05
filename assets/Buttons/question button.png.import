@@ -2,20 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<< HEAD
-uid="uid://308i837wiq55"
-=======
-uid="uid://bgbq4npp2j14v"
->>>>>>> main
-path="res://.godot/imported/bullet.png-4772be133ae899a6773145f5e02ec776.ctex"
+uid="uid://dutfub003bg10"
+path="res://.godot/imported/question button.png-012d0d3b289cc1f93ce4dd9cd049cad5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/bullet.png"
-dest_files=["res://.godot/imported/bullet.png-4772be133ae899a6773145f5e02ec776.ctex"]
+source_file="res://assets/Buttons/question button.png"
+dest_files=["res://.godot/imported/question button.png-012d0d3b289cc1f93ce4dd9cd049cad5.ctex"]
 
 [params]
 

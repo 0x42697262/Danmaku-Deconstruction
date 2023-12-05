@@ -12,11 +12,23 @@ config_version=5
 
 config/name="Danmaku Deconstruction"
 config/description="A simple bullet hell game."
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/Landing Page/Landing_page.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 run/max_fps=60
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/image="res://assets/Frame 4.png"
+boot_splash/fullsize=false
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=3000
 
+<<<<<<< HEAD
+[autoload]
+
+Settings="*res://scripts/autoloads/settings.gd"
+game_manager="*res://game_manager.gd"
+
+=======
+>>>>>>> main
 [debug]
 
 file_logging/enable_file_logging=true

@@ -2,20 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<< HEAD
-uid="uid://308i837wiq55"
-=======
-uid="uid://bgbq4npp2j14v"
->>>>>>> main
-path="res://.godot/imported/bullet.png-4772be133ae899a6773145f5e02ec776.ctex"
+uid="uid://ci0k33rqmwrop"
+path="res://.godot/imported/Screen 4.png-1a65db5bf08021f0bbf80eb81f810a0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/bullet.png"
-dest_files=["res://.godot/imported/bullet.png-4772be133ae899a6773145f5e02ec776.ctex"]
+source_file="res://assets/Screen 4.png"
+dest_files=["res://.godot/imported/Screen 4.png-1a65db5bf08021f0bbf80eb81f810a0a.ctex"]
 
 [params]
 

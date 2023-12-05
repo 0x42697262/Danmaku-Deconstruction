@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://bstsg8hhpsw81"]
+
+[ext_resource type="FontFile" uid="uid://d6iib252kl1w" path="res://assets/Fonts/Gaegu-Bold.ttf" id="1_aqbl3"]
+[ext_resource type="Script" path="res://scenes/Option Menu/OptionsMenu.gd" id="1_fklcn"]
+[ext_resource type="PackedScene" uid="uid://pqerxnq3udia" path="res://scenes/Option Menu/settings_tab_container.tscn" id="3_ofarw"]
+[ext_resource type="Theme" uid="uid://d26hyohpn50a2" path="res://assets/themes/landingbutton.tres" id="4_hl2nh"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fklcn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 130
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 130
+theme_override_constants/margin_bottom = 110
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.756863, 0.827451, 0.996078, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0.290196, 1)
+theme_override_fonts/font = ExtResource("1_aqbl3")
+theme_override_font_sizes/font_size = 40
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsTabContainer" parent="MarginContainer/MarginContainer" instance=ExtResource("3_ofarw")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ExitOption" type="Button" parent="MarginContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("4_hl2nh")
+text = "Exit"
+
+[connection signal="button_down" from="MarginContainer/MarginContainer/ExitOption" to="." method="_on_exit_option_button_down"]
