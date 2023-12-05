@@ -9,10 +9,12 @@ extends Node2D
 @export var is_parent: bool         = false
 @export var is_manual: bool         = false
 @export var spawn_rate: float       = 0.4
-@export var bullet_speed: int       = 5
+@export var bullet_speed: int       = 50
 @export var bullet_lifetime: float  = 10.00
 @export var use_velocity: bool      = false # If false use rotation, If true use velocity
-@export var rotate_speed: int       = 100
+@export var body_rotation: int      = 100
+@export var bullet_free_on_leave: bool = false
+@export var rotation_change: int 
 @export var bullet_velocity: Vector2 = Vector2(1,0)
 
 var rotations = []
@@ -23,7 +25,7 @@ func _ready():
 	$Timer.start()
 	
 func _process(delta):
-	var new_rotation = rotation_degrees + rotate_speed * delta
+	var new_rotation = rotation_degrees + body_rotation * delta
 	rotation_degrees = fmod(new_rotation, 360)
 	
 func random_rotations():
@@ -51,11 +53,6 @@ func spawn_bullets():
 		
 		spawned_bullets.append(bullet)
 		
-		# Parenting
-		if (is_parent):
-			add_child(spawned_bullets[i])
-		else:
-			get_parent().add_child(spawned_bullets[i])
 			
 		# Apply Fields
 		spawned_bullets[i].rotation_degrees = rotations[i]
@@ -64,7 +61,14 @@ func spawn_bullets():
 		spawned_bullets[i].global_position  = global_position
 		spawned_bullets[i].use_velocity     = use_velocity
 		spawned_bullets[i].lifetime         = bullet_lifetime
+		spawned_bullets[i].rotation_change  = rotation_change
+		spawned_bullets[i].free_on_leave    = bullet_free_on_leave
 		
+		# Parenting
+		if (is_parent):
+			add_child(spawned_bullets[i])
+		else:
+			get_parent().add_child(spawned_bullets[i])
 		if (log_to_console):
 			print("Bullet " + str(i) + " @ " + str(rotations[i]) + "deg")
 	
