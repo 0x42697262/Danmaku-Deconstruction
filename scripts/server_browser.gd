@@ -11,10 +11,10 @@ var listener : PacketPeerUDP
 var temp = ""
 var peer
 
-@export var address = "127.0.0.1"
+@export var address = "0.0.0.0"
 @export var broadcast_address = "172.16.15.255"
-@export var listen_port : int = 8911
-@export var broadcast_port : int = 8912
+@export var listen_port : int = 42070
+@export var broadcast_port : int = 42071
 
 @export var server_info : PackedScene
 
