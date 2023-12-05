@@ -1,11 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://de3fcc1ng16a7"]
+[gd_scene load_steps=3 format=3 uid="uid://de3fcc1ng16a7"]
 
 [ext_resource type="Script" path="res://scenes/world/gameplay.gd" id="1_ggn7s"]
-[ext_resource type="Script" path="res://scenes/world/bullets_manager.gd" id="2_mekei"]
 [ext_resource type="PackedScene" uid="uid://cumm7ewr26cy" path="res://scenes/entities/spawner/spawner.tscn" id="3_l1elf"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_igejv"]
-size = Vector2(1200, 700)
 
 [node name="gameplay" type="Control"]
 layout_mode = 3
@@ -16,12 +12,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ggn7s")
 
-[node name="area" type="Area2D" parent="."]
-
-[node name="area" type="CollisionShape2D" parent="area"]
-position = Vector2(576, 324)
-shape = SubResource("RectangleShape2D_igejv")
-
 [node name="background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -30,12 +20,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="bullets_manager" type="Node2D" parent="."]
-script = ExtResource("2_mekei")
-
-[node name="timer" type="Timer" parent="bullets_manager"]
-
-[node name="spawner" parent="bullets_manager" instance=ExtResource("3_l1elf")]
-position = Vector2(420, 340)
-
-[connection signal="timeout" from="bullets_manager/timer" to="bullets_manager" method="_on_timer_timeout"]
+[node name="spawner" parent="." instance=ExtResource("3_l1elf")]
+position = Vector2(576, 324)

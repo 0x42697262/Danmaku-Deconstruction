@@ -9,7 +9,6 @@ radius = 6.0
 [node name="bullet" type="Area2D"]
 script = ExtResource("1_mv1hr")
 velocity = Vector2(1, 1)
-rotation_change = -45
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_51bog")

@@ -6,8 +6,10 @@
 [node name="spawner" type="Node2D"]
 script = ExtResource("1_fado2")
 bullet_scene = ExtResource("2_bc4qp")
-number_of_bullets = 16
-bullet_speed = 200
+number_of_bullets = 1
+spawn_rate = 0.6
+bullet_speed = 100
+bullet_lifetime = 15.0
 
 [node name="Timer" type="Timer" parent="."]
 
