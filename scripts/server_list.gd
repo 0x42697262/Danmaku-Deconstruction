@@ -1,8 +1,8 @@
 extends VBoxContainer
 
 @export var server_info: PackedScene
-@export var Address = "127.0.0.1"
-@export var port = 8000
+@export var Address = "0.0.0.0"
+@export var port = 42069
 
 var server_instance
 var peer

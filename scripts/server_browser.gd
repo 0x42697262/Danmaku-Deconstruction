@@ -84,7 +84,7 @@ func _process(delta):
 
 func join_game(ip):
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(ip, 8000)
+	peer.create_client(ip, 42069)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 		
