@@ -103,7 +103,7 @@ func _on_broadcast_timer_timeout():
 	var data = JSON.stringify(room_info)
 	var packet = data.to_ascii_buffer()
 	broadcaster.put_packet(packet)
-	$broadcast_timer.stop()
+#	$broadcast_timer.stop()
 	pass # Replace with function body.
 
 func clean_up():
