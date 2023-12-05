@@ -49,6 +49,7 @@ func set_keybinds():
 	ev.physical_keycode = keybinds["move_dash"]
 	ev.shift_pressed = true
 	InputMap.action_add_event("move_dash", ev)
+	Logger.console(0, [self, "Loaded keybinds."])
 
 
 ## Settings singleton 

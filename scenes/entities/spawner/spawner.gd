@@ -21,8 +21,11 @@ var rotations = []
 @export var log_to_console: bool = false
 
 func _ready():
+	Logger.console(0, ['Instantiated', self])
 	$Timer.wait_time = spawn_rate
+	Logger.console(0, ['Set', $Timer, '`wait_time` to', spawn_rate])
 	$Timer.start()
+	Logger.console(0, ['Started', $Timer, 'of', self])
 	
 func _process(delta):
 	var new_rotation = rotation_degrees + body_rotation * delta
@@ -32,6 +35,7 @@ func random_rotations():
 	rotations = []
 	for _i in range(0, number_of_bullets):
 		rotations.append(randi_range(min_rotation, max_rotation))
+	Logger.console(-1, [self, "using random rotations with values:", rotations])
 
 func distributed_rotations():
 	rotations = []
@@ -39,6 +43,8 @@ func distributed_rotations():
 		var fraction = float(i) / float(number_of_bullets)
 		var difference = max_rotation - min_rotation
 		rotations.append((fraction * difference) + min_rotation + rotation_degrees)
+	
+	Logger.console(-1, [self, "using distributed rotations with values:", rotations])
 
 func spawn_bullets():
 	if (is_random):
@@ -53,7 +59,6 @@ func spawn_bullets():
 		
 		spawned_bullets.append(bullet)
 		
-			
 		# Apply Fields
 		spawned_bullets[i].rotation_degrees = rotations[i]
 		spawned_bullets[i].speed            = bullet_speed
@@ -70,7 +75,7 @@ func spawn_bullets():
 		else:
 			get_parent().add_child(spawned_bullets[i])
 		if (log_to_console):
-			print("Bullet " + str(i) + " @ " + str(rotations[i]) + "deg")
+			Logger.console(0, ["Bullet", i, "@", rotations[i], "degree"])
 	
 	return spawned_bullets
 
@@ -79,5 +84,5 @@ func _on_timer_timeout():
 		spawn_bullets()
 	
 	if (log_to_console):
-		print("Spawned Bullets")
+		Logger.console(0, ['Spawned Bullets'])
 

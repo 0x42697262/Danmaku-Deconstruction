@@ -9,7 +9,9 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Logger.console(-1, ['Instantiated', self])
 	$Timer.start(lifetime)
+	Logger.console(-1, [self, $Timer, "started with lifetime", lifetime])
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,16 +24,20 @@ func _process(delta):
 	rotation_degrees += rotation_change * delta
 
 
-func _on_timer_timeout(): 
+func _on_timer_timeout():
+	Logger.console(-1, ["Freeing", self, "on _on_timer_timeout"])
 	queue_free()
  
 
 func _on_body_entered(body): 
 	if body.name == "player":
 		body.take_damage()
+		Logger.console(0, [self, 'hit', body])
+		Logger.console(0, ["Freeing", self, "on _on_body_entered"])
 		queue_free()
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	if free_on_leave == true:
+		Logger.console(-1, ["Freeing", self, "on _on_visible_on_screen_notifier_2d_screen_exited"])
 		queue_free()

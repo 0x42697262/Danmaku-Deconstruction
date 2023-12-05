@@ -14,6 +14,7 @@ var texture_dead: Texture  = preload("res://assets/Characters/gray_character.png
 
 
 func _ready():
+	Logger.console(0, ["Spawned new player", self])
 	$sprite.texture = texture_green
 	hide_mouse(true)
 	
@@ -30,11 +31,14 @@ func _process(delta):
 func hide_mouse(value: bool):
 	if value == true:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		Logger.console(0, [self, "mouse cursor set to HIDDEN"])
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Logger.console(0, [self, "mouse cursor set to VISIBLE"])
 
 func take_damage():
 	if is_alive == true:
+		Logger.console(1, [self, "has taken damage."])
 		health_points -= 1
 		match health_points:
 			1:
@@ -49,4 +53,4 @@ func take_damage():
 	if health_points <= 0:
 		is_alive = false
 		hide_mouse(false)
-		print('Player ', self, ' has died!')
+		Logger.console(1, [self, "has died!"])
