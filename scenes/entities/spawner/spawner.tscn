@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cumm7ewr26cy"]
 
-[ext_resource type="Script" path="res://spawner.gd" id="1_fado2"]
+[ext_resource type="Script" path="res://scenes/entities/spawner/spawner.gd" id="1_fado2"]
 [ext_resource type="PackedScene" uid="uid://cy03j6jown1dv" path="res://scenes/entities/bullet.tscn" id="2_bc4qp"]
 
 [node name="spawner" type="Node2D"]
