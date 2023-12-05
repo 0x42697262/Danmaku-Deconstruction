@@ -18,7 +18,7 @@ func _ready():
 	$sprite.texture = texture_green
 	hide_mouse(true)
 	
-		
+
 func _input(event):
 	# Getting the movement of the mouse so the sprite can follow its position.
 	if event is InputEventMouseMotion and is_alive == true:
@@ -51,6 +51,6 @@ func take_damage():
 				$sprite.texture = texture_green
 	# game over
 	if health_points <= 0:
+		Logger.console(1, [self, "has died!"])
 		is_alive = false
 		hide_mouse(false)
-		Logger.console(1, [self, "has died!"])

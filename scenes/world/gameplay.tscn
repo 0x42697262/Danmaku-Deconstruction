@@ -23,5 +23,5 @@ grow_vertical = 2
 [node name="spawner" parent="." instance=ExtResource("3_l1elf")]
 position = Vector2(576, 324)
 number_of_bullets = 8
-bullet_speed = 200
-rotation_change = -45
+spawn_rate = 0.3
+body_rotation = 30

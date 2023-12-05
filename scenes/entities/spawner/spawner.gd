@@ -23,9 +23,8 @@ var rotations = []
 func _ready():
 	Logger.console(0, ['Instantiated', self])
 	$Timer.wait_time = spawn_rate
-	Logger.console(0, ['Set', $Timer, '`wait_time` to', spawn_rate])
 	$Timer.start()
-	Logger.console(0, ['Started', $Timer, 'of', self])
+	Logger.console(0, ['Started', $Timer, 'of', self, "with `wait_time` of", spawn_rate, "seconds"])
 	
 func _process(delta):
 	var new_rotation = rotation_degrees + body_rotation * delta

@@ -38,6 +38,7 @@ var keybinds: Dictionary = {
 ## @Tutorial(Tutorial 2): https://docs.godotengine.org/en/stable/classes/class_inputeventkey.html
 ## @Tutorial(Tutorial 3): https://docs.godotengine.org/en/stable/classes/class_inputeventwithmodifiers.html
 func set_keybinds():
+	Logger.console(0, ["Loading keybinds..."])
 	InputMap.load_from_project_settings() # resets the key binds
 	for key in keybinds:
 		var ev: InputEventKey = InputEventKey.new()
@@ -49,11 +50,13 @@ func set_keybinds():
 	ev.physical_keycode = keybinds["move_dash"]
 	ev.shift_pressed = true
 	InputMap.action_add_event("move_dash", ev)
-	Logger.console(0, [self, "Loaded keybinds."])
+	
+	Logger.console(0, ["Loading keybinds... done!"])
 
 
 ## Settings singleton 
 ##
 ## Loads the settings into the game.
 func _ready():
+	Logger.console(1, ["Started Settings Singleton"])
 	set_keybinds()

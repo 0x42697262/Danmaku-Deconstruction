@@ -11,4 +11,5 @@ func _on_host_button_down():
 	new_instance.get_node("server_name").text = RoomInfo.server_name
 	new_instance.get_node("server_ip").text = RoomInfo.server_address
 #	print(get_parent().get_parent().RoomInfo.server_name)
+	Logger.console(3, ["New server found:", RoomInfo.server_address])
 	add_child(new_instance)

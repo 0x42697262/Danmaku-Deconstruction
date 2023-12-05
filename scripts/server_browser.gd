@@ -28,10 +28,10 @@ func set_up():
 	var ok = listener.bind(listen_port)
 	
 	if ok == OK:
-		print("Bound to Listener Port " + str(listen_port) + " Successful")
+		Logger.console(3, ["Bound to Listener Port", listen_port, "Successful"])
 		$Label2.text = "Bound to listener port: True"
 	else:
-		print("Failed to bind")
+		Logger.console(3, ["Failed to bind listener port (error)"])
 		$Label2.text = "Bound to listener port: False"
 	
 func setup_broadcast(name):
@@ -46,11 +46,13 @@ func setup_broadcast(name):
 	var ok = broadcaster.bind(broadcast_port)
 	
 	if ok == OK:
-		print("Bound to Broadcast Port " + str(broadcast_port) + " Successful")
+		Logger.console(3, ["Bound to Broadcast Port", broadcast_port, "Successful"])
 	else:
-		print("Failed to bind")
+		Logger.console(3, ["Failed to bind broadcast port (error)"])
 		
 	$broadcast_timer.start()
+	
+	Logger.console(3, ["Started Broadcast Timer to", broadcast_address])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
