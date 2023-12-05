@@ -7,6 +7,12 @@ extends Node2D
 ## settings throughout the game.
 ## The settings that have been provided are default values.
 
+## MULTIPLAYER CONFIGURATION
+const ADDRESS: String       = "0.0.0.0"
+const PORT: int             = 42069
+const LISTEN_PORT: int      = 42070
+const BROADCAST_PORT: int   = 42071
+
 ## Volume settings
 var volume: float = 1.0
 ## Key bindings settings
