@@ -9,7 +9,10 @@ var player_status
 
 @export var join_button : PackedScene
 
-var RoomInfo = {"server_name":"server_name","server_address":Address}
+var RoomInfo = {
+	"server_name": "server_name",
+	"server_address": Address,
+	}
 
 #@export var server: PackedScene
 
@@ -24,16 +27,8 @@ func _ready():
 #	if join:
 #		join.connect("pressed", self, "_on_button_pressed")
 
-	pass # Replace with function body.
-	
-
 func _on_join_button_pressed():
 	print("Join Button Pressed")
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func peer_connected(id):
 	print("Player Connected " + str(id))
@@ -91,9 +86,6 @@ func _on_host_button_down():
 	
 	player_status = "Host"
 	
-	
-	pass # Replace with function body.
-
 
 
 func _on_join_button_down():
@@ -101,8 +93,6 @@ func _on_join_button_down():
 	peer.create_client(Address, port)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
-	pass # Replace with function body.
 
 func _on_start_button_down():
 	start_game.rpc()
-	pass # Replace with function body.
