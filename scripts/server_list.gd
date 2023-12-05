@@ -1,23 +1,13 @@
 extends VBoxContainer
 
 @export var server_info: PackedScene
-@export var Address = "0.0.0.0"
-@export var port = 42069
+@export var Address = Settings.ADDRESS
+@export var port    = Settings.PORT
 
 var server_instance
 var peer
 
 signal join_pressed
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 
 func _on_host_button_down():
 #	server_instance = server_info.instantiate()
@@ -40,7 +30,6 @@ func on_server_join_button_down():
 #	var server_instance = server_info.instantiate()
 #	server_instance._on_join_pressed.connect(server_join)
 	print("Pressed Join")
-	pass
 	
 func _server_join():
 	print("successfully joined server")
@@ -49,4 +38,3 @@ func _server_join():
 	peer.create_client(Address, port)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
-	pass

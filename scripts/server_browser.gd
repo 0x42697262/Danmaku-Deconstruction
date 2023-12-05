@@ -11,19 +11,17 @@ var listener : PacketPeerUDP
 var temp = ""
 var peer
 
-@export var address = "0.0.0.0"
-@export var broadcast_address = "172.16.15.255"
-@export var listen_port : int = 42070
-@export var broadcast_port : int = 42071
+@export var address             = Settings.ADDRESS
+@export var port                = Settings.PORT
+@export var broadcast_address   = "172.16.15.255"
+@export var listen_port         = Settings.LISTEN_PORT
+@export var broadcast_port      = Settings.BROADCAST_PORT
 
 @export var server_info : PackedScene
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	broadcast_timer = $broadcast_timer
 	set_up()
-	
-	pass # Replace with function body.
 	
 func set_up():
 	listener = PacketPeerUDP.new()
@@ -84,7 +82,7 @@ func _process(delta):
 
 func join_game(ip):
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(ip, 42069)
+	peer.create_client(ip, port)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 		
