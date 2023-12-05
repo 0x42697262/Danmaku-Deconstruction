@@ -25,7 +25,6 @@ boot_splash/minimum_display_time=3000
 
 Settings="*res://scripts/autoloads/settings.gd"
 game_manager="*res://game_manager.gd"
-Lobby="res://scripts/autoloads/lobby.gd"
 
 [debug]
 
