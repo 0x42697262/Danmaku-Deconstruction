@@ -21,11 +21,14 @@ boot_splash/fullsize=false
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=3000
 
+<<<<<<< HEAD
 [autoload]
 
 Settings="*res://scripts/autoloads/settings.gd"
 game_manager="*res://game_manager.gd"
 
+=======
+>>>>>>> main
 [debug]
 
 file_logging/enable_file_logging=true
@@ -33,6 +36,10 @@ file_logging/enable_file_logging=true
 [display]
 
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
 
 [input]
 
