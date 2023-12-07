@@ -15,7 +15,7 @@ var texture_dead: Texture  = preload("res://assets/Characters/gray_character.png
 
 func _ready():
 	Logger.console(0, ["Spawned new player", self])
-	$sprite.texture = texture_green
+	$sprite.texture = [texture_green, texture_red, texture_orange, texture_dead].pick_random()
 	hide_mouse(true)
 	
 

@@ -3,9 +3,14 @@ extends Control
 
 func _ready():
 	# James, change thiss part sa spawning.
-	var player = preload("res://scenes/entities/player.tscn").instantiate()
-	var area = size
-	add_child(player)
+	var index = 0
+	
+	for i in game_manager.Players:
+		var player = preload("res://scenes/entities/player.tscn").instantiate()
+		var area = size
+		add_child(player)
+		player.global_position = Vector2(209,156)
+		
 	var children = get_children()
 	
 	# DON'T CHANGE THIS PART

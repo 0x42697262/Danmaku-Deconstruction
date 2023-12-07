@@ -4,6 +4,8 @@ extends VBoxContainer
 @export var Address = Settings.ADDRESS
 @export var port    = Settings.PORT
 
+signal server_join
+
 var server_instance
 var peer
 
@@ -32,9 +34,10 @@ func on_server_join_button_down():
 	print("Pressed Join")
 	
 func _server_join():
-	print("successfully joined server")
-#	join_pressed.emit()
-	peer = ENetMultiplayerPeer.new()
-	peer.create_client(Address, port)
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	multiplayer.set_multiplayer_peer(peer)
+#	print("successfully joined server")
+##	join_pressed.emit()
+#	peer = ENetMultiplayerPeer.new()
+#	peer.create_client(Address, port)
+#	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
+#	multiplayer.set_multiplayer_peer(peer)
+	server_join.emit()
