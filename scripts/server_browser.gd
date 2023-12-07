@@ -2,6 +2,7 @@ extends Control
 
 signal found_server
 signal server_removed
+signal server_joined(ip)
 
 var broadcast_timer : Timer
 
@@ -63,7 +64,7 @@ func _process(delta):
 		var data = bytes.get_string_from_ascii()
 		var room_info = JSON.parse_string(data)
 		
-		print("server ip: " + server_ip + " server_port " + str(server_port) + " roomInfo" + str(room_info))
+		print("server ip: " + server_ip + " server_port: " + str(server_port) + " roomInfo: " + str(room_info))
 		
 #		var child = $Panel/server_list.find_child(room_info.name)
 		if room_info.name != temp:
@@ -83,18 +84,7 @@ func _process(delta):
 			
 
 func join_game(ip):
-	peer = ENetMultiplayerPeer.new()
-	peer.create_client(ip, port)
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	multiplayer.set_multiplayer_peer(peer)
-		
-		
-func _join_button_pressed():
-#	peer = ENetMultiplayerPeer.new()
-#	peer.create_client(address, 8000)
-#	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-#	multiplayer.set_multiplayer_peer(peer)
-	print("pressed")
+	server_joined.emit(ip)
 			
 
 func _on_broadcast_timer_timeout():

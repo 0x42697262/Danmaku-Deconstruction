@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://clwyik8h1klp0"]
+[gd_scene load_steps=5 format=3 uid="uid://clwyik8h1klp0"]
 
 [ext_resource type="Texture2D" uid="uid://dkcgsmiedscnq" path="res://assets/Characters/blue_character.png" id="1_jo1re"]
 [ext_resource type="Script" path="res://scenes/entities/player.gd" id="1_t6ev6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jb7jw"]
 radius = 2.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q1aes"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_t6ev6")
@@ -18,3 +24,6 @@ texture = ExtResource("1_jo1re")
 [node name="hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jb7jw")
 debug_color = Color(0.929412, 0, 0, 0.419608)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_q1aes")
