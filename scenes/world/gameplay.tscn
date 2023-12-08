@@ -25,3 +25,17 @@ position = Vector2(576, 324)
 number_of_bullets = 8
 spawn_rate = 0.3
 body_rotation = 30
+
+[node name="spawner2" parent="." instance=ExtResource("3_l1elf")]
+position = Vector2(575, 489)
+supernova_time = 6.0
+number_of_bullets = 8
+spawn_rate = 0.3
+body_rotation = 30
+
+[node name="spawner3" parent="." instance=ExtResource("3_l1elf")]
+position = Vector2(352, 395)
+supernova_time = 3.0
+number_of_bullets = 8
+spawn_rate = 0.3
+body_rotation = 30

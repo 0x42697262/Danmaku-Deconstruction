@@ -2,6 +2,8 @@ extends Node2D
 
 
 @export var bullet_scene: PackedScene
+@export var supernova_time: float   = 2.0 # 2s before exploding into supernova
+@export var despawn_time: float     = 10.0
 @export var min_rotation: int       = 0
 @export var max_rotation: int       = 360
 @export var number_of_bullets: int  = 8
@@ -21,11 +23,15 @@ var rotations = []
 @export var log_to_console: bool = false
 
 func _ready():
-	Logger.console(0, ['Instantiated', self])
-	$Timer.wait_time = spawn_rate
-	$Timer.start()
-	Logger.console(0, ['Started', $Timer, 'of', self, "with `wait_time` of", spawn_rate, "seconds"])
+	$Timer.wait_time        = spawn_rate
+	$supernova.wait_time    = supernova_time
+	$despawn.wait_time      = despawn_time
 	
+	$supernova.start()
+	$despawn.start()
+	Logger.console(0, ['Instantiated', self, "with supernova time of", supernova_time, 
+						"seconds -- despawn time", despawn_time, "seconds -- spawn rate of", spawn_rate, "seconds"])
+						
 func _process(delta):
 	var new_rotation = rotation_degrees + body_rotation * delta
 	rotation_degrees = fmod(new_rotation, 360)
@@ -78,6 +84,9 @@ func spawn_bullets():
 	
 	return spawned_bullets
 
+func free_memory():
+	queue_free()
+
 func _on_timer_timeout(): 
 	if !is_manual:
 		spawn_bullets()
@@ -85,3 +94,23 @@ func _on_timer_timeout():
 	if (log_to_console):
 		Logger.console(0, ['Spawned Bullets'])
 
+
+
+func _on_supernova_timeout():
+	# play explosion animation
+	$area.queue_free()
+	$Timer.start()
+	$supernova.stop()
+	Logger.console(0, [self, 'has exploded!'])
+
+
+func _on_despawn_timeout():
+	queue_free()
+	Logger.console(0, ["Auto despawned", self])
+
+
+func _on_area_body_entered(body):
+	# play some animation here that a star just sparkles
+	queue_free()
+	Logger.console(0, [body, "entered.", "Safely despawned", self])
+	

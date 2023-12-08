@@ -16,4 +16,4 @@ const LOG_LEVEL: int = 0
 func console(level: int, message: Array):
 	if level >= LOG_LEVEL:
 		var time_passed: int = Time.get_ticks_msec()
-		print(":: (", time_passed, " ms) ", " ".join(message))
+		print("(LOG::", time_passed, " ms) ", " ".join(message))

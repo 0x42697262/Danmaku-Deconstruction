@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cumm7ewr26cy"]
+[gd_scene load_steps=5 format=3 uid="uid://cumm7ewr26cy"]
 
 [ext_resource type="Script" path="res://scenes/entities/spawner/spawner.gd" id="1_fado2"]
 [ext_resource type="PackedScene" uid="uid://cy03j6jown1dv" path="res://scenes/entities/bullet.tscn" id="2_bc4qp"]
+[ext_resource type="Texture2D" uid="uid://da8xc8qlse732" path="res://assets/Characters/star.png" id="3_ar2vp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2bren"]
+radius = 30.0
 
 [node name="spawner" type="Node2D"]
 script = ExtResource("1_fado2")
@@ -11,6 +15,23 @@ spawn_rate = 0.6
 bullet_speed = 100
 bullet_lifetime = 15.0
 
+[node name="area" type="Area2D" parent="."]
+
+[node name="star" type="Sprite2D" parent="area"]
+position = Vector2(-1.52588e-05, -1.52588e-05)
+scale = Vector2(0.335052, 0.335052)
+texture = ExtResource("3_ar2vp")
+
+[node name="hitbox" type="CollisionShape2D" parent="area"]
+shape = SubResource("CircleShape2D_2bren")
+
+[node name="supernova" type="Timer" parent="."]
+
+[node name="despawn" type="Timer" parent="."]
+
 [node name="Timer" type="Timer" parent="."]
 
+[connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]
+[connection signal="timeout" from="supernova" to="." method="_on_supernova_timeout"]
+[connection signal="timeout" from="despawn" to="." method="_on_despawn_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

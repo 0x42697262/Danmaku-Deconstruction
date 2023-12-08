@@ -25,6 +25,7 @@ config/icon="res://icon.svg"
 Logger="*res://scripts/autoloads/logger.gd"
 Settings="*res://scripts/autoloads/settings.gd"
 game_manager="*res://scripts/autoloads/game_manager.gd"
+BeatmapManager="*res://scripts/autoloads/beatmap_manager.gd"
 
 [debug]
 

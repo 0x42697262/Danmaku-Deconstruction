@@ -2,9 +2,8 @@ extends Control
 
 
 func _ready():
-	# James, change thiss part sa spawning.
 	var index = 0
-	
+
 	for i in game_manager.Players:
 		var player = preload("res://scenes/entities/player.tscn").instantiate()
 		var area = size
@@ -20,6 +19,10 @@ func _ready():
 		if child.has_signal("gameover"):
 			child.gameover.connect(_on_gameover_signal)
 	Logger.console(0, [self, "connecting signals for each players... done!"])
-
+	
+	BeatmapManager.set_beatmap_type("endless")
+	var p = preload("res://scenes/entities/player.tscn")
+	add_child(p.instantiate())
+	
 func _on_gameover_signal(player):
 	player.queue_free()
