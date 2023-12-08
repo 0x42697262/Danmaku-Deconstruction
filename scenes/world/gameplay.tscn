@@ -22,20 +22,12 @@ grow_vertical = 2
 
 [node name="spawner" parent="." instance=ExtResource("3_l1elf")]
 position = Vector2(576, 324)
-number_of_bullets = 8
+vulnerable = false
+supernova_time = 1.0
+despawn_time = 5.0
+number_of_bullets = 16
 spawn_rate = 0.3
-body_rotation = 30
-
-[node name="spawner2" parent="." instance=ExtResource("3_l1elf")]
-position = Vector2(575, 489)
-supernova_time = 6.0
-number_of_bullets = 8
-spawn_rate = 0.3
-body_rotation = 30
-
-[node name="spawner3" parent="." instance=ExtResource("3_l1elf")]
-position = Vector2(352, 395)
-supernova_time = 3.0
-number_of_bullets = 8
-spawn_rate = 0.3
-body_rotation = 30
+bullet_speed = 255
+body_rotation = -45
+bullet_free_on_leave = false
+rotation_change = 45

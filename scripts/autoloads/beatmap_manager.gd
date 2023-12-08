@@ -31,13 +31,6 @@ func _ready():
 	Logger.console(3, ['Beatmap Manager Started'])
 
 
-func set_beatmap_type(type: String):
-	Logger.console(3, ["Configured Beatmap Manager type to", type, "mode"])
-	match type:
-		"endless":
-			pass
-		"osz":
-			print("osz")
 
 func reset_beatmap_manager():
 	beatmap_type    = ""
