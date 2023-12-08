@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8o75bc6kfle0"
-path="res://.godot/imported/gray_character.png-202b9059f5821834659937135a68650a.ctex"
+uid="uid://c7lktems2f88a"
+path="res://.godot/imported/mars.png-ddeb1c932aea9447cbf408fa7fd365ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/gray_character.png"
-dest_files=["res://.godot/imported/gray_character.png-202b9059f5821834659937135a68650a.ctex"]
+source_file="res://assets/Characters/mars.png"
+dest_files=["res://.godot/imported/mars.png-ddeb1c932aea9447cbf408fa7fd365ab.ctex"]
 
 [params]
 

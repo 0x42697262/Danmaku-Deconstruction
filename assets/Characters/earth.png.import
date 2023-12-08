@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0a3iixpwyqfk"
-path="res://.godot/imported/pink_character.png-2ea5089ef126a011edc81eed3f9aedde.ctex"
+uid="uid://c5gpjrujt4usy"
+path="res://.godot/imported/earth.png-419ba0cb842c0e0e044b7f869455e768.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/pink_character.png"
-dest_files=["res://.godot/imported/pink_character.png-2ea5089ef126a011edc81eed3f9aedde.ctex"]
+source_file="res://assets/Characters/earth.png"
+dest_files=["res://.godot/imported/earth.png-419ba0cb842c0e0e044b7f869455e768.ctex"]
 
 [params]
 

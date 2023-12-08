@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp7dikct7duer"
-path="res://.godot/imported/orange_character.png-10ee7640725f7d965c41fdefba9edd52.ctex"
+uid="uid://bxnfg6oprbx3c"
+path="res://.godot/imported/mercury.png-7fa7f12f155555beb79c4aae4e6038a5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/orange_character.png"
-dest_files=["res://.godot/imported/orange_character.png-10ee7640725f7d965c41fdefba9edd52.ctex"]
+source_file="res://assets/Characters/mercury.png"
+dest_files=["res://.godot/imported/mercury.png-7fa7f12f155555beb79c4aae4e6038a5.ctex"]
 
 [params]
 

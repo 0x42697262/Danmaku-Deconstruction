@@ -1,5 +1,15 @@
 extends Control
 
+var p1: Texture = preload("res://assets/Characters/mercury.png")
+var p2: Texture = preload("res://assets/Characters/venus.png")
+var p3: Texture = preload("res://assets/Characters/earth.png")
+var p4: Texture = preload("res://assets/Characters/mars.png")
+var p5: Texture = preload("res://assets/Characters/jupiter.png")
+var p6: Texture = preload("res://assets/Characters/saturn.png")
+var p7: Texture = preload("res://assets/Characters/uranus.png")
+var p8: Texture = preload("res://assets/Characters/neptune.png")
+
+var player_texture = [p1, p2, p3, p4, p5, p6, p7, p8]
 
 func _ready():
 	# James, change thiss part sa spawning.
@@ -8,9 +18,12 @@ func _ready():
 	for i in game_manager.Players:
 		var player = preload("res://scenes/entities/player.tscn").instantiate()
 		var area = size
+		player.name = str(game_manager.Players[i].id)
+		player.get_node("sprite").texture = player_texture[index+1]
 		add_child(player)
-		player.global_position = Vector2(209,156)
-		
+		player.global_position = Vector2(randi_range(0,1152), randi_range(0,648))
+		index += 1
+	
 	var children = get_children()
 	
 	# DON'T CHANGE THIS PART

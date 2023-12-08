@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://necrj7wj5y7y"
-path="res://.godot/imported/green_character.png-3a46ffeccd4a272c4c7d37f90b7b315e.ctex"
+uid="uid://b54qh0n2nyw57"
+path="res://.godot/imported/uranus.png-a4584090b365caec0e89b1c6c2d75d39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/green_character.png"
-dest_files=["res://.godot/imported/green_character.png-3a46ffeccd4a272c4c7d37f90b7b315e.ctex"]
+source_file="res://assets/Characters/uranus.png"
+dest_files=["res://.godot/imported/uranus.png-a4584090b365caec0e89b1c6c2d75d39.ctex"]
 
 [params]
 

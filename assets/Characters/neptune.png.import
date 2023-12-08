@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n0tv60jpluwa"
-path="res://.godot/imported/black_character.png-dc8dad777b0c5a1cfe65a7f135f8738a.ctex"
+uid="uid://3xdsaxd7t8iy"
+path="res://.godot/imported/neptune.png-30cfe2d10584c72eb6ab3bf566ad694e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/black_character.png"
-dest_files=["res://.godot/imported/black_character.png-dc8dad777b0c5a1cfe65a7f135f8738a.ctex"]
+source_file="res://assets/Characters/neptune.png"
+dest_files=["res://.godot/imported/neptune.png-30cfe2d10584c72eb6ab3bf566ad694e.ctex"]
 
 [params]
 

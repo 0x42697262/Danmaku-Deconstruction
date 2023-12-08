@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu8o34n4b1ipn"
-path="res://.godot/imported/yellow_character.png-6d048784ff15b082152e0586247ca4d1.ctex"
+uid="uid://by0661ox411oj"
+path="res://.godot/imported/venus.png-3ae01493c9a6e5ab5ef0a0eea4be3842.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/yellow_character.png"
-dest_files=["res://.godot/imported/yellow_character.png-6d048784ff15b082152e0586247ca4d1.ctex"]
+source_file="res://assets/Characters/venus.png"
+dest_files=["res://.godot/imported/venus.png-3ae01493c9a6e5ab5ef0a0eea4be3842.ctex"]
 
 [params]
 

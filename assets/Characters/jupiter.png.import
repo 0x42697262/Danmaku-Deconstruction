@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkcgsmiedscnq"
-path="res://.godot/imported/blue_character.png-9c1cd9ce4e036c94cfeee8779124e378.ctex"
+uid="uid://yuhqu43s60jf"
+path="res://.godot/imported/jupiter.png-f167f546ef57581b5d2401a69b4d3d4c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/blue_character.png"
-dest_files=["res://.godot/imported/blue_character.png-9c1cd9ce4e036c94cfeee8779124e378.ctex"]
+source_file="res://assets/Characters/jupiter.png"
+dest_files=["res://.godot/imported/jupiter.png-f167f546ef57581b5d2401a69b4d3d4c.ctex"]
 
 [params]
 
