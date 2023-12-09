@@ -22,7 +22,6 @@ texture = ExtResource("3_ar2vp")
 visible = false
 position = Vector2(-1.2219e-06, -2.08616e-07)
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_nxaaf")
 
 [node name="supernova" type="Timer" parent="."]

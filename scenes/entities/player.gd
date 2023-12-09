@@ -54,3 +54,18 @@ func take_damage():
 		Logger.console(1, [self, "has died!"])
 		is_alive = false
 		hide_mouse(false)
+		var explode = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()
+		explode.vulnerable = false
+		explode.supernova_time = 0
+		explode.number_of_bullets = 64
+		explode.remaining_spawns = 1
+		explode.bullet_speed = 150
+		explode.body_rotation = 0
+		explode.spawn_rate = 0
+		explode.global_position = position
+		explode.is_star = false
+		explode.get_child(0).queue_free()
+		get_parent().add_child(explode)
+		explode.spawn_bullets()
+		
+		queue_free()

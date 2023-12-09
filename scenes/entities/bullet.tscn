@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cy03j6jown1dv"]
 
-[ext_resource type="Texture2D" uid="uid://bgbq4npp2j14v" path="res://assets/Characters/bullet.png" id="1_51bog"]
+[ext_resource type="Texture2D" uid="uid://308i837wiq55" path="res://assets/Characters/bullet.png" id="1_51bog"]
 [ext_resource type="Script" path="res://scenes/entities/bullet.gd" id="1_mv1hr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_alts0"]
@@ -11,6 +11,7 @@ script = ExtResource("1_mv1hr")
 velocity = Vector2(1, 1)
 
 [node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.193359, 0.204545)
 texture = ExtResource("1_51bog")
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
@@ -19,6 +20,8 @@ shape = SubResource("CircleShape2D_alts0")
 [node name="Timer" type="Timer" parent="."]
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(4.76837e-07, 4.76837e-07)
+scale = Vector2(0.6, 0.6)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

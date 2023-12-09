@@ -20,10 +20,12 @@ func _ready():
 			child.gameover.connect(_on_gameover_signal)
 	Logger.console(0, [self, "connecting signals for each players... done!"])
 	
-	var endless_mode = preload("res://scenes/world/endless_mode.tscn").instantiate()
-	add_child(endless_mode)
-	endless_mode.spawn.connect(_on_spawn_a_star)
-	Logger.console(3, ["Configured Beatmap Manager type to endless mode"])
+	
+	# temporary parts
+	#var mode = preload("res://scenes/world/game_modes/endless_mode.tscn").instantiate()
+	var mode = preload("res://scenes/world/game_modes/musical_mode.tscn").instantiate()	
+	add_child(mode)
+	mode.spawn.connect(_on_spawn_a_star)
 	
 	var p = preload("res://scenes/entities/player.tscn")
 	add_child(p.instantiate())

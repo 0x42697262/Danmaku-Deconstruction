@@ -4,7 +4,8 @@ extends Node2D
 @export var bullet_scene: PackedScene
 ## Star's vulnerability to despawn when a player goes inside
 @export var vulnerable: bool        = true
-@export var supernova_time: float   = 5.0 # 2s before exploding into supernova
+@export var is_star: bool           = true
+@export var supernova_time: float   = 5.0 # 5s before exploding into supernova
 @export var despawn_time: float     = 30.0
 @export var min_rotation: int       = 0
 @export var max_rotation: int       = 360
@@ -32,11 +33,12 @@ var rotations = []
 func _ready():
 	if not vulnerable:
 		$area/star.modulate = Color.hex(0xff7d00ff)
+	
 	$Timer.wait_time        = spawn_rate
 	$supernova.wait_time    = supernova_time
 	$despawn.wait_time      = despawn_time
-	
-	$supernova.start()
+	if is_star:
+		$supernova.start()
 	
 	Logger.console(0, ['Instantiated', self, "with supernova time of", supernova_time, 
 						"seconds -- despawn time", despawn_time, "seconds -- spawn rate of", spawn_rate, "seconds"])
@@ -115,6 +117,7 @@ func _on_supernova_timeout():
 	$Timer.start()
 	$supernova.stop()
 	$despawn.start()
+	spawn_bullets()
 	Logger.console(0, [self, 'has exploded!'])
 
 
