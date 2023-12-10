@@ -27,6 +27,7 @@ func _ready():
 		host_game()
 	
 	Logger.console(0, ["connecting signals... done!"])
+
 	
 func _on_join_button_pressed():
 	print("Join Button Pressed")
@@ -108,6 +109,11 @@ func host_game():
 	multiplayer.set_multiplayer_peer(peer)
 	Logger.console(2, ["Waiting for players..."])
 	pass
+	
+func _on_exit_button_down():
+	var scene = load("res://scenes/Landing Page/Landing_page.tscn").instantiate()
+	get_tree().root.add_child(scene)
+	self.hide()
 
 func _on_start_button_down():
 	Logger.console(3, ["Start game pressed. Executing RPC()..."])

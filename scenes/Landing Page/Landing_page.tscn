@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bqqrl766bhv3g" path="res://assets/DANMAKU DECONSTRUCTION.png" id="4_u0uvd"]
 [ext_resource type="PackedScene" uid="uid://bstsg8hhpsw81" path="res://scenes/Option Menu/OptionsMenu.tscn" id="5_21aid"]
 [ext_resource type="Theme" uid="uid://86g371j1l8kt" path="res://assets/themes/questionbutton.tres" id="5_j6mip"]
-[ext_resource type="AudioStream" uid="uid://cdbip6yu0jxp8" path="res://assets/Audio/JEON SOMI - Fast Forward  Instrumental.mp3" id="6_rltqo"]
 [ext_resource type="PackedScene" uid="uid://q3non506qyqo" path="res://scenes/Option Menu/TutorialMenu.tscn" id="7_e5p8d"]
+[ext_resource type="AudioStream" uid="uid://b24swfg02p6be" path="res://assets/Audio/starting-game music.mp3" id="9_wd275"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4tdil"]
 particles_animation = true
@@ -184,7 +184,7 @@ mouse_filter = 1
 visible = false
 layout_mode = 1
 
-[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_rltqo")
+[node name="Background Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_wd275")
 volume_db = -13.671
 autoplay = true

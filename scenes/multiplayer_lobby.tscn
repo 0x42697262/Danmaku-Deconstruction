@@ -78,6 +78,16 @@ theme_override_fonts/font = ExtResource("7_kbkgn")
 theme_override_font_sizes/font_size = 20
 text = "Server List :"
 
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 869.0
+offset_top = 558.0
+offset_right = 1105.0
+offset_bottom = 604.0
+theme = ExtResource("4_4myw3")
+theme_override_font_sizes/font_size = 18
+text = "BACK TO MAIN MENU"
+
 [node name="server_browser" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -158,4 +168,5 @@ offset_bottom = 468.0
 [connection signal="button_down" from="Join" to="." method="_on_join_button_down"]
 [connection signal="button_down" from="Start" to="." method="_on_start_button_down"]
 [connection signal="text_changed" from="server_input" to="." method="_on_host_button_down"]
+[connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]
 [connection signal="timeout" from="server_browser/broadcast_timer" to="server_browser" method="_on_broadcast_timer_timeout"]
