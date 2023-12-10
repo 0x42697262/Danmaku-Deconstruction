@@ -14,7 +14,7 @@ var peer
 
 @export var address             = Settings.ADDRESS
 @export var port                = Settings.PORT
-@export var broadcast_address   = "192.168.254.255"
+@export var broadcast_address   = "172.16.15.255"
 @export var listen_port         = Settings.LISTEN_PORT
 @export var broadcast_port      = Settings.BROADCAST_PORT
 

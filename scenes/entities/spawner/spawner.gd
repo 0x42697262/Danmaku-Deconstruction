@@ -34,7 +34,7 @@ func _ready():
 	if not vulnerable:
 		$area/star.modulate = Color.hex(0xff7d00ff)
 	
-	$Timer.wait_time        = spawn_rate
+	$Timer.wait_time        = spawn_rate + 0.001
 	$supernova.wait_time    = supernova_time
 	$despawn.wait_time      = despawn_time
 	if is_star:
