@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Danmaku Deconstruction"
+config/name="Danmaku Deconstruction (main)"
 config/description="A simple bullet hell game."
 run/main_scene="res://scenes/Landing Page/Landing_page.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")

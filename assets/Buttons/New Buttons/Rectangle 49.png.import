@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://necrj7wj5y7y"
-path="res://.godot/imported/green_character.png-3a46ffeccd4a272c4c7d37f90b7b315e.ctex"
+uid="uid://cidefr7anx6lr"
+path="res://.godot/imported/Rectangle 49.png-ede7e7a718f62ddb86d8d2819581a4cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/green_character.png"
-dest_files=["res://.godot/imported/green_character.png-3a46ffeccd4a272c4c7d37f90b7b315e.ctex"]
+source_file="res://assets/Buttons/New Buttons/Rectangle 49.png"
+dest_files=["res://.godot/imported/Rectangle 49.png-ede7e7a718f62ddb86d8d2819581a4cf.ctex"]
 
 [params]
 

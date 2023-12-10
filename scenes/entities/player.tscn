@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://clwyik8h1klp0"]
 
-[ext_resource type="Texture2D" uid="uid://dkcgsmiedscnq" path="res://assets/Characters/blue_character.png" id="1_jo1re"]
 [ext_resource type="Script" path="res://scenes/entities/player.gd" id="1_t6ev6"]
+[ext_resource type="Texture2D" uid="uid://c5gpjrujt4usy" path="res://assets/Characters/earth.png" id="2_ooyqq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jb7jw"]
 radius = 2.0
@@ -15,10 +15,10 @@ properties/0/replication_mode = 1
 script = ExtResource("1_t6ev6")
 
 [node name="sprite" type="Sprite2D" parent="."]
-position = Vector2(1.19209e-07, 2.38419e-07)
+position = Vector2(0.0221586, 0.0233603)
 rotation = -3.14159
-scale = Vector2(0.044548, 0.0469609)
-texture = ExtResource("1_jo1re")
+scale = Vector2(0.407815, 0.429904)
+texture = ExtResource("2_ooyqq")
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jb7jw")

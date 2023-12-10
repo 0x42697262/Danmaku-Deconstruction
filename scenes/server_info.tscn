@@ -1,10 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://6g7c8ka0lodk"]
+[gd_scene load_steps=6 format=3 uid="uid://6g7c8ka0lodk"]
 
 [ext_resource type="Script" path="res://scripts/server_instance.gd" id="1_dd5ic"]
 [ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="2_t6htq"]
-[ext_resource type="Theme" uid="uid://ba5kplk6mf3lw" path="res://assets/themes/button.tres" id="3_tuqgj"]
+[ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="3_fjc1k"]
+[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="4_kkg6u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uk22a"]
+font_size = 12
 
 [node name="server_instance" type="HBoxContainer"]
 offset_right = 496.0
@@ -15,27 +17,33 @@ script = ExtResource("1_dd5ic")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_t6htq")
+theme_override_fonts/font = ExtResource("3_fjc1k")
 label_settings = SubResource("LabelSettings_uk22a")
 horizontal_alignment = 1
+clip_text = true
 
 [node name="server_ip" type="Label" parent="."]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme = ExtResource("2_t6htq")
+theme_override_fonts/font = ExtResource("3_fjc1k")
+theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 
 [node name="player_count" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme = ExtResource("2_t6htq")
-text = "Number of Players
-"
+theme_override_fonts/font = ExtResource("3_fjc1k")
+theme_override_font_sizes/font_size = 12
+text = "1"
 horizontal_alignment = 1
 
 [node name="Join" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_tuqgj")
+theme = ExtResource("4_kkg6u")
+theme_override_font_sizes/font_size = 10
 text = "Join
 "
 

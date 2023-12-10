@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0a3iixpwyqfk"
-path="res://.godot/imported/pink_character.png-2ea5089ef126a011edc81eed3f9aedde.ctex"
+uid="uid://k0yyupwf4kjs"
+path="res://.godot/imported/Polygon 1.png-9242bb405ef3f796468f07c890d96df1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/pink_character.png"
-dest_files=["res://.godot/imported/pink_character.png-2ea5089ef126a011edc81eed3f9aedde.ctex"]
+source_file="res://assets/Buttons/New Buttons/Polygon 1.png"
+dest_files=["res://.godot/imported/Polygon 1.png-9242bb405ef3f796468f07c890d96df1.ctex"]
 
 [params]
 
