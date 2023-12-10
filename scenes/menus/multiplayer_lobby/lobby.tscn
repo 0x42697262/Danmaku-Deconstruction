@@ -42,18 +42,6 @@ theme_override_fonts/font = ExtResource("5_rpjq4")
 theme_override_font_sizes/font_size = 20
 text = "127.0.0.1"
 
-[node name="test" type="Label" parent="."]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 624.0
-offset_right = 382.0
-offset_bottom = 650.0
-theme = ExtResource("4_ja0lf")
-theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
-theme_override_fonts/font = ExtResource("5_rpjq4")
-theme_override_font_sizes/font_size = 20
-text = "test"
-
 [node name="choice" type="Panel" parent="."]
 visible = false
 layout_mode = 0
@@ -123,9 +111,9 @@ text = "Start"
 
 [node name="Broadcast" type="CheckButton" parent="Room"]
 layout_mode = 0
-offset_left = 640.0
+offset_left = 642.0
 offset_top = 128.0
-offset_right = 813.0
+offset_right = 843.0
 offset_bottom = 176.0
 tooltip_text = "Broadcast Server IP Address"
 theme = ExtResource("4_ja0lf")
@@ -144,6 +132,18 @@ offset_bottom = 202.0
 theme_override_fonts/font = ExtResource("5_rpjq4")
 theme_override_font_sizes/font_size = 20
 text = "Broadcast Adress:"
+
+[node name="Broadcasting" type="Label" parent="Room"]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 16.0
+offset_right = 1144.0
+offset_bottom = 42.0
+theme = ExtResource("4_ja0lf")
+theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 2
 
 [node name="BroadcastAddress" type="LineEdit" parent="Room"]
 offset_left = 872.0

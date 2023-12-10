@@ -49,7 +49,11 @@ func _on_game_error(errtxt):
 func refresh_lobby():
 	pass
 
+func _on_start_pressed():
+	pass # Replace with function body.
 
+
+# ---- Broadcast related functions ---- #
 
 func _on_check_button_toggled(toggled_on):
 	if $Room/Broadcast.button_pressed:
@@ -57,17 +61,11 @@ func _on_check_button_toggled(toggled_on):
 	else:
 		stop_broadcasting()
 
-
-func _on_start_pressed():
-	pass # Replace with function body.
-
-
 func _on_broadcaster_timeout():
 	room_info.player_count = GameManager.get_player_count()
 	var data    = JSON.stringify(room_info)
 	var packet  = data.to_ascii_buffer()
 	broadcaster.put_packet(packet)
-	print(room_info, broadcast_address)
 
 func _on_broadcast_address_text_changed(new_text):
 	broadcast_address = new_text
@@ -103,6 +101,7 @@ func start_broadcasting():
 	Logger.console(3, ["Bound to Broadcast Port", broadcast_port, "Successful"])
 	
 	$Room/Broadcaster.start()
+	$Room/Broadcasting.text = "Broadcasting..."
 	
 	Logger.console(3, ["Started Broadcast Timer on", broadcast_address])
 
@@ -114,5 +113,6 @@ func stop_broadcasting():
 	$Room/Broadcaster.stop()
 	if broadcaster != null and broadcaster.is_bound():
 		broadcaster.close()
+		$Room/Broadcasting.text = ""
 		
 		Logger.console(3, ["Stopped broadcasting server"])
