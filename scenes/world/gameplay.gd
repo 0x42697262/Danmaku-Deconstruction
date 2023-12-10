@@ -17,10 +17,10 @@ var player_texture = [p1, p2, p3, p4, p5, p6, p7, p8]
 func _ready():
 	var index = 0
 
-	for i in game_manager.Players:
+	for i in GameManager.Players:
 		var player = preload("res://scenes/entities/player.tscn").instantiate()
 		var area = size
-		player.name = "player" + str(game_manager.Players[i].id)
+		player.name = "player" + str(GameManager.Players[i].id)
 		player.get_node("sprite").texture = player_texture[index+1]
 		player.spawn.connect(_on_spawn_a_star)
 		add_child(player)

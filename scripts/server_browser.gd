@@ -37,7 +37,7 @@ func set_up():
 	
 func setup_broadcast(name):
 	room_info.name = name
-	room_info.player_count = game_manager.Players.size()
+	room_info.player_count = GameManager.Players.size()
 	room_info.ip = listener.get_packet_ip()
 	
 	broadcaster = PacketPeerUDP.new()
@@ -117,7 +117,7 @@ func join_game(ip):
 
 func _on_broadcast_timer_timeout():
 	# print("Broadcasting Game!")
-	room_info.player_count = game_manager.Players.size()
+	room_info.player_count = GameManager.Players.size()
 	var data = JSON.stringify(room_info)
 	var packet = data.to_ascii_buffer()
 	broadcaster.put_packet(packet)

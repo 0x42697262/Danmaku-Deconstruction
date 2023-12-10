@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=3 uid="uid://4mb37tol2l2s"]
 
-[ext_resource type="Script" path="res://scenes/Landing Page/Landing_page.gd" id="1_yrunr"]
-[ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="2_36agv"]
-[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="2_qweai"]
-[ext_resource type="Texture2D" uid="uid://xx50vlwvcs0o" path="res://assets/Backgrounds/Group 27.png" id="3_2dxk2"]
-[ext_resource type="Texture2D" uid="uid://bqqrl766bhv3g" path="res://assets/DANMAKU DECONSTRUCTION.png" id="4_u0uvd"]
-[ext_resource type="PackedScene" uid="uid://bstsg8hhpsw81" path="res://scenes/Option Menu/OptionsMenu.tscn" id="5_21aid"]
-[ext_resource type="Theme" uid="uid://86g371j1l8kt" path="res://assets/themes/questionbutton.tres" id="5_j6mip"]
-[ext_resource type="AudioStream" uid="uid://cdbip6yu0jxp8" path="res://assets/Audio/JEON SOMI - Fast Forward  Instrumental.mp3" id="6_rltqo"]
-[ext_resource type="PackedScene" uid="uid://q3non506qyqo" path="res://scenes/Option Menu/TutorialMenu.tscn" id="7_e5p8d"]
+[ext_resource type="Script" path="res://scenes/menus/main_menu/main_menu.gd" id="1_hj4er"]
+[ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="2_xjamw"]
+[ext_resource type="Texture2D" uid="uid://xx50vlwvcs0o" path="res://assets/Backgrounds/Group 27.png" id="3_hoads"]
+[ext_resource type="Texture2D" uid="uid://bqqrl766bhv3g" path="res://assets/DANMAKU DECONSTRUCTION.png" id="4_8ocu7"]
+[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="5_sn1bl"]
+[ext_resource type="Theme" uid="uid://86g371j1l8kt" path="res://assets/themes/questionbutton.tres" id="6_dkaax"]
+[ext_resource type="PackedScene" uid="uid://bstsg8hhpsw81" path="res://scenes/Option Menu/OptionsMenu.tscn" id="7_t31ef"]
+[ext_resource type="PackedScene" uid="uid://q3non506qyqo" path="res://scenes/Option Menu/TutorialMenu.tscn" id="8_staoy"]
+[ext_resource type="AudioStream" uid="uid://cdbip6yu0jxp8" path="res://assets/Audio/JEON SOMI - Fast Forward  Instrumental.mp3" id="9_nxx1f"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4tdil"]
 particles_animation = true
@@ -17,12 +17,10 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_idaxc"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(100, 200, 1)
-particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
 
 [node name="Landing_page" type="Control"]
 clip_contents = true
@@ -32,7 +30,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_yrunr")
+script = ExtResource("1_hj4er")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -41,7 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_36agv")
+texture = ExtResource("2_xjamw")
 expand_mode = 2
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
@@ -90,7 +88,7 @@ offset_right = 32.0
 offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_2dxk2")
+texture = ExtResource("3_hoads")
 expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -124,7 +122,7 @@ layout_mode = 2
 [node name="Group14" type="Sprite2D" parent="MarginContainer/VBoxContainer"]
 position = Vector2(0, -47.504)
 scale = Vector2(0.916034, 0.916034)
-texture = ExtResource("4_u0uvd")
+texture = ExtResource("4_8ocu7")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -144,19 +142,19 @@ alignment = 1
 [node name="PlayButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-theme = ExtResource("2_qweai")
+theme = ExtResource("5_sn1bl")
 text = "Play"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-theme = ExtResource("2_qweai")
+theme = ExtResource("5_sn1bl")
 text = "Options"
 
 [node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-theme = ExtResource("2_qweai")
+theme = ExtResource("5_sn1bl")
 text = "Exit"
 
 [node name="Tutorial" type="Button" parent="MarginContainer"]
@@ -164,11 +162,11 @@ custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme = ExtResource("5_j6mip")
+theme = ExtResource("6_dkaax")
 theme_override_constants/outline_size = 0
 theme_override_constants/h_separation = 0
 
-[node name="OptionMenu" parent="." instance=ExtResource("5_21aid")]
+[node name="OptionMenu" parent="." instance=ExtResource("7_t31ef")]
 visible = false
 layout_mode = 2
 anchors_preset = 0
@@ -180,11 +178,11 @@ offset_right = 1140.0
 offset_bottom = 636.0
 mouse_filter = 1
 
-[node name="TutorialMenu" parent="." instance=ExtResource("7_e5p8d")]
+[node name="TutorialMenu" parent="." instance=ExtResource("8_staoy")]
 visible = false
 layout_mode = 1
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_rltqo")
+stream = ExtResource("9_nxx1f")
 volume_db = -13.671
 autoplay = true

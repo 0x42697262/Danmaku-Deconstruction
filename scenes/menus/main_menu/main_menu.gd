@@ -1,23 +1,20 @@
 class_name Landing_Page
 extends Control
 
-@onready var PlayButton = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/PlayButton as Button
-@onready var OptionsButton = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/OptionsButton as Button
-@onready var ExitButton = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ExitButton as Button
-@onready var Tutorial = $MarginContainer/Tutorial as Button
-@onready var OptionMenu = $OptionMenu as Options_Menu
-@onready var TutorialMenu = $TutorialMenu as TutorialsMenu
-@onready var margin_container = $MarginContainer as MarginContainer
+@onready var PlayButton         = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/PlayButton as Button
+@onready var OptionsButton      = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/OptionsButton as Button
+@onready var ExitButton         = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ExitButton as Button
+@onready var Tutorial           = $MarginContainer/Tutorial as Button
+@onready var OptionMenu         = $OptionMenu as Options_Menu
+@onready var TutorialMenu       = $TutorialMenu as TutorialsMenu
+@onready var margin_container   = $MarginContainer as MarginContainer
 
-@onready var next = preload("res://scenes/multiplayer_lobby.tscn") as PackedScene
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	Logger.console(0, ["Game Started"])
 	handle_connecting_signal()
 
-
 func on_play_press() -> void:
-	get_tree().change_scene_to_packed(next)
+	SceneManager.switch_to_multiplayer_lobby()
 
 func on_option_press() -> void:
 	margin_container.visible = false
@@ -30,7 +27,7 @@ func on_exit_press() -> void:
 func on_tutorial_press() -> void:
 	margin_container.visible = false
 	TutorialMenu.set_process(true)
-	TutorialMenu.visible = true	
+	TutorialMenu.visible = true
 	
 func on_exit_options_menu ()-> void:
 	margin_container.visible = true

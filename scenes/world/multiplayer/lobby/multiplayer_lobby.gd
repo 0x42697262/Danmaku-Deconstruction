@@ -15,6 +15,7 @@ var RoomInfo = {
 	}
 
 func _ready():
+	$client_ip_address.text = str(IP.get_local_addresses()[0])
 	Logger.console(3, ["Started Multiplayer Session"])
 	Logger.console(0, ["connecting signals..."])
 	
@@ -70,6 +71,7 @@ func send_player_information(name, id):
 
 @rpc("any_peer","call_local")
 func start_game():
+	
 	Logger.console(3, ["Loading match scene..."])
 	var scene = load("res://scenes/world/gameplay.tscn").instantiate()
 	Logger.console(3, ["Loading match scene... done!"])
