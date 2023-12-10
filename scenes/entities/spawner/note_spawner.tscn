@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfsrc761d1krs"]
+
+[ext_resource type="Script" path="res://scenes/entities/spawner/note_spawner.gd" id="1_5pyv5"]
+
+[node name="note_spawner" type="Timer"]
+script = ExtResource("1_5pyv5")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

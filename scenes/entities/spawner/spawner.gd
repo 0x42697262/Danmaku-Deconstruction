@@ -118,6 +118,7 @@ func _on_supernova_timeout():
 	$supernova.stop()
 	$despawn.start()
 	spawn_bullets()
+	remaining_spawns -= 1
 	Logger.console(0, [self, 'has exploded!'])
 
 
@@ -131,4 +132,7 @@ func _on_area_body_entered(body):
 	# play some animation here that a star just sparkles
 		queue_free()
 		Logger.console(0, [body, "entered.", "Safely despawned", self])
+		body.health_points += 1
+		
+		Logger.console(1, ["Increased HP for", body, "New HP:", body.health_points])
 	

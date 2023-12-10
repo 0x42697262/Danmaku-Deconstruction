@@ -4,7 +4,7 @@ signal gameover(player)
 signal touched(body_rid)
 
 @export_category("Properties")
-@export var health_points: int  = 3
+@export var health_points: int  = 10
 @export var is_alive: bool      = true
 
 var texture_red: Texture    = preload("res://assets/Characters/red_character.png")

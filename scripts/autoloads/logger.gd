@@ -10,7 +10,7 @@ extends Node
 ##
 ## Logs messages if higher than this level.
 ## To disable logging, set the LOG_LEVEL to a high number like 999
-const LOG_LEVEL: int = 0
+const LOG_LEVEL: int = 1
 
 ## Console printing
 func console(level: int, message: Array):

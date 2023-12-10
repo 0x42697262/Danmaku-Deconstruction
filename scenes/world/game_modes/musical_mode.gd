@@ -15,6 +15,9 @@ var maps: Array
 ## Current time in milliseconds
 @export var current_time: int
 
+@export var is_currently_playing: bool = false
+@export var music: AudioStreamPlayer = AudioStreamPlayer.new()
+var create_note = preload("res://scenes/entities/spawner/note_spawner.tscn")
 
 func _ready():
 	Logger.console(3, ['Game Match: Musical Mode'])
@@ -25,8 +28,8 @@ func _ready():
 	start_time = Time.get_ticks_msec()
 	Logger.console(3, ['Match has started at', start_time, 'milliseconds.'])
 
-	var texture = preload("res://assets/Characters/bullet.png")
-	spawner.get_child(0).texture = texture
+	#var texture = preload("res://assets/Characters/bullet.png")
+	#spawner.get_child(0).texture = texture
 
 	var start_game: Timer = Timer.new()
 	add_child(start_game)
@@ -35,30 +38,70 @@ func _ready():
 	start_game.timeout.connect(_on_start_game_timeout)
 
 	start_game.start()
-	for i in maps:
-		print(i[0])
-
   
 func _on_start_game_timeout():
-		print(Time.get_ticks_msec())
+		if not maps:
+				return
+
+		play_next_song()
+
+func play_next_song():
+		if maps:
+			var current_map	    = maps.pop_back()
+			var audio_filename  = current_map[0]
+			var notes           = current_map[1]
+			is_currently_playing = true
+			play_song(audio_filename, notes)
+
+		else:
+			print("game end")
+
+func play_song(audio_filename: String, notes: Array):
+		Logger.console(3, ["Playing song:", audio_filename])
+		for note_data in notes:
+			var note = create_note.instantiate()
+			add_child(note)
+			note.spawn_note.connect(_on_note_spawner_timeout)
+	
+			var x_y = scale_coordinates(int(note_data['x']), int(note_data['y']))
+			var time = (float(note_data['time']) / 1000) - 2
+			var type = int(note_data['type'])
+			note.create_a_note(x_y, time, type)
+
+		# var audio_resource = ProjectSettings.localize_path(audio_filename)
+		var audio = load(audio_filename)
+		music.stream = audio
+		add_child(music)
+		music.play()
+		music.finished.connect(_on_music_end)
+
+
 
 func _on_send_maps(m):
 		maps = m
 		maps.shuffle()
 
-func spawner_note(x: int, y: int, time: int):
-		var timer: Timer  = Timer.new()
-		timer.wait_time   = float(time)/1000
-		timer.one_shot    = true
-# finish the timer and spawn
-		var note = spawner.instantiate()
+func _on_note_spawner_timeout(note):
+		spawn.emit(note)
+
+func _on_music_end():
+		is_currently_playing = false
+		play_next_song()
 		
 
+func scale_coordinates(original_x: float, original_y: float) -> Vector2:
+		var original_min_x = 0.0
+		var original_max_x = 512.0
+		var target_min_x = 152.0
+		var target_max_x = 1052.0
 		
+		var original_min_y = 0.0
+		var original_max_y = 384.0
+		var target_min_y = 64.8
+		var target_max_y = 583.2
+		# var target_max_y = 648.0
 		
-  
-"""
-
-[["/home/birb/Github/Danmaku-Deconstruction/Songs/2061853 NewJeans - ETA/audio.mp3", [{ "x": "256", "y": "192", "time": "309", "type": "5" }, { "x": "332", "y": "192", "time": "531", "type": "5" }, { "x": "217", "y": "258", "time": "642", "type": "1" }, { "x": "217", "y": "126", "time": "753", "type": "1" }, { "x": "256", "y": "192", "time": "975", "type": "5" }, { "x": "236", "y": "192", "time": "1197", "type": "5" }, { "x": "265", "y": "208", "time": "1308", "type": "1" }, { "x": "265", "y": "175", "time": "1419", "type": "1" }, { "x": "256", "y": "192", "time": "1642", "type": "5" }, { "x": "256", "y": "192", "time": "2086", "type": "5" }, { "x": "209", "y": "196", "time": "2308", "type": "5" }, { "x": "275", "y": "149", "time": "2420", "type": "1" }, { "x": "282", "y": "230", "time": "2531", "type": "1" }, { "x": "256", "y": "192", "time": "2753", "type": "5" }]], ["/home/birb/Github/Danmaku-Deconstruction/Songs/2061853 NewJeans - ETA/audio.mp3", [{ "x": "76", "y": "28", "time": "309", "type": "6" }, { "x": "63", "y": "76", "time": "753", "type": "2" }, { "x": "23", "y": "156", "time": "1197", "type": "2" }, { "x": "163", "y": "304", "time": "1531", "type": "1" }, { "x": "147", "y": "218", "time": "1642", "type": "6" }, { "x": "171", "y": "144", "time": "1864", "type": "2" }, { "x": "102", "y": "27", "time": "2086", "type": "6" }, { "x": "52", "y": "96", "time": "2308", "type": "1" }, { "x": "192", "y": "133", "time": "2420", "type": "2" }, { "x": "236", "y": "177", "time": "2531", "type": "6" }, { "x": "375", "y": "90", "time": "2753", "type": "2" }, { "x": "41", "y": "102", "time": "2975", "type": "2" }]], ["/home/birb/Github/Danmaku-Deconstruction/Songs/993059 Demetori - Higan Kikou ~ View of The River Styx/audio.mp3", [{ "x": "44", "y": "103", "time": "0", "type": "5" }, { "x": "103", "y": "66", "time": "164", "type": "1" }, { "x": "172", "y": "76", "time": "329", "type": "1" }, { "x": "212", "y": "260", "time": "494", "type": "2" }]]]
-
-"""
+		var scaled_x = lerp(target_min_x, target_max_x, inverse_lerp(original_min_x, original_max_x, original_x))
+		var scaled_y = lerp(target_min_y, target_max_y, inverse_lerp(original_min_y, original_max_y, original_y))
+		
+		return Vector2(scaled_x, scaled_y)
