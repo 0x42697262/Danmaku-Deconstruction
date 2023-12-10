@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/Option Menu/TutorialMenu.gd" id="1_paj2v"]
 [ext_resource type="FontFile" uid="uid://d6iib252kl1w" path="res://assets/Fonts/Gaegu-Bold.ttf" id="2_oebwq"]
-[ext_resource type="Theme" uid="uid://d26hyohpn50a2" path="res://assets/themes/landingbutton.tres" id="4_u2b0t"]
+[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="4_u2b0t"]
 
 [node name="TutorialMenu" type="Control"]
 layout_mode = 3
