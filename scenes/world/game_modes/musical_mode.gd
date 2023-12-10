@@ -92,14 +92,13 @@ func _on_music_end():
 func scale_coordinates(original_x: float, original_y: float) -> Vector2:
 		var original_min_x = 0.0
 		var original_max_x = 512.0
-		var target_min_x = 152.0
-		var target_max_x = 1052.0
+		var target_min_x = 0.0
+		var target_max_x = 1152.0
 		
 		var original_min_y = 0.0
 		var original_max_y = 384.0
-		var target_min_y = 64.8
-		var target_max_y = 583.2
-		# var target_max_y = 648.0
+		var target_min_y = 0.0
+		var target_max_y = 648.0
 		
 		var scaled_x = lerp(target_min_x, target_max_x, inverse_lerp(original_min_x, original_max_x, original_x))
 		var scaled_y = lerp(target_min_y, target_max_y, inverse_lerp(original_min_y, original_max_y, original_y))
