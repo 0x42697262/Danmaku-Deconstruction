@@ -30,7 +30,7 @@ func _on_timer_timeout():
  
 
 func _on_body_entered(body): 
-	if body.name == "player":
+	if 'player' in body.name:
 		Logger.console(0, [self, 'hit', body])
 		body.take_damage()
 		Logger.console(0, ["Freeing", self, "on _on_body_entered"])

@@ -11,14 +11,18 @@ var p8: Texture = preload("res://assets/Characters/neptune.png")
 
 var player_texture = [p1, p2, p3, p4, p5, p6, p7, p8]
 
+## Game mode selected by the host
+@export var game_mode_selected: String = "musical_mode"
+
 func _ready():
 	var index = 0
 
 	for i in game_manager.Players:
 		var player = preload("res://scenes/entities/player.tscn").instantiate()
 		var area = size
-		player.name = str(game_manager.Players[i].id)
+		player.name = "player" + str(game_manager.Players[i].id)
 		player.get_node("sprite").texture = player_texture[index+1]
+		player.spawn.connect(_on_spawn_a_star)
 		add_child(player)
 		player.global_position = Vector2(randi_range(0,1152), randi_range(0,648))
 		index += 1
@@ -33,15 +37,26 @@ func _ready():
 			child.gameover.connect(_on_gameover_signal)
 	Logger.console(0, [self, "connecting signals for each players... done!"])
 	
-	
-	# temporary parts
-	#var mode = preload("res://scenes/world/game_modes/endless_mode.tscn").instantiate()
-	var mode = preload("res://scenes/world/game_modes/musical_mode.tscn").instantiate()	
+	match game_mode_selected:
+		"musical_mode":
+			start_musical_mode()
+		"endless_mode":
+			start_endless_mode.rpc()
+
+@rpc("authority", "call_local", "reliable")
+func start_endless_mode():
+	Logger.console(3, ["Selected mode is Endless Mode."])
+	var mode = preload("res://scenes/world/game_modes/endless_mode.tscn").instantiate()
+	add_child(mode)
+	mode.spawn.connect(_on_spawn_a_star)
+
+#@rpc("authority", "call_local", "reliable")
+func start_musical_mode():
+	Logger.console(3, ["Selected mode is Musical Mode."])
+	var mode = preload("res://scenes/world/game_modes/musical_mode.tscn").instantiate()
 	add_child(mode)
 	mode.spawn.connect(_on_spawn_a_star)
 	
-	var p = preload("res://scenes/entities/player.tscn")
-	add_child(p.instantiate())
 	
 func _on_spawn_a_star(star):
 	add_child(star)

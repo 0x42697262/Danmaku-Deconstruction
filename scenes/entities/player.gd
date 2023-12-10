@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal gameover(player)
 signal touched(body_rid)
+signal spawn(star)
 
 @export_category("Properties")
 @export var health_points: int  = 30
@@ -74,7 +75,8 @@ func explode():
 		explode.global_position = position
 		explode.is_star = false
 		explode.get_child(0).queue_free()
-		get_parent().add_child(explode)
+		#get_parent().add_child(explode)
+		spawn.emit(explode)
 		explode.spawn_bullets()
 
 		queue_free()

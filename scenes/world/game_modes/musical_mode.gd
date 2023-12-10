@@ -75,7 +75,7 @@ func play_song(audio_filename: String, notes: Array):
 
 func _on_send_maps(m):
 		maps = m
-		maps.shuffle()
+		# maps.shuffle()
 
 func _on_note_spawner_timeout(note):
 		spawn.emit(note)

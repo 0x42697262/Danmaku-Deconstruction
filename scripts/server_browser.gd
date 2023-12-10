@@ -64,7 +64,7 @@ func _process(delta):
 		var data = bytes.get_string_from_ascii()
 		var room_info = JSON.parse_string(data)
 		
-		print("server ip: " + server_ip + " server_port: " + str(server_port) + " roomInfo: " + str(room_info))
+		# print("server ip: " + server_ip + " server_port: " + str(server_port) + " roomInfo: " + str(room_info))
 		
 #		var child = $Panel/server_list.find_child(room_info.name)
 #		var child = $Panel/server_list.find_child(room_info.name)
@@ -116,7 +116,7 @@ func join_game(ip):
 			
 
 func _on_broadcast_timer_timeout():
-	print("Broadcasting Game!")
+	# print("Broadcasting Game!")
 	room_info.player_count = game_manager.Players.size()
 	var data = JSON.stringify(room_info)
 	var packet = data.to_ascii_buffer()
