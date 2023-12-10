@@ -4,7 +4,7 @@ signal gameover(player)
 signal touched(body_rid)
 
 @export_category("Properties")
-@export var health_points: int  = 10
+@export var health_points: int  = 30
 @export var is_alive: bool      = true
 
 var texture_red: Texture    = preload("res://assets/Characters/red_character.png")
@@ -39,11 +39,11 @@ func hide_mouse(value: bool):
 func take_damage():
 	if is_alive == true:
 		Logger.console(1, [self, "has taken damage."])
-		health_points -= 1
+		health_points -= 10
 		match health_points:
-			1:
+			10:
 				$sprite.texture = texture_red
-			2:
+			20:
 				$sprite.texture = texture_orange
 			0:
 				gameover.emit(self)
