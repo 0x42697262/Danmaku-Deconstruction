@@ -44,26 +44,24 @@ func _process(delta):
 		pass
 
 func hide_mouse(value: bool):
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		if value == true:
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-			Logger.console(0, [self, "mouse cursor set to HIDDEN"])
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			Logger.console(0, [self, "mouse cursor set to VISIBLE"])
+	if value == true:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		Logger.console(0, [self, "mouse cursor set to HIDDEN"])
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Logger.console(0, [self, "mouse cursor set to VISIBLE"])
 
 func take_damage():
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		if is_alive == true:
-			Logger.console(1, [self, "has taken damage. Current HP:", health_points])
-			health_points -= 10
-		# game over
-		if health_points <= 0:
-			Logger.console(1, [self, "has died!"])
-			is_alive = false
-			hide_mouse(false)
-			gameover.emit(self)
-			explode()
+	if is_alive == true:
+		Logger.console(1, [self, "has taken damage. Current HP:", health_points])
+		health_points -= 10
+	# game over
+	if health_points <= 0:
+		Logger.console(1, [self, "has died!"])
+		is_alive = false
+		hide_mouse(false)
+		gameover.emit(self)
+		explode()
 
 func explode():
 		var explode = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()
