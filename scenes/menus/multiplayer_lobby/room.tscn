@@ -1,29 +1,29 @@
 [gd_scene load_steps=11 format=3 uid="uid://bwvh28771k2wg"]
 
-[ext_resource type="Script" path="res://scenes/world/multiplayer/lobby/multiplayer_lobby.gd" id="1_2liid"]
-[ext_resource type="PackedScene" uid="uid://6g7c8ka0lodk" path="res://scenes/server_info.tscn" id="2_hekkk"]
-[ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="3_kjxy8"]
-[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="4_u1y0g"]
-[ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="5_j010y"]
-[ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="6_ntdxu"]
-[ext_resource type="Script" path="res://scripts/server_browser.gd" id="7_ks5vc"]
-[ext_resource type="Texture2D" uid="uid://4v6iw2xkki00" path="res://assets/Backgrounds/Server.png" id="8_j3fqg"]
-[ext_resource type="FontFile" uid="uid://ddjbdaer644gx" path="res://assets/Fonts/PixelGameFont.ttf" id="9_8yftl"]
+[ext_resource type="Script" path="res://scenes/menus/multiplayer_lobby/room.gd" id="1_vnteh"]
+[ext_resource type="PackedScene" uid="uid://6g7c8ka0lodk" path="res://scenes/server_info.tscn" id="2_fcvt6"]
+[ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="3_uycul"]
+[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="4_jb4d5"]
+[ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="5_1o58b"]
+[ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="6_67b63"]
+[ext_resource type="Script" path="res://scripts/server_browser.gd" id="7_x1on3"]
+[ext_resource type="Texture2D" uid="uid://4v6iw2xkki00" path="res://assets/Backgrounds/Server.png" id="8_lrsnc"]
+[ext_resource type="FontFile" uid="uid://ddjbdaer644gx" path="res://assets/Fonts/PixelGameFont.ttf" id="9_mo4kk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_px6qt"]
-texture = ExtResource("8_j3fqg")
+texture = ExtResource("8_lrsnc")
 
 [node name="Mode Selection" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_2liid")
-join_button = ExtResource("2_hekkk")
+script = ExtResource("1_vnteh")
+join_button = ExtResource("2_fcvt6")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 1153.0
 offset_bottom = 649.0
-texture = ExtResource("3_kjxy8")
+texture = ExtResource("3_uycul")
 
 [node name="Host" type="Button" parent="."]
 layout_mode = 0
@@ -31,7 +31,7 @@ offset_left = 745.0
 offset_top = 228.0
 offset_right = 987.0
 offset_bottom = 292.0
-theme = ExtResource("4_u1y0g")
+theme = ExtResource("4_jb4d5")
 theme_override_font_sizes/font_size = 18
 text = "Create Lobby
 "
@@ -51,7 +51,7 @@ offset_left = 745.0
 offset_top = 304.0
 offset_right = 988.0
 offset_bottom = 375.0
-theme = ExtResource("4_u1y0g")
+theme = ExtResource("4_jb4d5")
 theme_override_font_sizes/font_size = 18
 text = "Start"
 
@@ -62,7 +62,7 @@ offset_top = 154.0
 offset_right = 1027.0
 offset_bottom = 206.0
 scale = Vector2(0.977749, 1.17928)
-theme = ExtResource("5_j010y")
+theme = ExtResource("5_1o58b")
 placeholder_text = "enter lobby name"
 alignment = 1
 
@@ -72,24 +72,30 @@ offset_left = 76.0
 offset_top = 86.0
 offset_right = 166.0
 offset_bottom = 112.0
-theme = ExtResource("5_j010y")
+theme = ExtResource("5_1o58b")
 theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
-theme_override_fonts/font = ExtResource("6_ntdxu")
+theme_override_fonts/font = ExtResource("6_67b63")
 theme_override_font_sizes/font_size = 20
 text = "Server List :"
 
-[node name="client_ip_address" type="Label" parent="."]
+[node name="ip_address" type="Label" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 2.0
+offset_top = 622.0
+offset_right = 144.0
+offset_bottom = 648.0
+theme = ExtResource("5_1o58b")
+theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
+theme_override_fonts/font = ExtResource("6_67b63")
+theme_override_font_sizes/font_size = 20
 
 [node name="server_browser" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("7_ks5vc")
-server_info = ExtResource("2_hekkk")
+script = ExtResource("7_x1on3")
+server_info = ExtResource("2_fcvt6")
 
 [node name="broadcast_timer" type="Timer" parent="server_browser"]
 
@@ -119,8 +125,8 @@ offset_bottom = 61.0
 [node name="server_name" type="Label" parent="server_browser/Panel/server_label"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_j010y")
-theme_override_fonts/font = ExtResource("9_8yftl")
+theme = ExtResource("5_1o58b")
+theme_override_fonts/font = ExtResource("9_mo4kk")
 theme_override_font_sizes/font_size = 14
 text = "SERVER NAME"
 horizontal_alignment = 1
@@ -128,8 +134,8 @@ horizontal_alignment = 1
 [node name="server_ip" type="Label" parent="server_browser/Panel/server_label"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme = ExtResource("5_j010y")
-theme_override_fonts/font = ExtResource("9_8yftl")
+theme = ExtResource("5_1o58b")
+theme_override_fonts/font = ExtResource("9_mo4kk")
 theme_override_font_sizes/font_size = 14
 text = "IP"
 horizontal_alignment = 1
@@ -137,8 +143,8 @@ horizontal_alignment = 1
 [node name="player_number" type="Label" parent="server_browser/Panel/server_label"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-theme = ExtResource("5_j010y")
-theme_override_fonts/font = ExtResource("9_8yftl")
+theme = ExtResource("5_1o58b")
+theme_override_fonts/font = ExtResource("9_mo4kk")
 theme_override_font_sizes/font_size = 14
 text = "PLAYERS"
 horizontal_alignment = 1
@@ -146,8 +152,8 @@ horizontal_alignment = 1
 [node name="join_server" type="Label" parent="server_browser/Panel/server_label"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme = ExtResource("5_j010y")
-theme_override_fonts/font = ExtResource("9_8yftl")
+theme = ExtResource("5_1o58b")
+theme_override_fonts/font = ExtResource("9_mo4kk")
 theme_override_font_sizes/font_size = 14
 text = "JOIN"
 horizontal_alignment = 1

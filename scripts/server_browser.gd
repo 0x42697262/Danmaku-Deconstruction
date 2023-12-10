@@ -12,11 +12,11 @@ var listener : PacketPeerUDP
 var temp = ""
 var peer
 
-@export var address             = Settings.ADDRESS
-@export var port                = Settings.PORT
+@export var address             = NetworkManager.address()
+@export var port                = NetworkManager.PORT
 @export var broadcast_address   = "172.16.15.255"
-@export var listen_port         = Settings.LISTEN_PORT
-@export var broadcast_port      = Settings.BROADCAST_PORT
+@export var listen_port         = NetworkManager.LISTEN_PORT
+@export var broadcast_port      = NetworkManager.BROADCAST_PORT
 
 @export var server_info : PackedScene
 
@@ -37,7 +37,7 @@ func set_up():
 	
 func setup_broadcast(name):
 	room_info.name = name
-	room_info.player_count = GameManager.Players.size()
+	room_info.player_count = GameManager.players.size()
 	room_info.ip = listener.get_packet_ip()
 	
 	broadcaster = PacketPeerUDP.new()
@@ -117,7 +117,7 @@ func join_game(ip):
 
 func _on_broadcast_timer_timeout():
 	# print("Broadcasting Game!")
-	room_info.player_count = GameManager.Players.size()
+	room_info.player_count = GameManager.players.size()
 	var data = JSON.stringify(room_info)
 	var packet = data.to_ascii_buffer()
 	broadcaster.put_packet(packet)

@@ -1,13 +1,12 @@
 extends Control
 
-@export var Address = Settings.ADDRESS
-@export var port    = Settings.PORT
+@export var Address = NetworkManager.address()
+@export var port    = NetworkManager.PORT
+@export var join_button : PackedScene
+
 var peer
 var player_status
 
-#signal join_pressed
-
-@export var join_button : PackedScene
 
 var RoomInfo = {
 	"server_name": "server_name",
@@ -23,6 +22,8 @@ func _ready():
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 	$server_browser.server_joined.connect(join_game)
+	$ip_address.text = NetworkManager.address()
+
 	if "--server" in OS.get_cmdline_args():
 		host_game()
 	
@@ -32,37 +33,31 @@ func _on_join_button_pressed():
 	print("Join Button Pressed")
 
 func peer_connected(id):
-	Logger.console(3, ["Player", id, "has connected."])
+	Logger.console(2, ["Player", id, "has connected."])
 	
 func peer_disconnected(id):
-	Logger.console(3, ["Player", id, "has disconnected."])
-#	GameManager.Players.erase(id)
+	Logger.console(2, ["Player", id, "has disconnected."])
+	GameManager.unregister_player(id)
 	
 func connected_to_server():
 	var player_id = multiplayer.get_unique_id()
 	send_player_information.rpc_id(1,$server_input.text, player_id)
 	
-#	Logger.console(3, ["Sending player information: ", player_id])
+	Logger.console(2, ["Sending player information: ", player_id])
 	
 	
 func connection_failed():
-	Logger.console(3, ["Connection Failed (error)"])
+	Logger.console(2, ["Connection Failed (error)"])
 	
 @rpc("any_peer")
-func send_player_information(name, id):
-	if !GameManager.Players.has(id):
-		GameManager.Players[id]={
-			"name": name,
-			"id": id,
-			"score": 0
-		}
-		
-#		Logger.console(3, ["Player", id, 'connected to server.'])
+func send_player_information(player_name, id):
+	GameManager.register_player(player_name, id)
+	print(GameManager.players)
 		
 	if multiplayer.is_server():
 		Logger.console(3, ["Server updating clients..."])
-		for i in GameManager.Players:
-			send_player_information.rpc(GameManager.Players[i].name, i)
+		for i in GameManager.players:
+			send_player_information.rpc(GameManager.players[i].name, i)
 #			Logger.console(2, ["Updating player", GameManager.Players[i].id])
 #		Logger.console(3, ["Server updating clients... done!"])
 		

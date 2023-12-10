@@ -4,6 +4,9 @@
 ##
 ## To switch to a new scene, create a new function by preloading a PackedScene
 ## and use the function `__switch` with the PackedScene as the argument. 
+##
+## When switching the scene locations, it is all handled in one script and makes it easier for us
+## to debug.
 
 extends Node
 
@@ -17,7 +20,7 @@ func switch_to_main_menu():
 	__switch(scene)
 	
 func switch_to_multiplayer_lobby():
-	var scene = preload("res://scenes/multiplayer_lobby.tscn") as PackedScene
+	var scene = preload("res://scenes/menus/multiplayer_lobby/lobby.tscn") as PackedScene
 	__switch(scene)
 
 func __switch(scene: PackedScene):

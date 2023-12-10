@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://dns88xu1lvfxq"]
+
+[ext_resource type="Script" path="res://scenes/menus/multiplayer_lobby/lobby.gd" id="1_820i7"]
+[ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="3_45so0"]
+[ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="4_ja0lf"]
+[ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="5_rpjq4"]
+[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="6_f1sdw"]
+
+[node name="lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_820i7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 649.0
+texture = ExtResource("3_45so0")
+
+[node name="ip_address" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 622.0
+offset_right = 144.0
+offset_bottom = 648.0
+theme = ExtResource("4_ja0lf")
+theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+text = "127.0.0.1"
+
+[node name="Host" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+offset_left = 320.0
+offset_top = 88.0
+offset_right = 832.0
+offset_bottom = 284.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_f1sdw")
+theme_override_font_sizes/font_size = 18
+text = "Host"
+
+[node name="Join" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+offset_left = 320.0
+offset_top = 344.0
+offset_right = 832.0
+offset_bottom = 536.0
+theme = ExtResource("6_f1sdw")
+theme_override_font_sizes/font_size = 18
+text = "Join"
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
