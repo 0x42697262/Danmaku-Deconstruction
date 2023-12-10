@@ -28,9 +28,6 @@ func _ready():
 	start_time = Time.get_ticks_msec()
 	Logger.console(3, ['Match has started at', start_time, 'milliseconds.'])
 
-	#var texture = preload("res://assets/Characters/bullet.png")
-	#spawner.get_child(0).texture = texture
-
 	var start_game: Timer = Timer.new()
 	add_child(start_game)
 	start_game.wait_time = countdown_start
@@ -68,7 +65,6 @@ func play_song(audio_filename: String, notes: Array):
 			var type = int(note_data['type'])
 			note.create_a_note(x_y, time, type)
 
-		# var audio_resource = ProjectSettings.localize_path(audio_filename)
 		var audio = load(audio_filename)
 		music.stream = audio
 		add_child(music)
