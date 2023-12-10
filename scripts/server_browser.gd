@@ -12,7 +12,7 @@ var listener : PacketPeerUDP
 var temp = ""
 var peer
 
-@export var address             = NetworkManager.address()
+@export var address             = NetworkManager.get_ipv4_address()
 @export var port                = NetworkManager.PORT
 @export var broadcast_address   = "172.16.15.255"
 @export var listen_port         = NetworkManager.LISTEN_PORT

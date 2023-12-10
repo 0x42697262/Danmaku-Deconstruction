@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://dns88xu1lvfxq"]
+[gd_scene load_steps=11 format=3 uid="uid://dns88xu1lvfxq"]
 
 [ext_resource type="Script" path="res://scenes/menus/multiplayer_lobby/lobby.gd" id="1_820i7"]
 [ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="3_45so0"]
 [ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="4_ja0lf"]
 [ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="5_rpjq4"]
+[ext_resource type="Texture2D" uid="uid://4v6iw2xkki00" path="res://assets/Backgrounds/Server.png" id="6_15ch3"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="6_f1sdw"]
+[ext_resource type="FontFile" uid="uid://ddjbdaer644gx" path="res://assets/Fonts/PixelGameFont.ttf" id="7_gumfl"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ki2cv"]
+device = -1
+keycode = 66
+unicode = 98
+
+[sub_resource type="Shortcut" id="Shortcut_p15ch"]
+events = [SubResource("InputEventKey_ki2cv")]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1w8op"]
+texture = ExtResource("6_15ch3")
 
 [node name="lobby" type="Control"]
 layout_mode = 3
@@ -29,7 +42,25 @@ theme_override_fonts/font = ExtResource("5_rpjq4")
 theme_override_font_sizes/font_size = 20
 text = "127.0.0.1"
 
-[node name="Host" type="Button" parent="."]
+[node name="test" type="Label" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 624.0
+offset_right = 382.0
+offset_bottom = 650.0
+theme = ExtResource("4_ja0lf")
+theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+text = "test"
+
+[node name="choice" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Host" type="Button" parent="choice"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 offset_left = 320.0
@@ -42,7 +73,7 @@ theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
 text = "Host"
 
-[node name="Join" type="Button" parent="."]
+[node name="Join" type="Button" parent="choice"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 offset_left = 320.0
@@ -53,5 +84,139 @@ theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
 text = "Join"
 
-[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
+[node name="choice_back" type="Button" parent="choice"]
+custom_minimum_size = Vector2(200, 100)
+offset_left = 944.0
+offset_top = 536.0
+offset_right = 1144.0
+offset_bottom = 636.0
+theme = ExtResource("6_f1sdw")
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[node name="Room" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="room_back" type="Button" parent="Room"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+offset_left = 944.0
+offset_top = 536.0
+offset_right = 1144.0
+offset_bottom = 636.0
+theme = ExtResource("6_f1sdw")
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[node name="Start" type="Button" parent="Room"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+offset_left = 728.0
+offset_top = 536.0
+offset_right = 928.0
+offset_bottom = 636.0
+theme = ExtResource("6_f1sdw")
+theme_override_font_sizes/font_size = 18
+text = "Start"
+
+[node name="Broadcast" type="CheckButton" parent="Room"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 128.0
+offset_right = 813.0
+offset_bottom = 176.0
+tooltip_text = "Broadcast Server IP Address"
+theme = ExtResource("4_ja0lf")
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+shortcut = SubResource("Shortcut_p15ch")
+text = "Broadcast IP"
+
+[node name="Broadcaster" type="Timer" parent="Room"]
+
+[node name="Text" type="Label" parent="Room"]
+offset_left = 648.0
+offset_top = 176.0
+offset_right = 864.0
+offset_bottom = 202.0
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+text = "Broadcast Adress:"
+
+[node name="BroadcastAddress" type="LineEdit" parent="Room"]
+offset_left = 872.0
+offset_top = 167.0
+offset_right = 1150.0
+offset_bottom = 195.0
+scale = Vector2(0.977749, 1.17928)
+theme = ExtResource("4_ja0lf")
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+text = "172.16.15.255"
+alignment = 1
+editable = false
+
+[node name="Players" type="Control" parent="Room"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Text" type="Label" parent="Room/Players"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 86.0
+offset_right = 219.0
+offset_bottom = 112.0
+theme = ExtResource("4_ja0lf")
+theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+text = "Players:"
+
+[node name="Panel" type="Panel" parent="Room/Players"]
+offset_left = 61.0
+offset_top = 116.0
+offset_right = 614.0
+offset_bottom = 598.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_1w8op")
+
+[node name="PlayerLabels" type="HBoxContainer" parent="Room/Players/Panel"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 16.0
+offset_right = 515.0
+offset_bottom = 61.0
+
+[node name="PlayerName" type="Label" parent="Room/Players/Panel/PlayerLabels"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("7_gumfl")
+theme_override_font_sizes/font_size = 14
+text = "PLAYER NAME"
+horizontal_alignment = 1
+
+[node name="PlayerIP" type="Label" parent="Room/Players/Panel/PlayerLabels"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_gumfl")
+theme_override_font_sizes/font_size = 14
+text = "IP"
+horizontal_alignment = 1
+
+[node name="PlayersList" type="VBoxContainer" parent="Room/Players/Panel"]
+layout_mode = 0
+offset_top = 63.0
+offset_right = 515.0
+offset_bottom = 468.0
+
+[connection signal="pressed" from="choice/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="choice/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="choice/choice_back" to="." method="_on_choice_back_pressed"]
+[connection signal="pressed" from="Room/room_back" to="." method="_on_room_back_pressed"]
+[connection signal="pressed" from="Room/Start" to="." method="_on_start_pressed"]
+[connection signal="toggled" from="Room/Broadcast" to="." method="_on_check_button_toggled"]
+[connection signal="timeout" from="Room/Broadcaster" to="." method="_on_broadcaster_timeout"]
+[connection signal="text_changed" from="Room/BroadcastAddress" to="." method="_on_broadcast_address_text_changed"]

@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwvh28771k2wg"]
+[gd_scene load_steps=11 format=3 uid="uid://d0eqaa60wngwf"]
 
-[ext_resource type="Script" path="res://scenes/menus/multiplayer_lobby/room.gd" id="1_vnteh"]
+[ext_resource type="Script" path="res://scenes/menus/multiplayer_lobby/server_list.gd" id="1_i8uve"]
 [ext_resource type="PackedScene" uid="uid://6g7c8ka0lodk" path="res://scenes/server_info.tscn" id="2_fcvt6"]
 [ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="3_uycul"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="4_jb4d5"]
@@ -16,7 +16,7 @@ texture = ExtResource("8_lrsnc")
 [node name="Mode Selection" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_vnteh")
+script = ExtResource("1_i8uve")
 join_button = ExtResource("2_fcvt6")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -88,6 +88,7 @@ theme = ExtResource("5_1o58b")
 theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
 theme_override_fonts/font = ExtResource("6_67b63")
 theme_override_font_sizes/font_size = 20
+text = "127.0.0.1"
 
 [node name="server_browser" type="Control" parent="."]
 layout_mode = 3

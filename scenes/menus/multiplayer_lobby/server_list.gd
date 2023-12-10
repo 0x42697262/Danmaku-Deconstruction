@@ -1,9 +1,9 @@
 extends Control
 
-@export var Address = NetworkManager.address()
+@export var Address = NetworkManager.get_ipv4_address()
 @export var port    = NetworkManager.PORT
 @export var join_button : PackedScene
-
+ 
 var peer
 var player_status
 

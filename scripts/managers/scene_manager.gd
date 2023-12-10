@@ -31,5 +31,5 @@ func __switch(scene: PackedScene):
 	}
 	scene_logs.append(scene_log)
 	
-func logs() -> Array[Dictionary]:
+func get_logs() -> Array[Dictionary]:
 	return scene_logs
