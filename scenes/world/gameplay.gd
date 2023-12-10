@@ -1,5 +1,8 @@
 extends Control
 
+var mode
+var stream : AudioStream
+
 var p1: Texture = preload("res://assets/Characters/mercury.png")
 var p2: Texture = preload("res://assets/Characters/venus.png")
 var p3: Texture = preload("res://assets/Characters/earth.png")
@@ -26,6 +29,7 @@ func _ready():
 		add_child(player)
 		player.global_position = Vector2(randi_range(0,1152), randi_range(0,648))
 		index += 1
+		#player.gameover.connect(_on_gameover_signal(player))
 	
 	var children = get_children()
 	
@@ -46,14 +50,14 @@ func _ready():
 @rpc("authority", "call_local", "reliable")
 func start_endless_mode():
 	Logger.console(3, ["Selected mode is Endless Mode."])
-	var mode = preload("res://scenes/world/game_modes/endless_mode.tscn").instantiate()
+	mode = preload("res://scenes/world/game_modes/endless_mode.tscn").instantiate()
 	add_child(mode)
 	mode.spawn.connect(_on_spawn_a_star)
 
 #@rpc("authority", "call_local", "reliable")
 func start_musical_mode():
 	Logger.console(3, ["Selected mode is Musical Mode."])
-	var mode = preload("res://scenes/world/game_modes/musical_mode.tscn").instantiate()
+	mode = preload("res://scenes/world/game_modes/musical_mode.tscn").instantiate()
 	add_child(mode)
 	mode.spawn.connect(_on_spawn_a_star)
 	
@@ -62,4 +66,11 @@ func _on_spawn_a_star(star):
 	add_child(star)
 	
 func _on_gameover_signal(player):
+	var instance = AudioStreamPlayer.new()
+	instance.stream = stream
+	add_child(instance)
+	instance.play()
+	var scene = load("res://scenes/gameover.tscn").instantiate()
+	get_tree().root.add_child(scene)
 	player.queue_free()
+	mode.queue_free()
