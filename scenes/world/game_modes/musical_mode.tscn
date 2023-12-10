@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d7vwka386dlf"]
+
+[ext_resource type="Script" path="res://scenes/world/game_modes/musical_mode.gd" id="1_d1050"]
+
+[node name="musical_mode" type="Node2D"]
+script = ExtResource("1_d1050")

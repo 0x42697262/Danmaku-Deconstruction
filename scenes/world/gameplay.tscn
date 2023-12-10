@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://de3fcc1ng16a7"]
+[gd_scene load_steps=2 format=3 uid="uid://de3fcc1ng16a7"]
 
 [ext_resource type="Script" path="res://scenes/world/gameplay.gd" id="1_ggn7s"]
-[ext_resource type="PackedScene" uid="uid://cumm7ewr26cy" path="res://scenes/entities/spawner/spawner.tscn" id="3_l1elf"]
 
 [node name="gameplay" type="Control"]
 layout_mode = 3
@@ -19,9 +18,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="spawner" parent="." instance=ExtResource("3_l1elf")]
-position = Vector2(576, 324)
-number_of_bullets = 8
-spawn_rate = 0.3
-body_rotation = 30
+color = Color(0.427451, 0.0196078, 0.454902, 1)

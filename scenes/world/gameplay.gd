@@ -2,9 +2,8 @@ extends Control
 
 
 func _ready():
-	# James, change thiss part sa spawning.
 	var index = 0
-	
+
 	for i in game_manager.Players:
 		var player = preload("res://scenes/entities/player.tscn").instantiate()
 		var area = size
@@ -20,6 +19,19 @@ func _ready():
 		if child.has_signal("gameover"):
 			child.gameover.connect(_on_gameover_signal)
 	Logger.console(0, [self, "connecting signals for each players... done!"])
-
+	
+	
+	# temporary parts
+	#var mode = preload("res://scenes/world/game_modes/endless_mode.tscn").instantiate()
+	var mode = preload("res://scenes/world/game_modes/musical_mode.tscn").instantiate()	
+	add_child(mode)
+	mode.spawn.connect(_on_spawn_a_star)
+	
+	var p = preload("res://scenes/entities/player.tscn")
+	add_child(p.instantiate())
+	
+func _on_spawn_a_star(star):
+	add_child(star)
+	
 func _on_gameover_signal(player):
 	player.queue_free()

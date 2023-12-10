@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cvqc6w3yntikl"
+path="res://.godot/imported/audio.mp3-82c4bc7d2089978bf4b5647dd1ac5549.mp3str"
+
+[deps]
+
+source_file="res://Songs/2061853 NewJeans - ETA/audio.mp3"
+dest_files=["res://.godot/imported/audio.mp3-82c4bc7d2089978bf4b5647dd1ac5549.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,18 +2,28 @@ extends Node2D
 
 
 @export var bullet_scene: PackedScene
+## Star's vulnerability to despawn when a player goes inside
+@export var vulnerable: bool        = true
+@export var is_star: bool           = true
+@export var supernova_time: float   = 5.0 # 5s before exploding into supernova
+@export var despawn_time: float     = 30.0
 @export var min_rotation: int       = 0
 @export var max_rotation: int       = 360
 @export var number_of_bullets: int  = 8
 @export var is_random: bool         = false
 @export var is_parent: bool         = false
 @export var is_manual: bool         = false
-@export var spawn_rate: float       = 0.4
-@export var bullet_speed: int       = 50
+## Interval that bullets spawn
+@export var spawn_rate: float       = 0.7
+## Remaining amount that the spawner can eject bullets
+@export var remaining_spawns: int   = -1
+@export var bullet_speed: int       = 100
 @export var bullet_lifetime: float  = 10.00
 @export var use_velocity: bool      = false # If false use rotation, If true use velocity
+## Speed rotation of the spawner
 @export var body_rotation: int      = 100
-@export var bullet_free_on_leave: bool = false
+@export var bullet_free_on_leave: bool = true
+## Speed rotation of the bullet spawned by the spawner
 @export var rotation_change: int 
 @export var bullet_velocity: Vector2 = Vector2(1,0)
 
@@ -21,11 +31,18 @@ var rotations = []
 @export var log_to_console: bool = false
 
 func _ready():
-	Logger.console(0, ['Instantiated', self])
-	$Timer.wait_time = spawn_rate
-	$Timer.start()
-	Logger.console(0, ['Started', $Timer, 'of', self, "with `wait_time` of", spawn_rate, "seconds"])
+	if not vulnerable:
+		$area/star.modulate = Color.hex(0xff7d00ff)
 	
+	$Timer.wait_time        = spawn_rate
+	$supernova.wait_time    = supernova_time
+	$despawn.wait_time      = despawn_time
+	if is_star:
+		$supernova.start()
+	
+	Logger.console(0, ['Instantiated', self, "with supernova time of", supernova_time, 
+						"seconds -- despawn time", despawn_time, "seconds -- spawn rate of", spawn_rate, "seconds"])
+						
 func _process(delta):
 	var new_rotation = rotation_degrees + body_rotation * delta
 	rotation_degrees = fmod(new_rotation, 360)
@@ -78,10 +95,44 @@ func spawn_bullets():
 	
 	return spawned_bullets
 
-func _on_timer_timeout(): 
-	if !is_manual:
-		spawn_bullets()
+func free_memory():
+	queue_free()
+
+func _on_timer_timeout():
+	if remaining_spawns != 0:
+		if !is_manual:
+			remaining_spawns -= 1
+			spawn_bullets()
+	else:
+		queue_free()
 	
 	if (log_to_console):
 		Logger.console(0, ['Spawned Bullets'])
 
+
+
+func _on_supernova_timeout():
+	# play explosion animation
+	$area.queue_free()
+	$Timer.start()
+	$supernova.stop()
+	$despawn.start()
+	spawn_bullets()
+	remaining_spawns -= 1
+	Logger.console(0, [self, 'has exploded!'])
+
+
+func _on_despawn_timeout():
+	queue_free()
+	Logger.console(0, ["Auto despawned", self])
+
+
+func _on_area_body_entered(body):
+	if vulnerable:
+	# play some animation here that a star just sparkles
+		queue_free()
+		Logger.console(0, [body, "entered.", "Safely despawned", self])
+		body.health_points += 1
+		
+		Logger.console(1, ["Increased HP for", body, "New HP:", body.health_points])
+	

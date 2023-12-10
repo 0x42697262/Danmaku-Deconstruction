@@ -4,7 +4,7 @@ signal gameover(player)
 signal touched(body_rid)
 
 @export_category("Properties")
-@export var health_points: int  = 3
+@export var health_points: int  = 30
 @export var is_alive: bool      = true
 
 var texture_red: Texture    = preload("res://assets/Characters/red_character.png")
@@ -39,11 +39,11 @@ func hide_mouse(value: bool):
 func take_damage():
 	if is_alive == true:
 		Logger.console(1, [self, "has taken damage."])
-		health_points -= 1
+		health_points -= 10
 		match health_points:
-			1:
+			10:
 				$sprite.texture = texture_red
-			2:
+			20:
 				$sprite.texture = texture_orange
 			0:
 				gameover.emit(self)
@@ -54,3 +54,18 @@ func take_damage():
 		Logger.console(1, [self, "has died!"])
 		is_alive = false
 		hide_mouse(false)
+		var explode = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()
+		explode.vulnerable = false
+		explode.supernova_time = 0
+		explode.number_of_bullets = 64
+		explode.remaining_spawns = 1
+		explode.bullet_speed = 150
+		explode.body_rotation = 0
+		explode.spawn_rate = 0
+		explode.global_position = position
+		explode.is_star = false
+		explode.get_child(0).queue_free()
+		get_parent().add_child(explode)
+		explode.spawn_bullets()
+		
+		queue_free()

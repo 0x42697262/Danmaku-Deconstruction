@@ -10,10 +10,10 @@ extends Node
 ##
 ## Logs messages if higher than this level.
 ## To disable logging, set the LOG_LEVEL to a high number like 999
-const LOG_LEVEL: int = 0
+const LOG_LEVEL: int = 1
 
 ## Console printing
 func console(level: int, message: Array):
 	if level >= LOG_LEVEL:
 		var time_passed: int = Time.get_ticks_msec()
-		print(":: (", time_passed, " ms) ", " ".join(message))
+		print("(LOG::", time_passed, " ms) ", " ".join(message))
