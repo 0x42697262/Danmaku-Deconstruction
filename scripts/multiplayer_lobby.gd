@@ -36,12 +36,13 @@ func peer_connected(id):
 	
 func peer_disconnected(id):
 	Logger.console(3, ["Player", id, "has disconnected."])
+#	game_manager.Players.erase(id)
 	
 func connected_to_server():
 	var player_id = multiplayer.get_unique_id()
 	send_player_information.rpc_id(1,$server_input.text, player_id)
 	
-	Logger.console(3, ["Sending player information: ", player_id])
+#	Logger.console(3, ["Sending player information: ", player_id])
 	
 	
 func connection_failed():
@@ -62,10 +63,10 @@ func send_player_information(name, id):
 		Logger.console(3, ["Server updating clients..."])
 		for i in game_manager.Players:
 			send_player_information.rpc(game_manager.Players[i].name, i)
-			Logger.console(2, ["Updating player", game_manager.Players[i].id])
+#			Logger.console(2, ["Updating player", game_manager.Players[i].id])
 #		Logger.console(3, ["Server updating clients... done!"])
 		
-	print("\n", game_manager.Players)
+#	print("\n", game_manager.Players)
 
 @rpc("any_peer","call_local")
 func start_game():

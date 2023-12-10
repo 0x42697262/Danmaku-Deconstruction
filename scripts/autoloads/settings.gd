@@ -10,7 +10,8 @@ extends Node2D
 ## MULTIPLAYER CONFIGURATION
 const ADDRESS: String       = "0.0.0.0"
 const PORT: int             = 42069
-const LISTEN_PORT: int      = 42070
+const LISTEN_PORT: int 		= 42070
+#var LISTEN_PORT: int      = randi_range(42050, 42070)#42070
 const BROADCAST_PORT: int   = 42071
 
 ## Volume settings
