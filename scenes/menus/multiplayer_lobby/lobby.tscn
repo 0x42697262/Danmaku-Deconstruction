@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dns88xu1lvfxq"]
+[gd_scene load_steps=13 format=3 uid="uid://dns88xu1lvfxq"]
 
 [ext_resource type="Script" path="res://scenes/menus/multiplayer_lobby/lobby.gd" id="1_820i7"]
 [ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="3_45so0"]
@@ -21,6 +21,14 @@ texture = ExtResource("6_15ch3")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_604wl"]
 texture = ExtResource("6_15ch3")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q5yuo"]
+properties/0/path = NodePath(".:song_list_index")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:song_path")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -137,6 +145,16 @@ theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
 text = "Start"
 
+[node name="Text" type="Label" parent="Room" groups=["Broadcast"]]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 176.0
+offset_right = 864.0
+offset_bottom = 202.0
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+text = "Broadcast Adress:"
+
 [node name="Broadcast" type="CheckButton" parent="Room" groups=["Broadcast"]]
 layout_mode = 0
 offset_left = 642.0
@@ -151,16 +169,6 @@ shortcut = SubResource("Shortcut_p15ch")
 text = "Broadcast IP"
 
 [node name="Broadcaster" type="Timer" parent="Room" groups=["Broadcast"]]
-
-[node name="Text" type="Label" parent="Room" groups=["Broadcast"]]
-layout_mode = 0
-offset_left = 648.0
-offset_top = 176.0
-offset_right = 864.0
-offset_bottom = 202.0
-theme_override_fonts/font = ExtResource("5_rpjq4")
-theme_override_font_sizes/font_size = 20
-text = "Broadcast Adress:"
 
 [node name="Broadcasting" type="Label" parent="Room" groups=["Broadcast"]]
 layout_mode = 0
@@ -201,6 +209,14 @@ theme_override_fonts/font = ExtResource("5_rpjq4")
 theme_override_font_sizes/font_size = 20
 button_pressed = true
 text = "Musical Mode"
+
+[node name="SongsList" type="ItemList" parent="Room"]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 256.0
+offset_right = 1144.0
+offset_bottom = 512.0
+allow_search = false
 
 [node name="Players" type="Control" parent="Room"]
 layout_mode = 3
@@ -382,6 +398,21 @@ offset_top = 63.0
 offset_right = 495.0
 offset_bottom = 468.0
 
+[node name="SHIT" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_q5yuo")
+
+[node name="Timer" type="Timer" parent="MultiplayerSynchronizer"]
+wait_time = 0.001
+autostart = true
+
+[node name="PlaySong" type="Timer" parent="MultiplayerSynchronizer"]
+wait_time = 0.25
+one_shot = true
+
 [connection signal="text_changed" from="choice/Nickname" to="." method="_on_server_input_text_changed"]
 [connection signal="pressed" from="choice/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="choice/Join" to="." method="_on_join_pressed"]
@@ -392,6 +423,9 @@ offset_bottom = 468.0
 [connection signal="timeout" from="Room/Broadcaster" to="." method="_on_broadcaster_timeout"]
 [connection signal="text_changed" from="Room/BroadcastAddress" to="." method="_on_broadcast_address_text_changed"]
 [connection signal="pressed" from="Room/IsMusical" to="." method="_on_is_musical_pressed"]
+[connection signal="item_selected" from="Room/SongsList" to="." method="_on_songs_list_item_selected"]
 [connection signal="pressed" from="Server/ServerJoin" to="." method="_on_server_join_pressed"]
 [connection signal="pressed" from="Server/ServerBack" to="." method="_on_server_back_pressed"]
 [connection signal="text_changed" from="Server/IPAddress" to="." method="_on_ip_address_text_changed"]
+[connection signal="timeout" from="MultiplayerSynchronizer/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="MultiplayerSynchronizer/PlaySong" to="." method="_on_play_song_timeout"]

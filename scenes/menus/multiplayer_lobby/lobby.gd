@@ -3,7 +3,11 @@ extends Control
 var broadcaster     : PacketPeerUDP
 var listener        : PacketPeerUDP
 var room_info       : Dictionary = {"name":"name","ip":"server_ip","player_count": 1, "players": []}
+@export var map     : Array
+@export var songs_list : Array
 
+var song_list_index : int
+var song_path       : String
 
 @export var address             = NetworkManager.get_ipv4_address()
 @export var port                = NetworkManager.PORT
@@ -12,12 +16,17 @@ var room_info       : Dictionary = {"name":"name","ip":"server_ip","player_count
 @export var broadcast_port      = NetworkManager.BROADCAST_PORT
 
 func _ready():
-		$ip_address.text = NetworkManager.get_ipv4_address()
-		GameManager.connection_failed.connect(self._on_connection_failed)
-		GameManager.connection_succeeded.connect(self._on_connection_success)
-		GameManager.player_list_changed.connect(self.refresh_lobby)
-		GameManager.game_ended.connect(self._on_game_ended)
-		GameManager.game_error.connect(self._on_game_error)
+	$ip_address.text = NetworkManager.get_ipv4_address()
+	GameManager.connection_failed.connect(self._on_connection_failed)
+	GameManager.connection_succeeded.connect(self._on_connection_success)
+	GameManager.player_list_changed.connect(self.refresh_lobby)
+	GameManager.game_ended.connect(self._on_game_ended)
+	GameManager.game_error.connect(self._on_game_error)
+	
+	songs_list = BeatmapManager.read_songs_directory()
+	$Room/SongsList.clear()
+	for song in songs_list:
+		$Room/SongsList.add_item(song)	
 
 func _on_host_pressed():
 	$choice.hide()
@@ -159,8 +168,6 @@ func stop_broadcasting():
 		Logger.console(3, ["Stopped broadcasting server"])
 
 
-
-
 func _on_ip_address_text_changed(new_text):
 	if new_text.is_valid_ip_address():
 		$Server/ServerJoin.disabled = false
@@ -171,6 +178,18 @@ func _on_ip_address_text_changed(new_text):
 func _on_server_input_text_changed(new_text):
 	GameManager.set_player_name(new_text)
 
+
+
+@rpc("authority", "call_local")
+func set_current_song():
+	$MultiplayerSynchronizer/PlaySong.start()
+	
+func _on_songs_list_item_selected(index):
+	if multiplayer.is_server():
+		song_list_index = index
+		var path = $Room/SongsList.get_item_text(song_list_index)
+		song_path = path
+		set_current_song.rpc()
 
 
 # --- CODE THAT IS USELESS --- #
@@ -185,6 +204,17 @@ func _on_is_musical_pressed():
 	set_game_mode.rpc()
 
 
-func _on_multiplayer_synchronizer_synchronized():
-	set_game_mode.rpc()
 # --- CODE THAT IS USELESS --- #
+
+
+
+
+
+func _on_timer_timeout():
+	$Room/SongsList.select(song_list_index)
+	$SHIT.text = song_path
+	
+
+
+func _on_play_song_timeout():
+	BeatmapManager.read_song(song_path)
