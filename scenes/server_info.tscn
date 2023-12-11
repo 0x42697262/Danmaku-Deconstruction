@@ -1,9 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://6g7c8ka0lodk"]
+[gd_scene load_steps=6 format=3 uid="uid://cpr8x3t2c1rck"]
 
-[ext_resource type="Script" path="res://scripts/server_instance.gd" id="1_dd5ic"]
 [ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="2_t6htq"]
 [ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="3_fjc1k"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="4_kkg6u"]
+
+[sub_resource type="GDScript" id="GDScript_ul6kx"]
+script/source = "extends HBoxContainer
+
+signal server_join(ip)
+
+func _on_join_pressed():
+	server_join.emit($server_ip.text)
+
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_uk22a"]
 font_size = 12
@@ -11,7 +20,7 @@ font_size = 12
 [node name="server_instance" type="HBoxContainer"]
 offset_right = 496.0
 offset_bottom = 45.0
-script = ExtResource("1_dd5ic")
+script = SubResource("GDScript_ul6kx")
 
 [node name="server_name" type="Label" parent="."]
 layout_mode = 2
