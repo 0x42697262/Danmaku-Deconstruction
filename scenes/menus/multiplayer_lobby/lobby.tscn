@@ -195,19 +195,6 @@ alignment = 1
 max_length = 15
 editable = false
 
-[node name="IsMusical" type="CheckBox" parent="Room"]
-visible = false
-layout_mode = 0
-offset_left = 944.0
-offset_top = 208.0
-offset_right = 1135.0
-offset_bottom = 239.0
-theme = ExtResource("4_ja0lf")
-theme_override_fonts/font = ExtResource("5_rpjq4")
-theme_override_font_sizes/font_size = 20
-button_pressed = true
-text = "Musical Mode"
-
 [node name="SongsList" type="ItemList" parent="Room"]
 layout_mode = 0
 offset_left = 648.0
@@ -412,7 +399,6 @@ one_shot = true
 [connection signal="toggled" from="Room/Broadcast" to="." method="_on_check_button_toggled"]
 [connection signal="timeout" from="Room/Broadcaster" to="." method="_on_broadcaster_timeout"]
 [connection signal="text_changed" from="Room/BroadcastAddress" to="." method="_on_broadcast_address_text_changed"]
-[connection signal="pressed" from="Room/IsMusical" to="." method="_on_is_musical_pressed"]
 [connection signal="item_selected" from="Room/SongsList" to="." method="_on_songs_list_item_selected"]
 [connection signal="pressed" from="Server/ServerJoin" to="." method="_on_server_join_pressed"]
 [connection signal="pressed" from="Server/ServerBack" to="." method="_on_server_back_pressed"]

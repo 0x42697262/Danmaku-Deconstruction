@@ -2,7 +2,7 @@ extends Control
 
 var broadcaster     : PacketPeerUDP
 var listener        : PacketPeerUDP
-var room_info       : Dictionary = {"name":"name","ip":"server_ip","player_count": 1, "players": []}
+var room_info       : Dictionary = {"name":"name","ip":"server_ip","player_count": 1, "players": [], 'song': ""}
 @export var map     : Array
 @export var songs_list : Array
 
@@ -36,7 +36,6 @@ func _on_host_pressed():
 	$Room/Text.show()
 	$Room/BroadcastAddress.show()
 	$Room/Broadcasting.show()
-	$Room/IsMusical.disabled = false
 	
 	song_path = $Room/SongsList.get_item_text(0)
 	_on_play_song_timeout()
@@ -48,7 +47,6 @@ func _on_host_pressed():
 func _on_join_pressed():
 	$choice.hide()
 	$Server.show()
-	$Room/IsMusical.disabled = true
 
 func _on_choice_back_pressed():
 	SceneManager.switch_to_main_menu()
@@ -71,6 +69,10 @@ func _on_connection_success():
 	$Room/Text.hide()
 	$Room/BroadcastAddress.hide()
 	$Room/Broadcasting.hide()
+	
+	#song_path = room_info.song
+	print('=====',room_info.song)
+	#_on_play_song_timeout()
 
 func _on_connection_failed():
 	$Server/IPAddress.text = "connection failed"
@@ -87,6 +89,8 @@ func refresh_lobby():
 	$Room/Players/Panel/Players.add_item(GameManager.get_player_name() + " (You)")
 	for p in players:
 		$Room/Players/Panel/Players.add_item(p.name)
+	if multiplayer.is_server():
+		set_current_song.rpc()
 
 func _on_start_pressed():
 	GameManager.begin_game()
@@ -132,6 +136,7 @@ func start_broadcasting():
 	room_info.player_count  = GameManager.get_player_count()
 	room_info.ip            = listener.get_packet_ip()
 	room_info.players       = GameManager.get_player_list()
+	room_info.map           = map[0]
 	var self_info = {
 		'name': GameManager.get_player_name(),
 		'score': GameManager.get_score(),
@@ -198,19 +203,3 @@ func _on_play_song_timeout():
 	map = BeatmapManager.read_song(song_path)
 	GameManager.set_map(map)
 	$Room/SongsList.select(song_list_index)	
-
-
-# --- CODE THAT IS USELESS --- #
-@rpc("any_peer", "call_local", "reliable")
-func set_game_mode():
-	if $Room/IsMusical.button_pressed:
-		GameManager.set_game_mode(0)
-	else:
-		GameManager.set_game_mode(1)
-		
-func _on_is_musical_pressed():
-	set_game_mode.rpc()
-
-
-# --- CODE THAT IS USELESS --- #
-
