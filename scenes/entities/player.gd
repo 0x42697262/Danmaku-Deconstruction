@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal died(explode)
+
 @export var is_alive        = true as bool
 @export var health_points   = 30 as int
 
@@ -33,32 +35,34 @@ func hide_mouse(value: bool):
 func take_damage(damage: int = 10):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points -= damage
-	if self.health_points <= 0:
-		hide_mouse(false)
-		self.is_alive = false
-		Logger.console(3, ["Player", self.name, "has died!"])
-		queue_free()
 
 func heal(hp: int = 1):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points += hp
 		Logger.console(1, ["Increased HP for", self.name, "New HP:", self.health_points])
+	if self.health_points <= 10:
+		dead.rpc()
 
+@rpc("any_peer", "call_local")
+func dead():
+	hide_mouse(false)
+	is_alive = false
+	explode()
+	queue_free()
+	GameManager.gameover()
   
-#func explode():
-		#var explode = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()
-		#explode.vulnerable = false
-		#explode.supernova_time = 0
-		#explode.number_of_bullets = 64
-		#explode.remaining_spawns = 1
-		#explode.bullet_speed = 150
-		#explode.body_rotation = 0
-		#explode.spawn_rate = 0
-		#explode.global_position = position
-		#explode.is_star = false
-		#explode.get_child(0).queue_free()
-		##get_parent().add_child(explode)
-		#spawn.emit(explode)
-		#explode.spawn_bullets()
-#
-		#queue_free()
+func explode():
+		var explode = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()
+		explode.vulnerable = false
+		explode.supernova_time = 0
+		explode.number_of_bullets = 64
+		explode.remaining_spawns = 1
+		explode.bullet_speed = 150
+		explode.body_rotation = 0
+		explode.spawn_rate = 0
+		explode.global_position = position
+		explode.is_star = false
+		explode.get_child(0).queue_free()
+		#get_parent().add_child(explode)
+		died.emit(explode)
+		explode.spawn_bullets()

@@ -1,6 +1,7 @@
 extends Control
 
 @export var map = GameManager.get_map() as Array
+@export var is_playing = false as bool
 
 var hitcircle = preload("res://scenes/entities/spawner/hitcircle.tscn")
 
@@ -13,6 +14,9 @@ func _ready():
 	Logger.console(3, ["Match started!"])
 	
 func _on_countdown_timeout():
+	var players = get_tree().get_nodes_in_group("players")
+	for player in players:
+		player.died.connect(_on_spawned)
 	if !map:
 		GameManager.game_error.emit("No beatmap selected.")
 		return
@@ -23,6 +27,7 @@ func _on_countdown_timeout():
 	var audio = map[0]
 	var notes = get_tree().get_nodes_in_group("notes")
 	AudioManager.play(audio)
+	is_playing = true
 	for note in notes:
 		note.start()
 
@@ -56,4 +61,5 @@ func _scale_coordinates(original_x: float, original_y: float) -> Vector2:
 		var scaled_y = lerp(target_min_y, target_max_y, inverse_lerp(original_min_y, original_max_y, original_y))
 		
 		return Vector2(scaled_x, scaled_y)
+
 

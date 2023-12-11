@@ -13,7 +13,6 @@ var peer        = null
 
 var player_name = "DaChicken"
 var score       = 0 as int
-var game_mode   = "musical"
 
 @export var selected_map : Array
 
@@ -51,17 +50,6 @@ func set_player_name(nickname):
 	player_name = nickname
 	if len(nickname) == 0:
 		player_name = "DaChicken"
-
-func set_game_mode(mode: int):
-	match mode:
-		0:
-			game_mode = "musical"
-		1:
-			game_mode = "endless"
-
-func get_game_mode() -> String:
-	print(game_mode)
-	return game_mode
 
 @rpc("any_peer")
 func register_player(new_player_name: String):
@@ -145,12 +133,28 @@ func begin_game():
 
 		_index += 1
 
-func gameover(player_id: int):
+func gameover():
 	pass
 	
   	#print(player_id)
 
 # ---- Multiplayer related functions ---- #
+
+func check_alive_players():
+	var gameplay = get_node("/root/Gameplay")
+	if gameplay:
+		if !gameplay.is_playing:
+			return
+
+	var players = get_tree().get_nodes_in_group("players")
+	for player in players:
+		if player.health_points <= 0:
+			player.hide_mouse(false)
+			player.is_alive = false
+			Logger.console(3, ["Player", self.name, "has died!"])
+			player.queue_free()
+	if len(players) == 0:
+		GameManager.end_game()
 
 func _player_connected(id):
 		Logger.console(3, ["[Game Manager] Player", player_name, id, "connected." ])

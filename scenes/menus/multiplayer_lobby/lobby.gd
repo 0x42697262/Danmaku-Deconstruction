@@ -176,6 +176,7 @@ func stop_broadcasting():
 
 
 func _on_ip_address_text_changed(new_text):
+	new_text = new_text.strip_edges()
 	if new_text.is_valid_ip_address():
 		$Server/ServerJoin.disabled = false
 	else:
