@@ -26,6 +26,8 @@ one_shot = true
 
 [node name="Players" type="Node" parent="."]
 
+[node name="Bullets" type="Node" parent="."]
+
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/entities/player.tscn")
 spawn_path = NodePath("../Players")

@@ -89,7 +89,8 @@ func spawn_bullets():
 		if (is_parent):
 			add_child(spawned_bullets[i])
 		else:
-			get_parent().add_child(spawned_bullets[i])
+			#get_parent().add_child(spawned_bullets[i])
+			get_node("/root/Gameplay/Bullets").add_child(spawned_bullets[i])
 		if (log_to_console):
 			Logger.console(0, ["Bullet", i, "@", rotations[i], "degree"])
 	
@@ -97,6 +98,7 @@ func spawn_bullets():
 
 func free_memory():
 	queue_free()
+	
 
 func _on_timer_timeout():
 	if remaining_spawns != 0:
@@ -104,7 +106,7 @@ func _on_timer_timeout():
 			remaining_spawns -= 1
 			spawn_bullets()
 	else:
-		queue_free()
+		free_memory()
 	
 	if (log_to_console):
 		Logger.console(0, ['Spawned Bullets'])
@@ -123,14 +125,14 @@ func _on_supernova_timeout():
 
 
 func _on_despawn_timeout():
-	#queue_free()
+	free_memory()
 	Logger.console(0, ["Auto despawned", self])
 
 
 func _on_area_body_entered(body):
 	if vulnerable:
 	# play some animation here that a star just sparkles
-		queue_free()
+		free_memory()
 		body.heal()
 		Logger.console(0, [body, "entered.", "Safely despawned", self])
 	

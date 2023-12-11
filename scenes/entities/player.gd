@@ -52,17 +52,16 @@ func dead():
 	GameManager.gameover()
   
 func explode():
-		var explode = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()
-		explode.vulnerable = false
-		explode.supernova_time = 0
-		explode.number_of_bullets = 64
-		explode.remaining_spawns = 1
-		explode.bullet_speed = 150
-		explode.body_rotation = 0
-		explode.spawn_rate = 0
-		explode.global_position = position
-		explode.is_star = false
-		explode.get_child(0).queue_free()
-		#get_parent().add_child(explode)
-		died.emit(explode)
-		explode.spawn_bullets()
+		var explosion = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()
+		explosion.vulnerable        = false
+		explosion.supernova_time    = 0
+		explosion.number_of_bullets = 64
+		explosion.remaining_spawns  = 1
+		explosion.bullet_speed      = 150
+		explosion.body_rotation     = 0
+		explosion.spawn_rate        = 0
+		explosion.global_position   = position
+		explosion.is_star           = false
+
+		died.emit(explosion)
+		explosion.spawn_bullets()

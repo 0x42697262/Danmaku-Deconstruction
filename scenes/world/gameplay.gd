@@ -7,6 +7,7 @@ var hitcircle = preload("res://scenes/entities/spawner/hitcircle.tscn")
 
 func _ready():
 	AudioManager.stop()
+	AudioManager.finished.connect(_on_finished)
 
 	create_notes()
 	$Countdown.start()
@@ -63,3 +64,5 @@ func _scale_coordinates(original_x: float, original_y: float) -> Vector2:
 		return Vector2(scaled_x, scaled_y)
 
 
+func _on_finished():
+	print('win')
