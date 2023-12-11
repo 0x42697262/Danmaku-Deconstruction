@@ -2,7 +2,7 @@ extends Control
 
 var broadcaster     : PacketPeerUDP
 var listener        : PacketPeerUDP
-var room_info       : Dictionary = {"name":"name","ip":"server_ip","player_count": 0}
+var room_info       : Dictionary = {"name":"name","ip":"server_ip","player_count": 1, "players": []}
 
 
 @export var address             = NetworkManager.get_ipv4_address()
@@ -22,9 +22,22 @@ func _ready():
 func _on_host_pressed():
 	$choice.hide()
 	$Room.show()
+	$Room/Broadcast.show()
+	$Room/Start.show()
+	$Room/Text.show()
+	$Room/BroadcastAddress.show()
+	$Room/Broadcasting.show()
+	$Room/IsMusical.disabled = false
+	
+
+	GameManager.host_game($choice/Nickname.text)
+	
+	
 
 func _on_join_pressed():
-	pass
+	$choice.hide()
+	$Server.show()
+	$Room/IsMusical.disabled = true
 
 func _on_choice_back_pressed():
 	SceneManager.switch_to_main_menu()
@@ -33,24 +46,44 @@ func _on_room_back_pressed():
 	$choice.show()
 	$Room.hide()
 	stop_broadcasting()
+	GameManager.end_game()
 
+func _on_server_back_pressed():
+	$Server.hide()
+	$choice.show()
+	
 func _on_connection_success():
-	pass
+	$Room.show()
+	$Server.hide()
+	$Room/Broadcast.hide()
+	$Room/Start.hide()
+	$Room/Text.hide()
+	$Room/BroadcastAddress.hide()
+	$Room/Broadcasting.hide()
 
 func _on_connection_failed():
-	pass
+	$Server/IPAddress.text = "connection failed"
 
 func _on_game_ended():
 	pass
 
-func _on_game_error(errtxt):
-	pass
+func _on_game_error(error_message):
+	Logger.console(3, ["[Multiplayer Lobby] Error:", error_message])
 
 func refresh_lobby():
-	pass
+	var players = GameManager.get_player_list()
+	$Room/Players/Panel/Players.clear()
+	$Room/Players/Panel/Players.add_item(GameManager.get_player_name() + " (You)")
+	for p in players:
+		$Room/Players/Panel/Players.add_item(p.name)
 
 func _on_start_pressed():
-	pass # Replace with function body.
+	GameManager.begin_game()
+
+
+func _on_server_join_pressed():
+	var ip = $Server/IPAddress.text
+	GameManager.join_game(ip, $choice/Nickname.text)
 
 
 # ---- Broadcast related functions ---- #
@@ -62,13 +95,14 @@ func _on_check_button_toggled(toggled_on):
 		stop_broadcasting()
 
 func _on_broadcaster_timeout():
-	room_info.player_count = GameManager.get_player_count()
+	room_info.player_count = GameManager.get_player_count() + 1
 	var data    = JSON.stringify(room_info)
 	var packet  = data.to_ascii_buffer()
 	broadcaster.put_packet(packet)
 
 func _on_broadcast_address_text_changed(new_text):
-	broadcast_address = new_text
+	if new_text.is_valid_ip_address():
+		broadcast_address = new_text
 
 func start_broadcasting():
 	listener = PacketPeerUDP.new()
@@ -86,6 +120,13 @@ func start_broadcasting():
 	room_info.name          = name
 	room_info.player_count  = GameManager.get_player_count()
 	room_info.ip            = listener.get_packet_ip()
+	room_info.players       = GameManager.get_player_list()
+	var self_info = {
+		'hp': GameManager.get_hp(),
+		'name': GameManager.get_player_name(),
+		'score': GameManager.get_score(),
+	}
+	room_info.players.append(self_info)
 	
 	broadcaster = PacketPeerUDP.new()
 	broadcaster.set_broadcast_enabled(true)
@@ -108,7 +149,8 @@ func start_broadcasting():
 func stop_broadcasting():
 	$Room/Broadcast.button_pressed = false
 	$Room/BroadcastAddress.editable = false
-	listener.close()
+	if listener:
+		listener.close()
 	
 	$Room/Broadcaster.stop()
 	if broadcaster != null and broadcaster.is_bound():
@@ -116,3 +158,34 @@ func stop_broadcasting():
 		$Room/Broadcasting.text = ""
 		
 		Logger.console(3, ["Stopped broadcasting server"])
+
+
+
+
+func _on_ip_address_text_changed(new_text):
+	if new_text.is_valid_ip_address():
+		$Server/ServerJoin.disabled = false
+	else:
+		$Server/ServerJoin.disabled = true
+
+
+func _on_server_input_text_changed(new_text):
+	GameManager.set_player_name(new_text)
+
+
+
+# --- CODE THAT IS USELESS --- #
+@rpc("any_peer", "call_local", "reliable")
+func set_game_mode():
+	if $Room/IsMusical.button_pressed:
+		GameManager.set_game_mode(0)
+	else:
+		GameManager.set_game_mode(1)
+		
+func _on_is_musical_pressed():
+	set_game_mode.rpc()
+
+
+func _on_multiplayer_synchronizer_synchronized():
+	set_game_mode.rpc()
+# --- CODE THAT IS USELESS --- #

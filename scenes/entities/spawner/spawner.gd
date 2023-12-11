@@ -131,8 +131,6 @@ func _on_area_body_entered(body):
 	if vulnerable:
 	# play some animation here that a star just sparkles
 		queue_free()
+		body.heal()
 		Logger.console(0, [body, "entered.", "Safely despawned", self])
-		body.health_points += 1
-		
-		Logger.console(1, ["Increased HP for", body, "New HP:", body.health_points])
 	

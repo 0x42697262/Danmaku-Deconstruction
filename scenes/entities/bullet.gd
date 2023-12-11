@@ -7,7 +7,7 @@ extends Area2D
 @export var rotation_change: int = 0
 @export var free_on_leave: bool = false
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	Logger.console(-1, ['Instantiated', self])
 	$Timer.start(lifetime)
@@ -30,11 +30,10 @@ func _on_timer_timeout():
  
 
 func _on_body_entered(body): 
-	if 'player' in body.name:
-		Logger.console(0, [self, 'hit', body])
-		body.take_damage()
-		Logger.console(0, ["Freeing", self, "on _on_body_entered"])
-		queue_free()
+	# if body.name.to_int() in PlayerHPManager.player_health_points:
+	body.take_damage()
+	Logger.console(0, [self, 'hit', body])
+	queue_free()
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():

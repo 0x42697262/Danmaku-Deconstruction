@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dns88xu1lvfxq"]
+[gd_scene load_steps=12 format=3 uid="uid://dns88xu1lvfxq"]
 
 [ext_resource type="Script" path="res://scenes/menus/multiplayer_lobby/lobby.gd" id="1_820i7"]
 [ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="3_45so0"]
@@ -19,7 +19,10 @@ events = [SubResource("InputEventKey_ki2cv")]
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1w8op"]
 texture = ExtResource("6_15ch3")
 
-[node name="lobby" type="Control"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_604wl"]
+texture = ExtResource("6_15ch3")
+
+[node name="Lobby" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_820i7")
@@ -43,18 +46,29 @@ theme_override_font_sizes/font_size = 20
 text = "127.0.0.1"
 
 [node name="choice" type="Panel" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Nickname" type="LineEdit" parent="choice"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 128.0
+offset_right = 777.0
+offset_bottom = 180.0
+scale = Vector2(0.977749, 1.17928)
+theme = ExtResource("4_ja0lf")
+text = "DaBirb"
+placeholder_text = "nickname"
+alignment = 1
+
 [node name="Host" type="Button" parent="choice"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
-offset_left = 320.0
-offset_top = 88.0
-offset_right = 832.0
-offset_bottom = 284.0
+offset_left = 384.0
+offset_top = 248.0
+offset_right = 768.0
+offset_bottom = 384.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_f1sdw")
@@ -64,16 +78,17 @@ text = "Host"
 [node name="Join" type="Button" parent="choice"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
-offset_left = 320.0
-offset_top = 344.0
-offset_right = 832.0
-offset_bottom = 536.0
+offset_left = 384.0
+offset_top = 440.0
+offset_right = 768.0
+offset_bottom = 576.0
 theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
 text = "Join"
 
 [node name="choice_back" type="Button" parent="choice"]
 custom_minimum_size = Vector2(200, 100)
+layout_mode = 0
 offset_left = 944.0
 offset_top = 536.0
 offset_right = 1144.0
@@ -82,7 +97,20 @@ theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
 text = "Back"
 
+[node name="Label" type="Label" parent="choice"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 88.0
+offset_right = 527.0
+offset_bottom = 114.0
+theme = ExtResource("4_ja0lf")
+theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+text = "Nickname:"
+
 [node name="Room" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -109,7 +137,7 @@ theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
 text = "Start"
 
-[node name="Broadcast" type="CheckButton" parent="Room"]
+[node name="Broadcast" type="CheckButton" parent="Room" groups=["Broadcast"]]
 layout_mode = 0
 offset_left = 642.0
 offset_top = 128.0
@@ -122,9 +150,10 @@ theme_override_font_sizes/font_size = 20
 shortcut = SubResource("Shortcut_p15ch")
 text = "Broadcast IP"
 
-[node name="Broadcaster" type="Timer" parent="Room"]
+[node name="Broadcaster" type="Timer" parent="Room" groups=["Broadcast"]]
 
-[node name="Text" type="Label" parent="Room"]
+[node name="Text" type="Label" parent="Room" groups=["Broadcast"]]
+layout_mode = 0
 offset_left = 648.0
 offset_top = 176.0
 offset_right = 864.0
@@ -133,7 +162,7 @@ theme_override_fonts/font = ExtResource("5_rpjq4")
 theme_override_font_sizes/font_size = 20
 text = "Broadcast Adress:"
 
-[node name="Broadcasting" type="Label" parent="Room"]
+[node name="Broadcasting" type="Label" parent="Room" groups=["Broadcast"]]
 layout_mode = 0
 offset_left = 960.0
 offset_top = 16.0
@@ -145,7 +174,8 @@ theme_override_fonts/font = ExtResource("5_rpjq4")
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 2
 
-[node name="BroadcastAddress" type="LineEdit" parent="Room"]
+[node name="BroadcastAddress" type="LineEdit" parent="Room" groups=["Broadcast"]]
+layout_mode = 0
 offset_left = 872.0
 offset_top = 167.0
 offset_right = 1150.0
@@ -156,7 +186,21 @@ theme_override_fonts/font = ExtResource("5_rpjq4")
 theme_override_font_sizes/font_size = 20
 text = "172.16.15.255"
 alignment = 1
+max_length = 15
 editable = false
+
+[node name="IsMusical" type="CheckBox" parent="Room"]
+visible = false
+layout_mode = 0
+offset_left = 944.0
+offset_top = 208.0
+offset_right = 1135.0
+offset_bottom = 239.0
+theme = ExtResource("4_ja0lf")
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+button_pressed = true
+text = "Musical Mode"
 
 [node name="Players" type="Control" parent="Room"]
 layout_mode = 3
@@ -177,6 +221,7 @@ theme_override_font_sizes/font_size = 20
 text = "Players:"
 
 [node name="Panel" type="Panel" parent="Room/Players"]
+layout_mode = 0
 offset_left = 61.0
 offset_top = 116.0
 offset_right = 614.0
@@ -198,13 +243,13 @@ theme_override_font_sizes/font_size = 14
 text = "PLAYER NAME"
 horizontal_alignment = 1
 
-[node name="PlayerIP" type="Label" parent="Room/Players/Panel/PlayerLabels"]
-custom_minimum_size = Vector2(120, 0)
+[node name="Players" type="ItemList" parent="Room/Players/Panel"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_gumfl")
-theme_override_font_sizes/font_size = 14
-text = "IP"
-horizontal_alignment = 1
+offset_left = 43.0
+offset_top = 68.0
+offset_right = 507.0
+offset_bottom = 428.0
+allow_search = false
 
 [node name="PlayersList" type="VBoxContainer" parent="Room/Players/Panel"]
 layout_mode = 0
@@ -212,6 +257,132 @@ offset_top = 63.0
 offset_right = 515.0
 offset_bottom = 468.0
 
+[node name="Server" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ServerJoin" type="Button" parent="Server"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 0
+offset_left = 1044.0
+offset_top = 240.0
+offset_right = 1144.0
+offset_bottom = 290.0
+theme = ExtResource("6_f1sdw")
+theme_override_font_sizes/font_size = 18
+disabled = true
+text = "Join"
+
+[node name="ServerBack" type="Button" parent="Server"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 0
+offset_left = 944.0
+offset_top = 536.0
+offset_right = 1144.0
+offset_bottom = 636.0
+theme = ExtResource("6_f1sdw")
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[node name="Text" type="Label" parent="Server"]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 136.0
+offset_right = 864.0
+offset_bottom = 162.0
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+text = "Direct Connect:"
+
+[node name="IPAddress" type="LineEdit" parent="Server"]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 168.0
+offset_right = 1155.0
+offset_bottom = 220.0
+scale = Vector2(0.977749, 1.17928)
+theme = ExtResource("4_ja0lf")
+text = "172.16.0.153"
+placeholder_text = "Enter IP Address"
+alignment = 1
+max_length = 15
+
+[node name="ServerBrowser" type="Control" parent="Server"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Server/ServerBrowser"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 86.0
+offset_right = 219.0
+offset_bottom = 112.0
+theme = ExtResource("4_ja0lf")
+theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
+theme_override_fonts/font = ExtResource("5_rpjq4")
+theme_override_font_sizes/font_size = 20
+text = "Server List :"
+
+[node name="Panel" type="Panel" parent="Server/ServerBrowser"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 116.0
+offset_right = 614.0
+offset_bottom = 598.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_604wl")
+
+[node name="ServerLabels" type="HBoxContainer" parent="Server/ServerBrowser/Panel"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 16.0
+offset_right = 511.0
+offset_bottom = 61.0
+
+[node name="ServerName" type="Label" parent="Server/ServerBrowser/Panel/ServerLabels"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("7_gumfl")
+theme_override_font_sizes/font_size = 14
+text = "SERVER NAME"
+horizontal_alignment = 1
+
+[node name="ServerIP" type="Label" parent="Server/ServerBrowser/Panel/ServerLabels"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_gumfl")
+theme_override_font_sizes/font_size = 14
+text = "IP"
+horizontal_alignment = 1
+
+[node name="PlayerCount" type="Label" parent="Server/ServerBrowser/Panel/ServerLabels"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme = ExtResource("4_ja0lf")
+theme_override_fonts/font = ExtResource("7_gumfl")
+theme_override_font_sizes/font_size = 14
+text = "PLAYERS"
+horizontal_alignment = 1
+
+[node name="JoinServer" type="Label" parent="Server/ServerBrowser/Panel/ServerLabels"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("4_ja0lf")
+theme_override_fonts/font = ExtResource("7_gumfl")
+theme_override_font_sizes/font_size = 14
+text = "JOIN"
+horizontal_alignment = 1
+
+[node name="ServerList" type="VBoxContainer" parent="Server/ServerBrowser/Panel"]
+layout_mode = 0
+offset_top = 63.0
+offset_right = 495.0
+offset_bottom = 468.0
+
+[connection signal="text_changed" from="choice/Nickname" to="." method="_on_server_input_text_changed"]
 [connection signal="pressed" from="choice/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="choice/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="choice/choice_back" to="." method="_on_choice_back_pressed"]
@@ -220,3 +391,7 @@ offset_bottom = 468.0
 [connection signal="toggled" from="Room/Broadcast" to="." method="_on_check_button_toggled"]
 [connection signal="timeout" from="Room/Broadcaster" to="." method="_on_broadcaster_timeout"]
 [connection signal="text_changed" from="Room/BroadcastAddress" to="." method="_on_broadcast_address_text_changed"]
+[connection signal="pressed" from="Room/IsMusical" to="." method="_on_is_musical_pressed"]
+[connection signal="pressed" from="Server/ServerJoin" to="." method="_on_server_join_pressed"]
+[connection signal="pressed" from="Server/ServerBack" to="." method="_on_server_back_pressed"]
+[connection signal="text_changed" from="Server/IPAddress" to="." method="_on_ip_address_text_changed"]

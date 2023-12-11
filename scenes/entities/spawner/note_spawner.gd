@@ -6,7 +6,9 @@ signal spawn_note(note)
 var note
 
 func create_a_note(coords: Vector2, time: float, type: int):
-		wait_time = time + 0.1
+		if time <= 0:
+			time = 0.001
+		wait_time = time
 		one_shot = true
 
 		var bullets_count = 0

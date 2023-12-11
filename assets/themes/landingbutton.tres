@@ -8,6 +8,7 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y03px"]
 texture = ExtResource("2_fnem0")
+draw_center = false
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j26ko"]
 texture = ExtResource("5_7bpho")

@@ -6,4 +6,4 @@ const BROADCAST_PORT  = 42071 as int
 const MAX_PEERS       = 8 as int 
 
 func get_ipv4_address() -> String:
-		return IP.get_local_addresses()[0]
+		return "0.0.0.0"
