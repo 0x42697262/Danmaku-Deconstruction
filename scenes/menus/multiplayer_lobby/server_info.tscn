@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cpr8x3t2c1rck"]
 
-[ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="2_t6htq"]
-[ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="3_fjc1k"]
-[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="4_kkg6u"]
+[ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="1_pmv1m"]
+[ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="2_nbs1a"]
+[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="3_wie0a"]
 
 [sub_resource type="GDScript" id="GDScript_ul6kx"]
 script/source = "extends HBoxContainer
@@ -25,8 +25,8 @@ script = SubResource("GDScript_ul6kx")
 [node name="server_name" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("2_t6htq")
-theme_override_fonts/font = ExtResource("3_fjc1k")
+theme = ExtResource("1_pmv1m")
+theme_override_fonts/font = ExtResource("2_nbs1a")
 label_settings = SubResource("LabelSettings_uk22a")
 horizontal_alignment = 1
 clip_text = true
@@ -34,16 +34,16 @@ clip_text = true
 [node name="server_ip" type="Label" parent="."]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme = ExtResource("2_t6htq")
-theme_override_fonts/font = ExtResource("3_fjc1k")
+theme = ExtResource("1_pmv1m")
+theme_override_fonts/font = ExtResource("2_nbs1a")
 theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 
 [node name="player_count" type="Label" parent="."]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-theme = ExtResource("2_t6htq")
-theme_override_fonts/font = ExtResource("3_fjc1k")
+theme = ExtResource("1_pmv1m")
+theme_override_fonts/font = ExtResource("2_nbs1a")
 theme_override_font_sizes/font_size = 12
 text = "1"
 horizontal_alignment = 1
@@ -51,7 +51,7 @@ horizontal_alignment = 1
 [node name="Join" type="Button" parent="."]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme = ExtResource("4_kkg6u")
+theme = ExtResource("3_wie0a")
 theme_override_font_sizes/font_size = 10
 text = "Join
 "
