@@ -54,7 +54,6 @@ func play_next_song():
 			print("game end")
 
 func play_song(audio_filename: String, notes: Array):
-		Logger.console(3, ["Playing song:", audio_filename])
 		for note_data in notes:
 			var note = create_note.instantiate()
 			add_child(note)
@@ -65,12 +64,7 @@ func play_song(audio_filename: String, notes: Array):
 			var type = int(note_data['type'])
 			note.create_a_note(x_y, time, type)
 
-		var audio = load(audio_filename)
-		music.stream = audio
-		add_child(music)
-		music.play()
-		music.finished.connect(_on_music_end)
-
+		AudioManager.play(audio_filename)
 
 
 func _on_send_maps(m):

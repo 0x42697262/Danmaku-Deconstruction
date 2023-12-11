@@ -122,7 +122,6 @@ func start_broadcasting():
 	room_info.ip            = listener.get_packet_ip()
 	room_info.players       = GameManager.get_player_list()
 	var self_info = {
-		'hp': GameManager.get_hp(),
 		'name': GameManager.get_player_name(),
 		'score': GameManager.get_score(),
 	}

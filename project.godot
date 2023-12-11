@@ -29,6 +29,7 @@ BeatmapManager="*res://scripts/managers/beatmap_manager.gd"
 SceneManager="*res://scripts/managers/scene_manager.gd"
 NetworkManager="*res://scripts/managers/network_manager.gd"
 TextureManager="*res://scripts/managers/texture_manager.gd"
+AudioManager="*res://scripts/managers/audio_manager.gd"
 
 [debug]
 
