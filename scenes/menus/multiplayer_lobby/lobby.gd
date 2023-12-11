@@ -38,6 +38,8 @@ func _on_host_pressed():
 	$Room/Broadcasting.show()
 	$Room/IsMusical.disabled = false
 	
+	song_path = $Room/SongsList.get_item_text(0)
+	_on_play_song_timeout()
 
 	GameManager.host_game($choice/Nickname.text)
 	
@@ -192,6 +194,12 @@ func _on_songs_list_item_selected(index):
 		set_current_song.rpc()
 
 
+func _on_play_song_timeout():
+	map = BeatmapManager.read_song(song_path)
+	GameManager.set_map(map)
+	$Room/SongsList.select(song_list_index)	
+
+
 # --- CODE THAT IS USELESS --- #
 @rpc("any_peer", "call_local", "reliable")
 func set_game_mode():
@@ -206,15 +214,3 @@ func _on_is_musical_pressed():
 
 # --- CODE THAT IS USELESS --- #
 
-
-
-
-
-func _on_timer_timeout():
-	$Room/SongsList.select(song_list_index)
-	$SHIT.text = song_path
-	
-
-
-func _on_play_song_timeout():
-	BeatmapManager.read_song(song_path)

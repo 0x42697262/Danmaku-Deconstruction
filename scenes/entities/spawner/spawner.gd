@@ -123,7 +123,7 @@ func _on_supernova_timeout():
 
 
 func _on_despawn_timeout():
-	queue_free()
+	#queue_free()
 	Logger.console(0, ["Auto despawned", self])
 
 

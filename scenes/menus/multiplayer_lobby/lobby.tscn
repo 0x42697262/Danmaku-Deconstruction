@@ -55,8 +55,6 @@ text = "127.0.0.1"
 
 [node name="choice" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Nickname" type="LineEdit" parent="choice"]
 layout_mode = 0
@@ -398,16 +396,8 @@ offset_top = 63.0
 offset_right = 495.0
 offset_bottom = 468.0
 
-[node name="SHIT" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_q5yuo")
-
-[node name="Timer" type="Timer" parent="MultiplayerSynchronizer"]
-wait_time = 0.001
-autostart = true
 
 [node name="PlaySong" type="Timer" parent="MultiplayerSynchronizer"]
 wait_time = 0.25
@@ -427,5 +417,4 @@ one_shot = true
 [connection signal="pressed" from="Server/ServerJoin" to="." method="_on_server_join_pressed"]
 [connection signal="pressed" from="Server/ServerBack" to="." method="_on_server_back_pressed"]
 [connection signal="text_changed" from="Server/IPAddress" to="." method="_on_ip_address_text_changed"]
-[connection signal="timeout" from="MultiplayerSynchronizer/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="MultiplayerSynchronizer/PlaySong" to="." method="_on_play_song_timeout"]

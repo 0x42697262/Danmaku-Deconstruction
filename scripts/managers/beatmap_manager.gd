@@ -51,6 +51,13 @@ func read_song(path: String):
 
 	AudioManager.play(beatmap[0])
 
+	return beatmap
+
+func play(map: Array):
+	if len(map) < 2:
+		return 1
+	var audio = map[0]
+	AudioManager.play(audio)
 
 
 	

@@ -26,17 +26,26 @@ func _process(delta):
 
 func _on_timer_timeout():
 	Logger.console(-1, ["Freeing", self, "on _on_timer_timeout"])
-	queue_free()
+	self.monitoring = false
+	self.monitorable = false
+	self.visible = false
+	#queue_free()
  
 
 func _on_body_entered(body): 
 	# if body.name.to_int() in PlayerHPManager.player_health_points:
 	body.take_damage()
 	Logger.console(0, [self, 'hit', body])
-	queue_free()
+	self.monitoring = false
+	self.monitorable = false
+	self.visible = false
+	#queue_free()
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	if free_on_leave == true:
 		Logger.console(-1, ["Freeing", self, "on _on_visible_on_screen_notifier_2d_screen_exited"])
-		queue_free()
+		self.monitoring = false
+		self.monitorable = false
+		self.visible = false
+		#queue_free()

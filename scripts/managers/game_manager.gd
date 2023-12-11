@@ -15,6 +15,8 @@ var player_name = "DaChicken"
 var score       = 0 as int
 var game_mode   = "musical"
 
+@export var selected_map : Array
+
 var players = {}
 
 
@@ -27,9 +29,14 @@ func _ready():
 
 # ---- Property related functions ---- #
 
+func set_map(map: Array):
+	self.selected_map = map
+
+func get_map():
+	return self.selected_map
+
 func get_player_list():
 		return players.values()
-
 
 func get_score() -> int:
 	return score
@@ -167,3 +174,4 @@ func _connected_fail():
 func _server_disconnected():
 		game_error.emit("Server disconnected")
 		end_game()
+		multiplayer.multiplayer_peer = null

@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://de3fcc1ng16a7"]
+[gd_scene load_steps=2 format=3 uid="uid://de3fcc1ng16a7"]
 
 [ext_resource type="Script" path="res://scenes/world/gameplay.gd" id="1_ggn7s"]
-[ext_resource type="Script" path="res://scripts/gameplay_health_points.gd" id="2_swx4r"]
 
 [node name="Gameplay" type="Control"]
 layout_mode = 3
@@ -21,8 +20,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.427451, 0.0196078, 0.454902, 1)
 
-[node name="HealthPoints" type="Node" parent="."]
-script = ExtResource("2_swx4r")
+[node name="Countdown" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [node name="Players" type="Node" parent="."]
 
@@ -32,3 +32,5 @@ spawn_path = NodePath("../Players")
 
 [node name="NoteSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
+
+[connection signal="timeout" from="Countdown" to="." method="_on_countdown_timeout"]

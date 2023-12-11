@@ -17,11 +17,6 @@ func _input(event):
 			position = event.position
 
 func _process(delta):
-	# if self.health_points <= 0:
-	# 	hide_mouse(false)
-	# 	self.is_alive = false
-	# 	Logger.console(3, ["Player", self.name, "has died!"])
-	# 	queue_free()
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		position.x = clamp(position.x, 0, 1152)
 		position.y = clamp(position.y, 0, 648)
