@@ -121,10 +121,7 @@ theme_override_font_sizes/font_size = 20
 text = "Nickname:"
 
 [node name="Room" type="Panel" parent="."]
-visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="room_back" type="Button" parent="Room"]
 custom_minimum_size = Vector2(200, 100)
@@ -209,8 +206,6 @@ allow_search = false
 [node name="Players" type="Control" parent="Room"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Text" type="Label" parent="Room/Players"]
 layout_mode = 0
@@ -262,7 +257,6 @@ offset_right = 515.0
 offset_bottom = 468.0
 
 [node name="Server" type="Panel" parent="."]
-visible = false
 layout_mode = 0
 
 [node name="ServerJoin" type="Button" parent="Server"]
