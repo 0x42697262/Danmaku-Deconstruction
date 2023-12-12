@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 signal died(explode)
+signal gameover
+signal health_changed(current_hp)
 
 @export var is_alive        = true as bool
 @export var health_points   = 30 as int
@@ -35,13 +37,17 @@ func hide_mouse(value: bool):
 func take_damage(damage: int = 10):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points -= damage
+		Logger.console(1, ["Decreased HP for", self.name, "New HP:", self.health_points])
+		health_changed.emit(self.health_points)
+	if self.health_points <= 0:
+		dead.rpc()
+		gameover.emit()
 
 func heal(hp: int = 1):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points += hp
 		Logger.console(1, ["Increased HP for", self.name, "New HP:", self.health_points])
-	if self.health_points <= 10:
-		dead.rpc()
+		health_changed.emit(self.health_points)
 
 @rpc("any_peer", "call_local")
 func dead():
@@ -49,7 +55,6 @@ func dead():
 	is_alive = false
 	explode()
 	queue_free()
-	GameManager.gameover()
   
 func explode():
 		var explosion = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()

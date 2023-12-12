@@ -133,11 +133,6 @@ func begin_game():
 
 		_index += 1
 
-func gameover():
-	pass
-	
-  	#print(player_id)
-
 # ---- Multiplayer related functions ---- #
 
 func check_alive_players():
@@ -146,8 +141,8 @@ func check_alive_players():
 		if !gameplay.is_playing:
 			return
 
-	var players = get_tree().get_nodes_in_group("players")
-	for player in players:
+	var players_group = get_tree().get_nodes_in_group("players")
+	for player in players_group:
 		if player.health_points <= 0:
 			player.hide_mouse(false)
 			player.is_alive = false

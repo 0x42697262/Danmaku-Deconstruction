@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwyg3mdsir4sp"]
 
-[ext_resource type="Script" path="res://scenes/gameover.gd" id="1_uyokp"]
+[ext_resource type="Script" path="res://scenes/world/gameover.gd" id="1_uyokp"]
 [ext_resource type="Texture2D" uid="uid://biigv1qqs5uh2" path="res://assets/Backgrounds/Subtract.png" id="2_3qucp"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="3_ipx5p"]
 [ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="4_osk6t"]
@@ -46,8 +46,6 @@ offset_bottom = 277.0
 theme_override_fonts/font = ExtResource("4_osk6t")
 theme_override_font_sizes/font_size = 50
 text = "GAME OVER"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="button_down" from="Spectate" to="." method="_on_spectate_button_down"]
 [connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]

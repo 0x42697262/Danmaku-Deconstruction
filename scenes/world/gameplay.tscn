@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://de3fcc1ng16a7"]
+[gd_scene load_steps=3 format=3 uid="uid://de3fcc1ng16a7"]
 
 [ext_resource type="Script" path="res://scenes/world/gameplay.gd" id="1_ggn7s"]
+[ext_resource type="PackedScene" uid="uid://dwyg3mdsir4sp" path="res://scenes/world/gameover.tscn" id="2_o18ki"]
 
 [node name="Gameplay" type="Control"]
 layout_mode = 3
@@ -34,5 +35,18 @@ spawn_path = NodePath("../Players")
 
 [node name="NoteSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
+
+[node name="Gameover" parent="." instance=ExtResource("2_o18ki")]
+visible = false
+layout_mode = 1
+
+[node name="HP" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 45.0
+offset_bottom = 26.0
+text = "30
+"
 
 [connection signal="timeout" from="Countdown" to="." method="_on_countdown_timeout"]
