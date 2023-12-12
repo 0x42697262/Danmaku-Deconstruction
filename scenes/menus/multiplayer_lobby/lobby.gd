@@ -70,10 +70,6 @@ func _on_connection_success():
 	$Room/BroadcastAddress.hide()
 	$Room/Broadcasting.hide()
 	
-	#song_path = room_info.song
-	print('=====',room_info.song)
-	#_on_play_song_timeout()
-
 func _on_connection_failed():
 	$Server/IPAddress.text = "connection failed"
 

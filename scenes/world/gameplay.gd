@@ -17,7 +17,7 @@ func create_notes():
 	for data in notes:
 		var note = hitcircle.instantiate()
 		add_child(note)
-		note.spawned.connect(_on_spawned)
+		note.spawned.connect(_on_player_died)
 
 		var x_y = _scale_coordinates(int(data['x']), int(data['y']))
 		var time = (float(data['time']) / 1000) - (2 + $Countdown.time_left)
@@ -26,6 +26,17 @@ func create_notes():
 		
 func _on_spawned(note):
 	add_child(note)
+	
+func _on_player_died(explosion):
+	add_child(explosion)
+	var len_players = len($Players.get_children())
+	#if len_players == 0:
+		#AudioManager.stop()
+	
+
+
+func _on_gameover():
+	$Gameover.show()
 
 func _scale_coordinates(original_x: float, original_y: float) -> Vector2:
 		var original_min_x = 0.0
@@ -47,6 +58,8 @@ func _on_countdown_timeout():
 	var players = get_tree().get_nodes_in_group("players")
 	for player in players:
 		player.died.connect(_on_spawned)
+		player.gameover.connect(_on_gameover)
+		player.health_changed.connect(_on_player_health_changed)
 	if !map:
 		GameManager.game_error.emit("No beatmap selected.")
 		return
@@ -63,9 +76,10 @@ func _on_countdown_timeout():
 
 func _on_finished():
 	print('win')
-	
-func _on_spawn_a_star(star):
-	add_child(star)
-	
+
+func _on_player_health_changed(current_hp):
+	$HP.text = str(current_hp)
+
 func _on_gameover_signal():
 	var scene = load("res://scenes/world/gameover.tscn").instantiate()
+	
