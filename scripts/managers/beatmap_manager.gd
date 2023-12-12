@@ -78,6 +78,7 @@ func read_osu_file(song: DirAccess, osu: FileAccess):
 	var metadata: Dictionary  = {
 		'General':    {},
 		'HitObjects': [],
+		'Metadata': {},
 		}
 	
 
