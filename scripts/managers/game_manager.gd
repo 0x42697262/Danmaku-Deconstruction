@@ -142,7 +142,7 @@ func _player_connected(id):
 func _player_disconnected(id):
 		if has_node("/root/Gameplay"):
 				if multiplayer.is_server():
-						game_error.emit("Player" + players[id] + " disconnected")
+						game_error.emit("Player" + players[id].name + " disconnected")
 						end_game()
 		else:
 			unregister_player(id)
