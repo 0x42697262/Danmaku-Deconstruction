@@ -26,7 +26,7 @@ func _ready():
 
 	listener = PacketPeerUDP.new()
 	var listener_ok = listener.bind(listen_port)
-	$IPAddress.text = IP.get_local_addresses()[0]
+	$IPAddress.text = NetworkManager.get_ipv4_address()
 	
 	if listener_ok != OK:
 		Logger.console(3, ["Failed to bind listener port (error)"])
@@ -87,7 +87,9 @@ func _on_connection_failed():
 	$Server/IPAddress.text = "connection failed"
 
 func _on_game_ended():
-	pass
+	SceneManager.switch_to_main_menu()
+	AudioManager.stop()
+	
 
 func _on_game_error(error_message):
 	SceneManager.switch_to_main_menu()
@@ -204,7 +206,7 @@ func _on_play_song_timeout():
 
 
 func _on_lobby_scanner_timeout():
-	$IPAddress.text = IP.get_local_addresses()[0]
+	$IPAddress.text = NetworkManager.get_ipv4_address()
 	if listener.get_available_packet_count() > 0:
 		var server_ip   = listener.get_packet_ip()
 		var bytes       = listener.get_packet()
@@ -219,7 +221,7 @@ func _on_lobby_scanner_timeout():
 		new_server.player_count = str(info.player_count)
 		new_server.server_ip    = server_ip
 
-		var servers = get_tree().get_nodes_in_group("servers")
+		var servers = GroupsManager.get_group('servers')
 		var ip_addresses = []
 		for server in servers:
 			ip_addresses.append(server.name)
@@ -233,5 +235,4 @@ func _on_lobby_scanner_timeout():
 
 
 func _on_lobby_ip_cleaner_timeout():
-	for server in get_tree().get_nodes_in_group("servers"):
-		server.queue_free()
+	GroupsManager.call_group('servers', 'queue_free')
