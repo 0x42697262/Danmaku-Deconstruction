@@ -2,31 +2,41 @@ extends Control
 
 var broadcaster     : PacketPeerUDP
 var listener        : PacketPeerUDP
-var room_info       : Dictionary = {"name":"name","ip":"server_ip","player_count": 1, "players": [], 'song': ""}
+var room_info       : Dictionary = {"name":"name","ip_addresses":[],"player_count": 1, "players": [], 'map': ""}
+var server_info     : PackedScene
 @export var map     : Array
 @export var songs_list : Array
+
 
 var song_list_index : int
 var song_path       : String
 
-@export var address             = NetworkManager.get_ipv4_address()
+@export var address             = NetworkManager.get_ipv4_address() as String
 @export var port                = NetworkManager.PORT
-@export var broadcast_address   = "172.16.15.255"
+@export var broadcast_address   = NetworkManager.broadcast_address() as String
 @export var listen_port         = NetworkManager.LISTEN_PORT
 @export var broadcast_port      = NetworkManager.BROADCAST_PORT
 
 func _ready():
-	$ip_address.text = NetworkManager.get_ipv4_address()
 	GameManager.connection_failed.connect(self._on_connection_failed)
 	GameManager.connection_succeeded.connect(self._on_connection_success)
 	GameManager.player_list_changed.connect(self.refresh_lobby)
 	GameManager.game_ended.connect(self._on_game_ended)
 	GameManager.game_error.connect(self._on_game_error)
+
+	listener = PacketPeerUDP.new()
+	var listener_ok = listener.bind(listen_port)
+	$IPAddress.text = IP.get_local_addresses()[0]
+	
+	if listener_ok != OK:
+		Logger.console(3, ["Failed to bind listener port (error)"])
+		$Room/Broadcast.button_pressed = false
 	
 	songs_list = BeatmapManager.read_songs_directory()
 	$Room/SongsList.clear()
 	for song in songs_list:
-		$Room/SongsList.add_item(song)	
+		$Room/SongsList.add_item(song)
+	$Room/BroadcastAddress.text = broadcast_address
 
 func _on_host_pressed():
 	$choice.hide()
@@ -47,6 +57,9 @@ func _on_host_pressed():
 func _on_join_pressed():
 	$choice.hide()
 	$Server.show()
+	$LobbyScanner.start()
+	$Server/IPAddress.text = NetworkManager.get_ipv4_address()
+	server_info = preload("res://scenes/menus/multiplayer_lobby/server.tscn")
 
 func _on_choice_back_pressed():
 	SceneManager.switch_to_main_menu()
@@ -92,8 +105,7 @@ func _on_start_pressed():
 	GameManager.begin_game()
 
 
-func _on_server_join_pressed():
-	var ip = $Server/IPAddress.text
+func _on_server_join_pressed(ip = $Server/IPAddress.text):
 	GameManager.join_game(ip, $choice/Nickname.text)
 
 
@@ -116,26 +128,15 @@ func _on_broadcast_address_text_changed(new_text):
 		broadcast_address = new_text
 
 func start_broadcasting():
-	listener = PacketPeerUDP.new()
-	var listener_ok = listener.bind(listen_port)
-	$Room/BroadcastAddress.editable = true
-	broadcast_address = $Room/BroadcastAddress.text
-	
-	if listener_ok != OK:
-		Logger.console(3, ["Failed to bind listener port (error)"])
-		$Room/Broadcast.button_pressed = false
-		
-		return
 	Logger.console(3, ["Bound to Listener Port", listen_port, "Successful"])
 	
-	room_info.name          = name
+	room_info.name          = GameManager.player_name + "'s Server"
 	room_info.player_count  = GameManager.get_player_count()
-	room_info.ip            = listener.get_packet_ip()
+	room_info.ip_addresses  = IP.get_local_addresses()
 	room_info.players       = GameManager.get_player_list()
-	room_info.map           = map[0]
+	room_info.map           = ProjectSettings.localize_path(map[0])
 	var self_info = {
 		'name': GameManager.get_player_name(),
-		'score': GameManager.get_score(),
 	}
 	room_info.players.append(self_info)
 	
@@ -159,7 +160,6 @@ func start_broadcasting():
 
 func stop_broadcasting():
 	$Room/Broadcast.button_pressed = false
-	$Room/BroadcastAddress.editable = false
 	if listener:
 		listener.close()
 	
@@ -200,3 +200,37 @@ func _on_play_song_timeout():
 	map = BeatmapManager.read_song(song_path)
 	GameManager.set_map(map)
 	$Room/SongsList.select(song_list_index)	
+
+
+func _on_lobby_scanner_timeout():
+	$IPAddress.text = IP.get_local_addresses()[0]
+	if listener.get_available_packet_count() > 0:
+		var server_ip   = listener.get_packet_ip()
+		var bytes       = listener.get_packet()
+		var data        = bytes.get_string_from_ascii()
+		var info        = JSON.parse_string(data)
+
+		var server_list = $Server/ServerBrowser/Panel/ServerList
+
+		var new_server = server_info.instantiate()
+		new_server.name         = server_ip
+		new_server.server_name  = info.name
+		new_server.player_count = str(info.player_count)
+		new_server.server_ip    = server_ip
+
+		var servers = get_tree().get_nodes_in_group("servers")
+		var ip_addresses = []
+		for server in servers:
+			ip_addresses.append(server.name)
+		if new_server.name not in ip_addresses:
+			if new_server.name in ["Server", ""]:
+				return
+			server_list.add_child(new_server)
+			new_server.joined.connect(_on_server_join_pressed)
+			Logger.console(1, ["Added a new server to the list:", server_ip])
+		Logger.console(0, ["Scanning for IP Addresses..."])
+
+
+func _on_lobby_ip_cleaner_timeout():
+	for server in get_tree().get_nodes_in_group("servers"):
+		server.queue_free()

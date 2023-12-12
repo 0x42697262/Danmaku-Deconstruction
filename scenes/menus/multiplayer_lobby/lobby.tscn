@@ -35,13 +35,19 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_820i7")
 
+[node name="LobbyScanner" type="Timer" parent="."]
+
+[node name="LobbyIPCleaner" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 1153.0
 offset_bottom = 649.0
 texture = ExtResource("3_45so0")
 
-[node name="ip_address" type="Label" parent="."]
+[node name="IPAddress" type="Label" parent="."]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 622.0
@@ -51,7 +57,6 @@ theme = ExtResource("4_ja0lf")
 theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
 theme_override_fonts/font = ExtResource("5_rpjq4")
 theme_override_font_sizes/font_size = 20
-text = "127.0.0.1"
 
 [node name="choice" type="Panel" parent="."]
 layout_mode = 0
@@ -190,10 +195,8 @@ scale = Vector2(0.977749, 1.17928)
 theme = ExtResource("4_ja0lf")
 theme_override_fonts/font = ExtResource("5_rpjq4")
 theme_override_font_sizes/font_size = 20
-text = "172.16.15.255"
 alignment = 1
 max_length = 15
-editable = false
 
 [node name="SongsList" type="ItemList" parent="Room"]
 layout_mode = 0
@@ -261,8 +264,6 @@ offset_bottom = 468.0
 [node name="Server" type="Panel" parent="."]
 visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="ServerJoin" type="Button" parent="Server"]
 custom_minimum_size = Vector2(100, 50)
@@ -305,16 +306,13 @@ offset_right = 1155.0
 offset_bottom = 220.0
 scale = Vector2(0.977749, 1.17928)
 theme = ExtResource("4_ja0lf")
-text = "172.16.0.153"
-placeholder_text = "Enter IP Address"
+placeholder_text = "ip address"
 alignment = 1
 max_length = 15
 
 [node name="ServerBrowser" type="Control" parent="Server"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="Server/ServerBrowser"]
 layout_mode = 0
@@ -390,6 +388,8 @@ replication_config = SubResource("SceneReplicationConfig_q5yuo")
 wait_time = 0.25
 one_shot = true
 
+[connection signal="timeout" from="LobbyScanner" to="." method="_on_lobby_scanner_timeout"]
+[connection signal="timeout" from="LobbyIPCleaner" to="." method="_on_lobby_ip_cleaner_timeout"]
 [connection signal="text_changed" from="choice/Nickname" to="." method="_on_server_input_text_changed"]
 [connection signal="pressed" from="choice/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="choice/Join" to="." method="_on_join_pressed"]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpr8x3t2c1rck"]
+
+[ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="1_x4v1o"]
+[ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="2_hc7op"]
+[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="3_wuaoc"]
+
+[sub_resource type="GDScript" id="GDScript_ul6kx"]
+script/source = "extends HBoxContainer
+
+signal joined(ip)
+
+var server_name  : String
+var server_ip    : String
+var player_count : String
+
+func _ready():
+	name = server_ip
+	$Name.text = server_name
+	$IP.text   = server_ip
+	$PlayerCount.text = player_count
+
+func _on_join_pressed():
+	joined.emit(server_ip)
+
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_uk22a"]
+font_size = 12
+
+[node name="Server" type="HBoxContainer" groups=["servers"]]
+offset_right = 496.0
+offset_bottom = 45.0
+script = SubResource("GDScript_ul6kx")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_x4v1o")
+theme_override_fonts/font = ExtResource("2_hc7op")
+text = "DaChicken's Server"
+label_settings = SubResource("LabelSettings_uk22a")
+horizontal_alignment = 1
+clip_text = true
+
+[node name="IP" type="Label" parent="."]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme = ExtResource("1_x4v1o")
+theme_override_fonts/font = ExtResource("2_hc7op")
+theme_override_font_sizes/font_size = 12
+text = "172.16.0.153"
+horizontal_alignment = 1
+
+[node name="PlayerCount" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme = ExtResource("1_x4v1o")
+theme_override_fonts/font = ExtResource("2_hc7op")
+theme_override_font_sizes/font_size = 12
+text = "1"
+horizontal_alignment = 1
+
+[node name="Join" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("3_wuaoc")
+theme_override_font_sizes/font_size = 10
+text = "Join
+"
+
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
