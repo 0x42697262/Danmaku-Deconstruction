@@ -114,7 +114,7 @@ func _on_server_join_pressed(ip = $Server/IPAddress.text):
 
 # ---- Broadcast related functions ---- #
 
-func _on_check_button_toggled(toggled_on):
+func _on_check_button_toggled(togged_on):
 	if $Room/Broadcast.button_pressed:
 		start_broadcasting()
 	else:

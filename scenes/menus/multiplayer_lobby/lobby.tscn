@@ -270,7 +270,6 @@ offset_right = 1144.0
 offset_bottom = 290.0
 theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
-disabled = true
 text = "Join"
 
 [node name="ServerBack" type="Button" parent="Server"]
