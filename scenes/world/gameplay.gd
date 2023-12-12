@@ -54,7 +54,7 @@ func _scale_coordinates(original_x: float, original_y: float) -> Vector2:
 		return Vector2(scaled_x, scaled_y)
 
 func _on_countdown_timeout():
-	var players = get_tree().get_nodes_in_group("players")
+	var players = GroupsManager.get_group('players')
 	for player in players:
 		player.died.connect(_on_spawned)
 		player.gameover.connect(_on_gameover)
@@ -67,7 +67,7 @@ func _on_countdown_timeout():
 		return
 
 	var audio = map[0]
-	var notes = get_tree().get_nodes_in_group("notes")
+	var notes = GroupsManager.get_group("notes")
 	AudioManager.play(audio)
 	is_playing = true
 	for note in notes:
@@ -79,7 +79,7 @@ func _on_finished():
 func _on_player_health_changed(current_hp):
 	$HP.text = str(clamp(current_hp,0,1000))
 	print(current_hp)
-
-func _on_gameover_signal():
-	var scene = load("res://scenes/world/gameover.tscn").instantiate()
 	
+func _on_check_players_timeout():
+	if not GroupsManager.get_group('players'):
+		GameManager.end_game()
