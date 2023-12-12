@@ -73,4 +73,8 @@ text = "30"
 visible = false
 layout_mode = 1
 
+[node name="CheckPlayers" type="Timer" parent="."]
+autostart = true
+
 [connection signal="timeout" from="Countdown" to="." method="_on_countdown_timeout"]
+[connection signal="timeout" from="CheckPlayers" to="." method="_on_check_players_timeout"]
