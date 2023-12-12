@@ -26,7 +26,7 @@ func _ready():
 
 	listener = PacketPeerUDP.new()
 	var listener_ok = listener.bind(listen_port)
-	$IPAddress.text = IP.get_local_addresses()[0]
+	$IPAddress.text = NetworkManager.get_ipv4_address()
 	
 	if listener_ok != OK:
 		Logger.console(3, ["Failed to bind listener port (error)"])
@@ -206,7 +206,7 @@ func _on_play_song_timeout():
 
 
 func _on_lobby_scanner_timeout():
-	$IPAddress.text = IP.get_local_addresses()[0]
+	$IPAddress.text = NetworkManager.get_ipv4_address()
 	if listener.get_available_packet_count() > 0:
 		var server_ip   = listener.get_packet_ip()
 		var bytes       = listener.get_packet()
