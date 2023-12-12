@@ -121,6 +121,7 @@ theme_override_font_sizes/font_size = 20
 text = "Nickname:"
 
 [node name="Room" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 
 [node name="room_back" type="Button" parent="Room"]
@@ -257,6 +258,7 @@ offset_right = 515.0
 offset_bottom = 468.0
 
 [node name="Server" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 
 [node name="ServerJoin" type="Button" parent="Server"]

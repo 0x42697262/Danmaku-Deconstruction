@@ -90,6 +90,7 @@ func _on_game_ended():
 	pass
 
 func _on_game_error(error_message):
+	SceneManager.switch_to_main_menu()
 	Logger.console(3, ["[Multiplayer Lobby] Error:", error_message])
 
 func refresh_lobby():
