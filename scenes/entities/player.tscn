@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://clwyik8h1klp0"]
+[gd_scene load_steps=6 format=3 uid="uid://clwyik8h1klp0"]
 
 [ext_resource type="Script" path="res://scenes/entities/player.gd" id="1_t6ev6"]
 [ext_resource type="Texture2D" uid="uid://c5gpjrujt4usy" path="res://assets/Characters/earth.png" id="2_ooyqq"]
+[ext_resource type="AudioStream" uid="uid://c3ihko8ivxye0" path="res://assets/Audio/starpick.mp3" id="3_h46ci"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jb7jw"]
 radius = 2.0
@@ -26,3 +27,9 @@ debug_color = Color(0.929412, 0, 0, 0.419608)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_q1aes")
+
+[node name="starpick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_h46ci")
+volume_db = -0.001
+pitch_scale = 1.75
+bus = &"Sfx"

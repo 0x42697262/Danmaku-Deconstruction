@@ -6,6 +6,8 @@ var room_info       : Dictionary = {"name":"name","ip":"server_ip","player_count
 @export var map     : Array
 @export var songs_list : Array
 
+@onready var clickButton = $clickButton as AudioStreamPlayer
+
 var song_list_index : int
 var song_path       : String
 
@@ -27,8 +29,13 @@ func _ready():
 	$Room/SongsList.clear()
 	for song in songs_list:
 		$Room/SongsList.add_item(song)	
+		
+	#var sound = load("res://assets/Audio/clickbutton1.mp3") as AudioStream
+	#clickButton.stream = sound
+	clickButton.play()
 
 func _on_host_pressed():
+	clickButton.play()
 	$choice.hide()
 	$Room.show()
 	$Room/Broadcast.show()
@@ -45,19 +52,24 @@ func _on_host_pressed():
 	
 
 func _on_join_pressed():
+	clickButton.play()
 	$choice.hide()
 	$Server.show()
 
 func _on_choice_back_pressed():
+	print("Back button pressed!")
+	clickButton.play()
 	SceneManager.switch_to_main_menu()
 
 func _on_room_back_pressed():
+	clickButton.play()
 	$choice.show()
 	$Room.hide()
 	stop_broadcasting()
 	GameManager.end_game()
 
 func _on_server_back_pressed():
+	clickButton.play()
 	$Server.hide()
 	$choice.show()
 	

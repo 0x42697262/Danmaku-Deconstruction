@@ -46,6 +46,7 @@ func take_damage(damage: int = 10):
 func heal(hp: int = 1):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points += hp
+		$starpick.play()
 		Logger.console(1, ["Increased HP for", self.name, "New HP:", self.health_points])
 		health_changed.emit(self.health_points)
 

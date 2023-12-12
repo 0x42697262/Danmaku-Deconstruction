@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bstsg8hhpsw81"]
+[gd_scene load_steps=6 format=3 uid="uid://bstsg8hhpsw81"]
 
 [ext_resource type="Script" path="res://scenes/Option Menu/OptionsMenu.gd" id="1_fklcn"]
 [ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="2_f4dc3"]
 [ext_resource type="PackedScene" uid="uid://pqerxnq3udia" path="res://scenes/Option Menu/settings_tab_container.tscn" id="3_ofarw"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="4_hl2nh"]
+[ext_resource type="AudioStream" uid="uid://b8gddqg3v2un0" path="res://assets/Audio/clickbutton2.mp3" id="5_kydgf"]
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
@@ -61,5 +62,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 theme = ExtResource("4_hl2nh")
 text = "Exit"
+
+[node name="clickButton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_kydgf")
+volume_db = 9.835
+pitch_scale = 0.7
+bus = &"Sfx"
 
 [connection signal="button_down" from="MarginContainer/MarginContainer/ExitOption" to="." method="_on_exit_option_button_down"]

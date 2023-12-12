@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://4mb37tol2l2s"]
+[gd_scene load_steps=13 format=3 uid="uid://4mb37tol2l2s"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu/main_menu.gd" id="1_hj4er"]
 [ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="2_xjamw"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bstsg8hhpsw81" path="res://scenes/Option Menu/OptionsMenu.tscn" id="7_t31ef"]
 [ext_resource type="PackedScene" uid="uid://q3non506qyqo" path="res://scenes/Option Menu/TutorialMenu.tscn" id="8_staoy"]
 [ext_resource type="AudioStream" uid="uid://cdbip6yu0jxp8" path="res://assets/Audio/JEON SOMI - Fast Forward  Instrumental.mp3" id="9_nxx1f"]
+[ext_resource type="AudioStream" uid="uid://b8gddqg3v2un0" path="res://assets/Audio/clickbutton2.mp3" id="10_w888a"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4tdil"]
 particles_animation = true
@@ -186,3 +187,9 @@ layout_mode = 1
 stream = ExtResource("9_nxx1f")
 volume_db = -13.671
 autoplay = true
+
+[node name="clickButton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_w888a")
+volume_db = 9.835
+pitch_scale = 0.7
+bus = &"Sfx"

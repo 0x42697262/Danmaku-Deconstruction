@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dns88xu1lvfxq"]
+[gd_scene load_steps=14 format=3 uid="uid://dns88xu1lvfxq"]
 
 [ext_resource type="Script" path="res://scenes/menus/multiplayer_lobby/lobby.gd" id="1_820i7"]
 [ext_resource type="Texture2D" uid="uid://twa8p425f2wy" path="res://assets/Backgrounds/Idk.png" id="3_45so0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://4v6iw2xkki00" path="res://assets/Backgrounds/Server.png" id="6_15ch3"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="6_f1sdw"]
 [ext_resource type="FontFile" uid="uid://ddjbdaer644gx" path="res://assets/Fonts/PixelGameFont.ttf" id="7_gumfl"]
+[ext_resource type="AudioStream" uid="uid://b8gddqg3v2un0" path="res://assets/Audio/clickbutton2.mp3" id="8_gcfli"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_ki2cv"]
 device = -1
@@ -389,6 +390,12 @@ replication_config = SubResource("SceneReplicationConfig_q5yuo")
 [node name="PlaySong" type="Timer" parent="MultiplayerSynchronizer"]
 wait_time = 0.25
 one_shot = true
+
+[node name="clickButton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_gcfli")
+volume_db = 9.835
+pitch_scale = 0.7
+bus = &"Sfx"
 
 [connection signal="text_changed" from="choice/Nickname" to="." method="_on_server_input_text_changed"]
 [connection signal="pressed" from="choice/Host" to="." method="_on_host_pressed"]

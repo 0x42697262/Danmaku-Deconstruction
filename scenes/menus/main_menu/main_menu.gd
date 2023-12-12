@@ -8,23 +8,29 @@ extends Control
 @onready var OptionMenu         = $OptionMenu as Options_Menu
 @onready var TutorialMenu       = $TutorialMenu as TutorialsMenu
 @onready var margin_container   = $MarginContainer as MarginContainer
+@onready var clickButton = $clickButton as AudioStreamPlayer
+
 
 func _ready():
 	Logger.console(0, ["Game Started"])
 	handle_connecting_signal()
 
 func on_play_press() -> void:
+	clickButton.play()
 	SceneManager.switch_to_multiplayer_lobby()
 
 func on_option_press() -> void:
+	clickButton.play()
 	margin_container.visible = false
 	OptionMenu.set_process(true)
 	OptionMenu.visible = true
 	
 func on_exit_press() -> void:
+	clickButton.play()
 	get_tree().quit()
 	
 func on_tutorial_press() -> void:
+	clickButton.play()
 	margin_container.visible = false
 	TutorialMenu.set_process(true)
 	TutorialMenu.visible = true
