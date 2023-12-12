@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://pfr4we5ys1ba"]
+
+[ext_resource type="Script" path="res://scenes/entities/spawner/hitcircle.gd" id="1_hrkvp"]
+
+[node name="hitcircle" type="Timer" groups=["notes"]]
+one_shot = true
+script = ExtResource("1_hrkvp")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

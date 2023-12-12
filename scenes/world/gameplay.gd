@@ -1,76 +1,54 @@
 extends Control
 
-var mode
-var stream : AudioStream
+@export var map = GameManager.get_map() as Array
+@export var is_playing = false as bool
 
-var p1: Texture = preload("res://assets/Characters/mercury.png")
-var p2: Texture = preload("res://assets/Characters/venus.png")
-var p3: Texture = preload("res://assets/Characters/earth.png")
-var p4: Texture = preload("res://assets/Characters/mars.png")
-var p5: Texture = preload("res://assets/Characters/jupiter.png")
-var p6: Texture = preload("res://assets/Characters/saturn.png")
-var p7: Texture = preload("res://assets/Characters/uranus.png")
-var p8: Texture = preload("res://assets/Characters/neptune.png")
-
-var player_texture = [p1, p2, p3, p4, p5, p6, p7, p8]
-
-## Game mode selected by the host
-@export var game_mode_selected: String = "musical_mode"
+var hitcircle = preload("res://scenes/entities/spawner/hitcircle.tscn")
 
 func _ready():
-	var index = 0
+	AudioManager.stop()
+	AudioManager.finished.connect(_on_finished)
 
-	for i in game_manager.Players:
-		var player = preload("res://scenes/entities/player.tscn").instantiate()
-		var area = size
-		player.name = "player" + str(game_manager.Players[i].id)
-		player.get_node("sprite").texture = player_texture[index+1]
-		player.spawn.connect(_on_spawn_a_star)
-		add_child(player)
-		player.global_position = Vector2(randi_range(0,1152), randi_range(0,648))
-		index += 1
-		#player.gameover.connect(_on_gameover_signal(player))
-	
-	var children = get_children()
-	
-	# DON'T CHANGE THIS PART
-	Logger.console(3, ["Match started!"])
-	Logger.console(0, [self ,"connecting signals for each players..."])
-	for child in children:
-		if child.has_signal("gameover"):
-			child.gameover.connect(_on_gameover_signal)
-	Logger.console(0, [self, "connecting signals for each players... done!"])
-	
-	match game_mode_selected:
-		"musical_mode":
-			start_musical_mode()
-		"endless_mode":
-			start_endless_mode.rpc()
+	create_notes()
+	$Countdown.start()
 
-@rpc("authority", "call_local", "reliable")
-func start_endless_mode():
-	Logger.console(3, ["Selected mode is Endless Mode."])
-	mode = preload("res://scenes/world/game_modes/endless_mode.tscn").instantiate()
-	add_child(mode)
-	mode.spawn.connect(_on_spawn_a_star)
+func create_notes():
+	var notes = map[1]
+	for data in notes:
+		var note = hitcircle.instantiate()
+		add_child(note)
+		note.spawned.connect(_on_spawned)
 
-#@rpc("authority", "call_local", "reliable")
-func start_musical_mode():
-	Logger.console(3, ["Selected mode is Musical Mode."])
-	mode = preload("res://scenes/world/game_modes/musical_mode.tscn").instantiate()
-	add_child(mode)
-	mode.spawn.connect(_on_spawn_a_star)
-	
+		var x_y = _scale_coordinates(int(data['x']), int(data['y']))
+		var time = (float(data['time']) / 1000) - (2 + $Countdown.time_left)
+		var type = int(data['type'])
+		note.create_a_note(x_y, time, type)
+		
+func _on_spawned(note):
+	add_child(note)
+
+func _scale_coordinates(original_x: float, original_y: float) -> Vector2:
+		var original_min_x = 0.0
+		var original_max_x = 512.0
+		var target_min_x = 0.0
+		var target_max_x = 1152.0
+		
+		var original_min_y = 0.0
+		var original_max_y = 384.0
+		var target_min_y = 0.0
+		var target_max_y = 648.0
+		
+		var scaled_x = lerp(target_min_x, target_max_x, inverse_lerp(original_min_x, original_max_x, original_x))
+		var scaled_y = lerp(target_min_y, target_max_y, inverse_lerp(original_min_y, original_max_y, original_y))
+		
+		return Vector2(scaled_x, scaled_y)
+
+
+func _on_finished():
+	print('win')
 	
 func _on_spawn_a_star(star):
 	add_child(star)
 	
-func _on_gameover_signal(player):
-	var instance = AudioStreamPlayer.new()
-	instance.stream = stream
-	add_child(instance)
-	instance.play()
+func _on_gameover_signal():
 	var scene = load("res://scenes/gameover.tscn").instantiate()
-	get_tree().root.add_child(scene)
-	player.queue_free()
-	mode.queue_free()

@@ -16,7 +16,7 @@
 extends Node
 signal send_maps(maps)
 
-const songs_directory: String = "maps/"
+const songs_directory: String = "Songs/"
 var dir: DirAccess            = DirAccess.open(".")
 var songs_dir: DirAccess
 
@@ -38,6 +38,28 @@ func read_songs_directory():
 	if songs_dir:
 		Logger.console(3, ["Reading Songs directory..."])
 		return songs_dir.get_directories()
+
+func read_song(path: String):
+	var song_path = DirAccess.open(songs_directory + path)
+	var ddb_files = []
+	for song in song_path.get_files():
+		if song.to_lower().ends_with('.ddb'):
+			ddb_files.append(song)
+
+	var file = FileAccess.open(concat_paths([songs_directory, path, ddb_files[0]]), FileAccess.READ)
+	var beatmap = read_osu_file(song_path, file)
+
+	AudioManager.play(beatmap[0])
+
+	return beatmap
+
+func play(map: Array):
+	if len(map) < 2:
+		return 1
+	var audio = map[0]
+	AudioManager.play(audio)
+
+
 	
 func get_unconverted_osz_files():
 	if songs_dir:
@@ -46,10 +68,9 @@ func get_unconverted_osz_files():
 			if song.to_lower().ends_with(".osz"):
 				osz_files.append(song)
 
-		return osz_files
 
 func read_osu_file(song: DirAccess, osu: FileAccess):
-	if osu.get_length() == 0:
+	if !osu:
 		return
 	if "ddbullet file format v1" not in osu.get_line():
 		return
@@ -66,8 +87,14 @@ func read_osu_file(song: DirAccess, osu: FileAccess):
 		if "[General]" in line:
 			current_metadata = "General"
 			continue
+		if "[Metadata]" in line:
+			current_metadata = "Metadata"
+			continue
 		if "[HitObjects]" in line:
 			current_metadata = "HitObjects"
+			continue
+		if "" in line:
+			current_metadata = ""
 			continue
 
 		match current_metadata:
@@ -75,6 +102,11 @@ func read_osu_file(song: DirAccess, osu: FileAccess):
 				var key_value = line.split(':')
 				if len(key_value) == 2:
 					metadata["General"][key_value[0]] = key_value[1]
+
+			"Metadata":
+				var key_value = line.split(':')
+				if len(key_value) == 2:
+					metadata["Metadata"][key_value[0]] = key_value[1]
 
 			"HitObjects":
 				var raw_data = line.split(',')
