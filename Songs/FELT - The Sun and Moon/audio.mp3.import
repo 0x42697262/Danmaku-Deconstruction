@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cohc077m5mmsv"
+path="res://.godot/imported/audio.mp3-f55ae53be4ecca337188ced60a62e3d8.mp3str"
+
+[deps]
+
+source_file="res://Songs/FELT - The Sun and Moon/audio.mp3"
+dest_files=["res://.godot/imported/audio.mp3-f55ae53be4ecca337188ced60a62e3d8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
