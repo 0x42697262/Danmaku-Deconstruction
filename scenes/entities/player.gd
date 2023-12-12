@@ -12,7 +12,7 @@ func _ready():
 		set_multiplayer_authority(str(name).to_int())
 		Logger.console(0, ["Set", self, "Multiplayer Authority to", name])
 		$sprite.texture = TextureManager.get_planet(randi_range(1,8))
-		hide_mouse(true)
+		GameManager.hide_mouse(true)
 	
 func _input(event):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
@@ -24,15 +24,6 @@ func _process(delta):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		position.x = clamp(position.x, 0, 1152)
 		position.y = clamp(position.y, 0, 648)
-#
-func hide_mouse(value: bool):
-	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
-		if value == true:
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-			Logger.console(0, [self, "mouse cursor set to HIDDEN"])
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			Logger.console(0, [self, "mouse cursor set to VISIBLE"])
 
 func take_damage(damage: int = 3):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
@@ -51,7 +42,7 @@ func heal(hp: int = 1):
 
 @rpc("any_peer", "call_local")
 func dead():
-	hide_mouse(false)
+	GameManager.hide_mouse(false)
 	is_alive = false
 	explode()
 	queue_free()
