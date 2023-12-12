@@ -12,26 +12,6 @@ func _ready():
 	create_notes()
 	$Countdown.start()
 
-	Logger.console(3, ["Match started!"])
-	
-func _on_countdown_timeout():
-	var players = get_tree().get_nodes_in_group("players")
-	for player in players:
-		player.died.connect(_on_spawned)
-	if !map:
-		GameManager.game_error.emit("No beatmap selected.")
-		return
-	if len(map) < 2:
-		GameManager.game_error.emit("Missing beatmap properties")
-		return
-
-	var audio = map[0]
-	var notes = get_tree().get_nodes_in_group("notes")
-	AudioManager.play(audio)
-	is_playing = true
-	for note in notes:
-		note.start()
-
 func create_notes():
 	var notes = map[1]
 	for data in notes:
@@ -66,3 +46,9 @@ func _scale_coordinates(original_x: float, original_y: float) -> Vector2:
 
 func _on_finished():
 	print('win')
+	
+func _on_spawn_a_star(star):
+	add_child(star)
+	
+func _on_gameover_signal():
+	var scene = load("res://scenes/gameover.tscn").instantiate()
