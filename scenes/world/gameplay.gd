@@ -16,7 +16,7 @@ func create_notes():
 	var notes = map[1]
 	for data in notes:
 		var note = hitcircle.instantiate()
-		add_child(note)
+		$Bullets.add_child(note)
 		note.spawned.connect(_on_player_died)
 
 		var x_y = _scale_coordinates(int(data['x']), int(data['y']))
@@ -25,13 +25,10 @@ func create_notes():
 		note.create_a_note(x_y, time, type)
 		
 func _on_spawned(note):
-	add_child(note)
+	$Bullets.add_child(note)
 	
 func _on_player_died(explosion):
-	add_child(explosion)
-	var len_players = len($Players.get_children())
-	#if len_players == 0:
-		#AudioManager.stop()
+	$Bullets.add_child(explosion)
 
 
 func _on_gameover():
@@ -77,8 +74,7 @@ func _on_finished():
 	print('win')
 
 func _on_player_health_changed(current_hp):
-	$HP.text = str(clamp(current_hp,0,1000))
-	print(current_hp)
+	$HP.text = str(current_hp)
 	
 func _on_check_players_timeout():
 	if not GroupsManager.get_group('players'):

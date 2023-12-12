@@ -13,7 +13,7 @@ func _on_spectate_button_down():
 	self.hide()
 
 func _on_exit_button_down():
-	if not GroupsManager.get_players():
+	if not GroupsManager.get_group('players'):
 		exit_game()
 
 	if not multiplayer.is_server():
