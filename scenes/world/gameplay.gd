@@ -32,7 +32,6 @@ func _on_player_died(explosion):
 	var len_players = len($Players.get_children())
 	#if len_players == 0:
 		#AudioManager.stop()
-	
 
 
 func _on_gameover():
@@ -78,7 +77,7 @@ func _on_finished():
 	print('win')
 
 func _on_player_health_changed(current_hp):
-	$HP.text = str(current_hp)
+	$HP.text = str(current_hp.clamp(0,1000))
 
 func _on_gameover_signal():
 	var scene = load("res://scenes/world/gameover.tscn").instantiate()
