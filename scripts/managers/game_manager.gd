@@ -132,16 +132,18 @@ func begin_game():
 		Logger.console(3, ["Spawned player", player.name])
 
 		_index += 1
+	hide_mouse(true)
 
 
 func hide_mouse(value: bool):
 	# if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
+	print(multiplayer.get_unique_id())
 	if value == true:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		Logger.console(0, ["[Game Manager]", self, "mouse cursor set to HIDDEN"])
+		Logger.console(1, ["[Game Manager]", self, "mouse cursor set to HIDDEN"])
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		Logger.console(0, ["[Game Manager]", self, "mouse cursor set to VISIBLE"])
+		Logger.console(1, ["[Game Manager]", self, "mouse cursor set to VISIBLE"])
 
 # ---- Multiplayer related functions ---- #
 
@@ -169,4 +171,4 @@ func _server_disconnected():
 		game_error.emit("Server disconnected")
 		end_game()
 		multiplayer.multiplayer_peer = null
-		hide_mouse(true)
+		hide_mouse(false)

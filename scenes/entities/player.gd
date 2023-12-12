@@ -44,10 +44,12 @@ func heal(hp: int = 1):
 
 @rpc("any_peer", "call_local")
 func dead():
-	GameManager.hide_mouse(false)
 	is_alive = false
 	explode()
 	queue_free()
+
+	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
+		GameManager.hide_mouse(false)
   
 func explode():
 		var explosion = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()
