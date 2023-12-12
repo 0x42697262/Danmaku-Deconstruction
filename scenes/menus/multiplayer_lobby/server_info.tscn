@@ -1,15 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpr8x3t2c1rck"]
+[gd_scene load_steps=7 format=3 uid="uid://cpr8x3t2c1rck"]
 
 [ext_resource type="Theme" uid="uid://bb7v4c8nt3y8l" path="res://assets/themes/text.tres" id="1_pmv1m"]
 [ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="2_nbs1a"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="3_wie0a"]
+[ext_resource type="AudioStream" uid="uid://b8gddqg3v2un0" path="res://assets/Audio/clickbutton2.mp3" id="4_3mdgp"]
 
 [sub_resource type="GDScript" id="GDScript_ul6kx"]
 script/source = "extends HBoxContainer
 
+@onready var clickButton = $clickButton as AudioStreamPlayer
 signal server_join(ip)
 
 func _on_join_pressed():
+	clickButton.play()
 	server_join.emit($server_ip.text)
 
 "
@@ -55,5 +58,11 @@ theme = ExtResource("3_wie0a")
 theme_override_font_sizes/font_size = 10
 text = "Join
 "
+
+[node name="clickButton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3mdgp")
+volume_db = 9.835
+pitch_scale = 0.7
+bus = &"Sfx"
 
 [connection signal="pressed" from="Join" to="." method="_on_join_pressed"]

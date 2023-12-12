@@ -78,4 +78,8 @@ volume_db = 9.835
 pitch_scale = 0.7
 bus = &"Sfx"
 
+[connection signal="mouse_entered" from="TabContainer/Tutorial A" to="." method="_on_tutorial_a_mouse_entered"]
+[connection signal="tab_button_pressed" from="TabContainer/Tutorial B" to="." method="_on_tutorial_b_tab_button_pressed"]
+[connection signal="tab_button_pressed" from="TabContainer/Tutorial C" to="." method="_on_tutorial_c_tab_button_pressed"]
+[connection signal="tab_button_pressed" from="TabContainer/Tutorial D" to="." method="_on_tutorial_d_tab_button_pressed"]
 [connection signal="button_down" from="ExitTutorial" to="." method="_on_exit_tutorial_button_down"]

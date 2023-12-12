@@ -63,6 +63,7 @@ func _on_choice_back_pressed():
 
 func _on_room_back_pressed():
 	clickButton.play()
+	print("Back button pressed")
 	$choice.show()
 	$Room.hide()
 	stop_broadcasting()
@@ -101,10 +102,12 @@ func refresh_lobby():
 		set_current_song.rpc()
 
 func _on_start_pressed():
+	clickButton.play()
 	GameManager.begin_game()
 
 
 func _on_server_join_pressed():
+	clickButton.play()
 	var ip = $Server/IPAddress.text
 	GameManager.join_game(ip, $choice/Nickname.text)
 
