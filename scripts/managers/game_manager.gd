@@ -135,22 +135,6 @@ func begin_game():
 
 # ---- Multiplayer related functions ---- #
 
-func check_alive_players():
-	var gameplay = get_node("/root/Gameplay")
-	if gameplay:
-		if !gameplay.is_playing:
-			return
-
-	var players_group = get_tree().get_nodes_in_group("players")
-	for player in players_group:
-		if player.health_points <= 0:
-			player.hide_mouse(false)
-			player.is_alive = false
-			Logger.console(3, ["Player", self.name, "has died!"])
-			player.queue_free()
-	if len(players) == 0:
-		GameManager.end_game()
-
 func _player_connected(id):
 		Logger.console(3, ["[Game Manager] Player", player_name, id, "connected." ])
 		register_player.rpc_id(id, player_name)

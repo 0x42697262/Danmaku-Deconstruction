@@ -9,3 +9,5 @@ func _on_spectate_button_down():
 func _on_exit_button_down():
 	SceneManager.switch_to_main_menu()
 	multiplayer.multiplayer_peer = null
+	AudioManager.stop()
+	get_node("/root/Gameplay").queue_free()
