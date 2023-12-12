@@ -43,6 +43,23 @@ func _scale_coordinates(original_x: float, original_y: float) -> Vector2:
 		
 		return Vector2(scaled_x, scaled_y)
 
+func _on_countdown_timeout():
+	var players = get_tree().get_nodes_in_group("players")
+	for player in players:
+		player.died.connect(_on_spawned)
+	if !map:
+		GameManager.game_error.emit("No beatmap selected.")
+		return
+	if len(map) < 2:
+		GameManager.game_error.emit("Missing beatmap properties")
+		return
+
+	var audio = map[0]
+	var notes = get_tree().get_nodes_in_group("notes")
+	AudioManager.play(audio)
+	is_playing = true
+	for note in notes:
+		note.start()
 
 func _on_finished():
 	print('win')
@@ -51,4 +68,4 @@ func _on_spawn_a_star(star):
 	add_child(star)
 	
 func _on_gameover_signal():
-	var scene = load("res://scenes/gameover.tscn").instantiate()
+	var scene = load("res://scenes/world/gameover.tscn").instantiate()
