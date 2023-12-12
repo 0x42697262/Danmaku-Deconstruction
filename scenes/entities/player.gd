@@ -34,7 +34,7 @@ func hide_mouse(value: bool):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			Logger.console(0, [self, "mouse cursor set to VISIBLE"])
 
-func take_damage(damage: int = 10):
+func take_damage(damage: int = 3):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points -= damage
 		Logger.console(1, ["Decreased HP for", self.name, "New HP:", self.health_points])
