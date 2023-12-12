@@ -6,7 +6,7 @@ extends Control
 
 @export_enum("Master","Music","Sfx") var bus_name :String
 
-var bus_index : int=0
+var bus_index : int = 0
 
 func _ready():
 	MasterSlider.value_changed.connect(on_value_changed) 
@@ -22,13 +22,12 @@ func set_num_label_text() -> void:
 	
 func get_bus_name_by_index()-> void:
 	bus_index= AudioServer.get_bus_index(bus_name)
-	bus_index += 1
+	#bus_index += 1
 	
 func set_slider_value() -> void:
 	MasterSlider.value = db_to_linear(AudioServer.get_bus_volume_db (bus_index))
 	set_num_label_text()
 
-	
 	
 func on_value_changed(value : float) ->void:
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))

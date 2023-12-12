@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bstsg8hhpsw81"]
+[gd_scene load_steps=6 format=3 uid="uid://bstsg8hhpsw81"]
 
 [ext_resource type="Script" path="res://scenes/Option Menu/OptionsMenu.gd" id="1_fklcn"]
 [ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="2_f4dc3"]
+[ext_resource type="Texture2D" uid="uid://brgj1rw7ekjsw" path="res://assets/Backgrounds/Subtract (1).png" id="2_rahat"]
 [ext_resource type="PackedScene" uid="uid://pqerxnq3udia" path="res://scenes/Option Menu/settings_tab_container.tscn" id="3_ofarw"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="4_hl2nh"]
 
@@ -26,18 +27,17 @@ theme_override_constants/margin_top = 110
 theme_override_constants/margin_right = 130
 theme_override_constants/margin_bottom = 110
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
-mouse_filter = 2
-color = Color(0.756863, 0.827451, 0.996078, 0.372549)
+texture = ExtResource("2_rahat")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
+theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_bottom = 30
 
 [node name="Label" type="Label" parent="MarginContainer/MarginContainer"]
 layout_direction = 1
