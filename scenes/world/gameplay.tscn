@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://de3fcc1ng16a7"]
+[gd_scene load_steps=9 format=3 uid="uid://de3fcc1ng16a7"]
 
 [ext_resource type="Script" path="res://scenes/world/gameplay.gd" id="1_ggn7s"]
 [ext_resource type="Texture2D" uid="uid://djpbgww8jaq66" path="res://assets/Backgrounds/Lose Screen.png" id="2_bgpvg"]
 [ext_resource type="PackedScene" uid="uid://dwyg3mdsir4sp" path="res://scenes/world/gameover.tscn" id="2_o18ki"]
+[ext_resource type="Texture2D" uid="uid://brgj1rw7ekjsw" path="res://assets/Backgrounds/Subtract (1).png" id="4_pao8b"]
+[ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="5_vm12c"]
+[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="6_wwyvp"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eb62e"]
 particles_animation = true
@@ -73,4 +76,51 @@ text = "30"
 visible = false
 layout_mode = 1
 
+[node name="ExitDialog" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -108.0
+offset_right = 224.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_pao8b")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ExitDialog"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 70.0
+offset_right = 432.0
+offset_bottom = 97.0
+theme_override_fonts/font = ExtResource("5_vm12c")
+theme_override_font_sizes/font_size = 19
+text = "Are you sure you want to exit?"
+
+[node name="Yes" type="Button" parent="ExitDialog"]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 118.0
+offset_right = 188.0
+offset_bottom = 148.0
+theme = ExtResource("6_wwyvp")
+theme_override_font_sizes/font_size = 12
+text = "Yes"
+
+[node name="No" type="Button" parent="ExitDialog"]
+layout_mode = 0
+offset_left = 253.0
+offset_top = 118.0
+offset_right = 303.0
+offset_bottom = 148.0
+theme = ExtResource("6_wwyvp")
+theme_override_font_sizes/font_size = 12
+text = "No"
+
 [connection signal="timeout" from="Countdown" to="." method="_on_countdown_timeout"]
+[connection signal="button_down" from="ExitDialog/Yes" to="." method="_on_yes_button_down"]

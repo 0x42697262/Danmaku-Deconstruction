@@ -11,6 +11,11 @@ func _ready():
 
 	create_notes()
 	$Countdown.start()
+	$ExitDialog.hide()
+	
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		$ExitDialog.show()
 
 func create_notes():
 	var notes = map[1]
@@ -82,4 +87,9 @@ func _on_player_health_changed(current_hp):
 
 func _on_gameover_signal():
 	var scene = load("res://scenes/world/gameover.tscn").instantiate()
-	
+
+func _on_yes_button_down():
+	AudioManager.stop()
+	SceneManager.switch_to_main_menu()
+	multiplayer.multiplayer_peer = null
+	get_node("/root/Gameplay").queue_free()
