@@ -10,9 +10,9 @@ signal health_changed(current_hp)
 func _ready():
 	if str(name).is_valid_int():
 		set_multiplayer_authority(str(name).to_int())
-		Logger.console(0, ["Set", self, "Multiplayer Authority to", name])
+		Logger.console(0, ["[Game Manager] Set", self, "Multiplayer Authority to", name])
 		$sprite.texture = TextureManager.get_planet(randi_range(1,8))
-		hide_mouse(true)
+		GameManager.hide_mouse(true)
 	
 func _input(event):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
@@ -24,19 +24,11 @@ func _process(delta):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		position.x = clamp(position.x, 0, 1152)
 		position.y = clamp(position.y, 0, 648)
-#
-func hide_mouse(value: bool):
-	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
-		if value == true:
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-			Logger.console(0, [self, "mouse cursor set to HIDDEN"])
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			Logger.console(0, [self, "mouse cursor set to VISIBLE"])
 
 func take_damage(damage: int = 3):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points -= damage
+		clamp(self.health_points, 0, 1000)
 		Logger.console(1, ["Decreased HP for", self.name, "New HP:", self.health_points])
 		health_changed.emit(self.health_points)
 	if self.health_points <= 0:
@@ -46,15 +38,18 @@ func take_damage(damage: int = 3):
 func heal(hp: int = 1):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points += hp
+		clamp(self.health_points, 0, 1000)
 		Logger.console(1, ["Increased HP for", self.name, "New HP:", self.health_points])
 		health_changed.emit(self.health_points)
 
 @rpc("any_peer", "call_local")
 func dead():
-	hide_mouse(false)
 	is_alive = false
 	explode()
 	queue_free()
+
+	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
+		GameManager.hide_mouse(false)
   
 func explode():
 		var explosion = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()
