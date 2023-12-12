@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bh234381koejd"
+path="res://.godot/imported/audio.mp3-8e1cf38c236275169e76c60090c88d0d.mp3str"
+
+[deps]
+
+source_file="res://Songs/FELT - Lost My Way/audio.mp3"
+dest_files=["res://.godot/imported/audio.mp3-8e1cf38c236275169e76c60090c88d0d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://une5b22j1yn7"
+path="res://.godot/imported/audio.mp3-fdaf36e6669dbbbb71df67f9f89785cd.mp3str"
+
+[deps]
+
+source_file="res://Songs/YENA - Hate Rodrigo Feat YUQI of GI-DLE/audio.mp3"
+dest_files=["res://.godot/imported/audio.mp3-fdaf36e6669dbbbb71df67f9f89785cd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

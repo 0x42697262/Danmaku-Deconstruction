@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://wthe02mpsvam"
+path="res://.godot/imported/audio.mp3-4da02fac11ecf287e7440d398b32698d.mp3str"
+
+[deps]
+
+source_file="res://Songs/Shibayan feat 3L - Tiny Little Adiantum/audio.mp3"
+dest_files=["res://.godot/imported/audio.mp3-4da02fac11ecf287e7440d398b32698d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
