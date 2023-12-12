@@ -136,8 +136,6 @@ func begin_game():
 
 
 func hide_mouse(value: bool):
-	# if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
-	print(multiplayer.get_unique_id())
 	if value == true:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		Logger.console(1, ["[Game Manager]", self, "mouse cursor set to HIDDEN"])
