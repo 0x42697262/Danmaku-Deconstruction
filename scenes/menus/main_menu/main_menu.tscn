@@ -8,7 +8,7 @@
 [ext_resource type="Theme" uid="uid://86g371j1l8kt" path="res://assets/themes/questionbutton.tres" id="6_dkaax"]
 [ext_resource type="PackedScene" uid="uid://bstsg8hhpsw81" path="res://scenes/Option Menu/OptionsMenu.tscn" id="7_t31ef"]
 [ext_resource type="PackedScene" uid="uid://q3non506qyqo" path="res://scenes/Option Menu/TutorialMenu.tscn" id="8_staoy"]
-[ext_resource type="AudioStream" uid="uid://cdbip6yu0jxp8" path="res://assets/Audio/JEON SOMI - Fast Forward  Instrumental.mp3" id="9_nxx1f"]
+[ext_resource type="AudioStream" uid="uid://b24swfg02p6be" path="res://assets/Audio/starting-game music.mp3" id="9_wd275"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4tdil"]
 particles_animation = true
@@ -182,7 +182,7 @@ mouse_filter = 1
 visible = false
 layout_mode = 1
 
-[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_nxx1f")
+[node name="Background Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_wd275")
 volume_db = -13.671
 autoplay = true

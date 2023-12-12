@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://q3non506qyqo"]
+[gd_scene load_steps=10 format=3 uid="uid://q3non506qyqo"]
 
 [ext_resource type="Script" path="res://scenes/Option Menu/TutorialMenu.gd" id="1_paj2v"]
-[ext_resource type="FontFile" uid="uid://d6iib252kl1w" path="res://assets/Fonts/Gaegu-Bold.ttf" id="2_oebwq"]
-[ext_resource type="Theme" uid="uid://d26hyohpn50a2" path="res://assets/themes/landingbutton.tres" id="4_u2b0t"]
+[ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="2_hatgc"]
+[ext_resource type="Texture2D" uid="uid://bui0vqrvw7cpx" path="res://assets/Backgrounds/Subtract.png" id="3_srt8y"]
+[ext_resource type="Texture2D" uid="uid://dl1noo6cm5vom" path="res://assets/Backgrounds/Tutorial Pics/Group 28.png" id="4_oxmrj"]
+[ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="4_u2b0t"]
+[ext_resource type="Texture2D" uid="uid://biu47aemcgxwv" path="res://assets/Backgrounds/Tutorial Pics/image 20.png" id="5_srgtu"]
+[ext_resource type="Texture2D" uid="uid://b5663j2okdbgc" path="res://assets/Backgrounds/Tutorial Pics/image 21.png" id="6_kqefx"]
+[ext_resource type="Texture2D" uid="uid://da8xc8qlse732" path="res://assets/Characters/star.png" id="7_qjw0n"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oeqsv"]
+texture = ExtResource("3_srt8y")
 
 [node name="TutorialMenu" type="Control"]
 layout_mode = 3
@@ -18,43 +26,106 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 100.0
-offset_top = 100.0
-offset_right = -100.0
-offset_bottom = -100.0
+offset_left = 163.0
+offset_top = 112.0
+offset_right = -152.0
+offset_bottom = -58.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_oebwq")
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("2_hatgc")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/panel = SubResource("StyleBoxTexture_oeqsv")
 tab_alignment = 1
 
 [node name="Tutorial A" type="TabBar" parent="TabContainer"]
 layout_mode = 2
 
+[node name="Group28" type="Sprite2D" parent="TabContainer/Tutorial A"]
+position = Vector2(420, 196)
+scale = Vector2(0.422163, 0.422163)
+texture = ExtResource("4_oxmrj")
+
+[node name="Label" type="Label" parent="TabContainer/Tutorial A"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 347.0
+offset_right = 822.0
+offset_bottom = 382.0
+theme_override_fonts/font = ExtResource("2_hatgc")
+theme_override_font_sizes/font_size = 20
+text = "CREATE OR JOIN YOUR DESIRED LOBBY TO START PLAYING."
+horizontal_alignment = 1
+
 [node name="Tutorial B" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
+
+[node name="Image20" type="Sprite2D" parent="TabContainer/Tutorial B"]
+position = Vector2(414, 193)
+scale = Vector2(0.39869, 0.39869)
+texture = ExtResource("5_srgtu")
+
+[node name="Label2" type="Label" parent="TabContainer/Tutorial B"]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 340.0
+offset_right = 666.0
+offset_bottom = 368.0
+theme_override_fonts/font = ExtResource("2_hatgc")
+theme_override_font_sizes/font_size = 20
+text = "WAIT FOR THE BULLETS TO START APPEARING."
+horizontal_alignment = 1
 
 [node name="Tutorial C" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
+[node name="Group28" type="Sprite2D" parent="TabContainer/Tutorial C"]
+position = Vector2(414, 190)
+scale = Vector2(0.389103, 0.389103)
+texture = ExtResource("6_kqefx")
+
+[node name="Label" type="Label" parent="TabContainer/Tutorial C"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 332.0
+offset_right = 739.0
+offset_bottom = 370.0
+theme_override_fonts/font = ExtResource("2_hatgc")
+text = "HOVER YOUR MOUSE TO DODGE THE BULLETS WHILE AIMING FOR THE STARS! 
+BE CAREFUL, THEY MIGHT BE TOO MANY TO HANDLE."
+horizontal_alignment = 1
+
 [node name="Tutorial D" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
+
+[node name="Star" type="Sprite2D" parent="TabContainer/Tutorial D"]
+position = Vector2(215, 207)
+texture = ExtResource("7_qjw0n")
+
+[node name="Label" type="Label" parent="TabContainer/Tutorial D"]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 138.0
+offset_right = 709.0
+offset_bottom = 276.0
+theme_override_fonts/font = ExtResource("2_hatgc")
+theme_override_font_sizes/font_size = 30
+text = "COLLECT THIS STAR!
+IT WILL GIVE YOU 
+HP BONUSES
+TO SURVIVE LONGER."
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-offset_left = 142.0
-offset_top = 122.0
-offset_right = 1010.0
-offset_bottom = 166.0
+offset_left = 138.0
+offset_top = 140.0
+offset_right = 1026.0
+offset_bottom = 215.0
 grow_horizontal = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_oebwq")
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("2_hatgc")
+theme_override_font_sizes/font_size = 25
 text = "Tutorial"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -62,13 +133,20 @@ vertical_alignment = 1
 [node name="ExitTutorial" type="Button" parent="."]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-offset_left = 476.0
-offset_top = 476.0
-offset_right = 676.0
-offset_bottom = 526.0
+anchor_left = 0.413194
+anchor_top = 0.734568
+anchor_right = 0.586806
+anchor_bottom = 0.811728
+offset_left = 2.0
+offset_top = 39.0
+offset_right = 2.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme = ExtResource("4_u2b0t")
+theme_override_font_sizes/font_size = 20
 text = "Exit"
 
 [connection signal="button_down" from="ExitTutorial" to="." method="_on_exit_tutorial_button_down"]
