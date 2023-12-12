@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://de3fcc1ng16a7"]
+[gd_scene load_steps=6 format=3 uid="uid://de3fcc1ng16a7"]
 
 [ext_resource type="Script" path="res://scenes/world/gameplay.gd" id="1_ggn7s"]
 [ext_resource type="Texture2D" uid="uid://djpbgww8jaq66" path="res://assets/Backgrounds/Lose Screen.png" id="2_bgpvg"]
+[ext_resource type="PackedScene" uid="uid://dwyg3mdsir4sp" path="res://scenes/world/gameover.tscn" id="2_o18ki"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eb62e"]
 particles_animation = true
@@ -10,12 +11,10 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yt3r0"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(100, 200, 1)
-particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
 
 [node name="Gameplay" type="Control"]
 layout_mode = 3
@@ -25,44 +24,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ggn7s")
-
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.427451, 0.0196078, 0.454902, 1)
-
-[node name="Countdown" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
-[node name="Players" type="Node" parent="."]
-
-[node name="Bullets" type="Node" parent="."]
-
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/entities/player.tscn")
-spawn_path = NodePath("../Players")
-
-[node name="NoteSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("..")
-
-[node name="Gameover" parent="." instance=ExtResource("2_o18ki")]
-visible = false
-layout_mode = 1
-
-[node name="HP" type="Label" parent="."]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 3.0
-offset_right = 45.0
-offset_bottom = 26.0
-text = "30"
-
-[connection signal="timeout" from="Countdown" to="." method="_on_countdown_timeout"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -87,3 +48,29 @@ scale = Vector2(1000, 1000)
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_yt3r0")
 lifetime = 18.49
+
+[node name="Countdown" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Players" type="Node" parent="."]
+
+[node name="Bullets" type="Node" parent="."]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/entities/player.tscn")
+spawn_path = NodePath("../Players")
+
+[node name="HP" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 45.0
+offset_bottom = 26.0
+text = "30"
+
+[node name="Gameover" parent="." instance=ExtResource("2_o18ki")]
+visible = false
+layout_mode = 1
+
+[connection signal="timeout" from="Countdown" to="." method="_on_countdown_timeout"]

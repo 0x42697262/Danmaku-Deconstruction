@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwyg3mdsir4sp"]
 
 [ext_resource type="Script" path="res://scenes/world/gameover.gd" id="1_uyokp"]
-[ext_resource type="Texture2D" uid="uid://biigv1qqs5uh2" path="res://assets/Backgrounds/Subtract.png" id="2_3qucp"]
+[ext_resource type="Texture2D" uid="uid://b14oo6vgy1lpu" path="res://assets/Backgrounds/Subtract.png" id="2_3qucp"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="3_ipx5p"]
 [ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="4_osk6t"]
 

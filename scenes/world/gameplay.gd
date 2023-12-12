@@ -78,6 +78,7 @@ func _on_finished():
 
 func _on_player_health_changed(current_hp):
 	$HP.text = str(clamp(current_hp,0,1000))
+	print(current_hp)
 
 func _on_gameover_signal():
 	var scene = load("res://scenes/world/gameover.tscn").instantiate()
