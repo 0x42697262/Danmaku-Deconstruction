@@ -10,7 +10,7 @@ signal health_changed(current_hp)
 func _ready():
 	if str(name).is_valid_int():
 		set_multiplayer_authority(str(name).to_int())
-		Logger.console(0, ["Set", self, "Multiplayer Authority to", name])
+		Logger.console(0, ["[Game Manager] Set", self, "Multiplayer Authority to", name])
 		$sprite.texture = TextureManager.get_planet(randi_range(1,8))
 		GameManager.hide_mouse(true)
 	
@@ -28,6 +28,7 @@ func _process(delta):
 func take_damage(damage: int = 3):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points -= damage
+		clamp(self.health_points, 0, 1000)
 		Logger.console(1, ["Decreased HP for", self.name, "New HP:", self.health_points])
 		health_changed.emit(self.health_points)
 	if self.health_points <= 0:
@@ -37,6 +38,7 @@ func take_damage(damage: int = 3):
 func heal(hp: int = 1):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points += hp
+		clamp(self.health_points, 0, 1000)
 		Logger.console(1, ["Increased HP for", self.name, "New HP:", self.health_points])
 		health_changed.emit(self.health_points)
 
