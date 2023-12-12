@@ -36,8 +36,9 @@ func _on_timer_timeout():
 
 func _on_body_entered(body): 
 	# if body.name.to_int() in PlayerHPManager.player_health_points:
-	body.take_damage()
-	Logger.console(0, [self, 'hit', body])
+	if body: 
+		body.take_damage()
+		Logger.console(0, [self, 'hit', body])
 	free_memory()
 
 
