@@ -60,13 +60,13 @@ func explode():
 		var explosion = preload("res://scenes/entities/spawner/spawner.tscn").instantiate()
 		explosion.vulnerable        = false
 		explosion.supernova_time    = 0
-		explosion.number_of_bullets = 64
-		explosion.remaining_spawns  = 1
+		explosion.number_of_bullets = 32
+		explosion.remaining_spawns  = 2
 		explosion.bullet_speed      = 150
 		explosion.body_rotation     = 0
-		explosion.spawn_rate        = 0
+		explosion.spawn_rate        = 0.2
 		explosion.global_position   = position
 		explosion.is_star           = false
 
 		died.emit(explosion)
-		explosion.spawn_bullets()
+		explosion.custom_spawn_bullets()

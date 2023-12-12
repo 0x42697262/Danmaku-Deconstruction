@@ -111,7 +111,10 @@ func _on_timer_timeout():
 	if (log_to_console):
 		Logger.console(0, ['Spawned Bullets'])
 
-
+func custom_spawn_bullets():
+	spawn_bullets()
+	remaining_spawns -= 1
+	$Timer.start()
 
 func _on_supernova_timeout():
 	# play explosion animation
@@ -136,3 +139,4 @@ func _on_area_body_entered(body):
 		body.heal()
 		Logger.console(0, [body, "entered.", "Safely despawned", self])
 	
+
