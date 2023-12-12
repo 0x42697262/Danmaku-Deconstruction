@@ -11,21 +11,21 @@ var uranus  = preload("res://assets/Characters/uranus.png") as Texture
 var neptune = preload("res://assets/Characters/neptune.png") as Texture
 
 func get_planet(planet_idx: int) -> Texture:
-  match planet_idx:
-    1:
-      return mercury
-    2:
-      return venus
-    3:
-      return earth
-    4:
-      return mars
-    5:
-      return jupiter
-    6:
-      return saturn
-    7:
-      return uranus
-    8:
-      return neptune
-  return
+	match planet_idx:
+		1:
+			return mercury
+		2:
+			return venus
+		3:
+			return earth
+		4:
+			return mars
+		5:
+			return jupiter
+		6:
+			return saturn
+		7:
+			return uranus
+		8:
+			return neptune
+	return
