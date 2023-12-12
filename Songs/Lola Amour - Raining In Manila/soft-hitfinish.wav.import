@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ijv68r2lr2d8"
+path="res://.godot/imported/soft-hitfinish.wav-db6022f5490847c731f249531a479589.sample"
+
+[deps]
+
+source_file="res://Songs/Lola Amour - Raining In Manila/soft-hitfinish.wav"
+dest_files=["res://.godot/imported/soft-hitfinish.wav-db6022f5490847c731f249531a479589.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

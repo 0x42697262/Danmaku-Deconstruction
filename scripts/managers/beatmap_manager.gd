@@ -78,6 +78,7 @@ func read_osu_file(song: DirAccess, osu: FileAccess):
 	var metadata: Dictionary  = {
 		'General':    {},
 		'HitObjects': [],
+		'Metadata': {},
 		}
 	
 
@@ -93,7 +94,7 @@ func read_osu_file(song: DirAccess, osu: FileAccess):
 		if "[HitObjects]" in line:
 			current_metadata = "HitObjects"
 			continue
-		if "" in line:
+		if len(line) < 4:
 			current_metadata = ""
 			continue
 
@@ -106,6 +107,7 @@ func read_osu_file(song: DirAccess, osu: FileAccess):
 			"Metadata":
 				var key_value = line.split(':')
 				if len(key_value) == 2:
+					print(metadata)
 					metadata["Metadata"][key_value[0]] = key_value[1]
 
 			"HitObjects":

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bpicy7cnn6mvg"
+path="res://.godot/imported/audio.mp3-cc0605c894a3369d69512b5dca761382.mp3str"
+
+[deps]
+
+source_file="res://Songs/The Koxx - A FOOL MOON NIGHT/audio.mp3"
+dest_files=["res://.godot/imported/audio.mp3-cc0605c894a3369d69512b5dca761382.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

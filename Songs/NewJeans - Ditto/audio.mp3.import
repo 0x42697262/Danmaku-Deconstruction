@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://beu5vphsn14yy"
+path="res://.godot/imported/audio.mp3-557af5bd63506217cafb67c180f5ba8d.mp3str"
+
+[deps]
+
+source_file="res://Songs/NewJeans - Ditto/audio.mp3"
+dest_files=["res://.godot/imported/audio.mp3-557af5bd63506217cafb67c180f5ba8d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

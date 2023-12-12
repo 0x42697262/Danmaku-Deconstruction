@@ -74,6 +74,7 @@ text = "30"
 
 [node name="Gameover" parent="." instance=ExtResource("2_o18ki")]
 visible = false
+top_level = true
 layout_mode = 1
 
 [node name="ExitDialog" type="TextureRect" parent="."]

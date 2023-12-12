@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cuvtdlfj8ecog"
+path="res://.godot/imported/audio.mp3-b7dc5e6ba5ff5c02681e824208ef4658.mp3str"
+
+[deps]
+
+source_file="res://Songs/ShinRa-Bansho - MY Heart Rate/audio.mp3"
+dest_files=["res://.godot/imported/audio.mp3-b7dc5e6ba5ff5c02681e824208ef4658.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
