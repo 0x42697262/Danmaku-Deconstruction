@@ -25,10 +25,12 @@ texture = ExtResource("6_15ch3")
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q5yuo"]
 properties/0/path = NodePath(".:song_list_index")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/sync = true
+properties/0/watch = false
 properties/1/path = NodePath(".:song_path")
 properties/1/spawn = true
-properties/1/replication_mode = 1
+properties/1/sync = true
+properties/1/watch = false
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -59,61 +61,67 @@ theme_override_fonts/font = ExtResource("5_rpjq4")
 theme_override_font_sizes/font_size = 20
 
 [node name="choice" type="Panel" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Nickname" type="LineEdit" parent="choice"]
 layout_mode = 0
-offset_left = 384.0
-offset_top = 128.0
-offset_right = 777.0
-offset_bottom = 180.0
+offset_left = 324.0
+offset_top = 188.0
+offset_right = 848.0
+offset_bottom = 248.0
 scale = Vector2(0.977749, 1.17928)
 theme = ExtResource("4_ja0lf")
-text = "DaBirb"
+theme_override_fonts/font = ExtResource("7_gumfl")
+text = "TYPE YOUR NICKNAME"
 placeholder_text = "nickname"
 alignment = 1
 
 [node name="Host" type="Button" parent="choice"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-offset_left = 384.0
-offset_top = 248.0
-offset_right = 768.0
-offset_bottom = 384.0
+offset_left = 447.0
+offset_top = 321.0
+offset_right = 697.0
+offset_bottom = 381.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_f1sdw")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 30
 text = "Host"
 
 [node name="Join" type="Button" parent="choice"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-offset_left = 384.0
-offset_top = 440.0
-offset_right = 768.0
-offset_bottom = 576.0
+offset_left = 448.0
+offset_top = 403.0
+offset_right = 698.0
+offset_bottom = 463.0
 theme = ExtResource("6_f1sdw")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 30
 text = "Join"
 
 [node name="choice_back" type="Button" parent="choice"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 0
-offset_left = 944.0
-offset_top = 536.0
-offset_right = 1144.0
-offset_bottom = 636.0
+offset_left = 861.0
+offset_top = 550.0
+offset_right = 1097.0
+offset_bottom = 600.0
 theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
-text = "Back"
+text = "Back TO MAIN MENU"
 
 [node name="Label" type="Label" parent="choice"]
 layout_mode = 0
-offset_left = 384.0
-offset_top = 88.0
-offset_right = 527.0
-offset_bottom = 114.0
+offset_left = 331.0
+offset_top = 157.0
+offset_right = 474.0
+offset_bottom = 183.0
 theme = ExtResource("4_ja0lf")
 theme_override_colors/font_color = Color(0.941176, 0.705882, 0.247059, 1)
 theme_override_fonts/font = ExtResource("5_rpjq4")
@@ -125,23 +133,23 @@ visible = false
 layout_mode = 0
 
 [node name="room_back" type="Button" parent="Room"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-offset_left = 944.0
-offset_top = 536.0
-offset_right = 1144.0
-offset_bottom = 636.0
+offset_left = 902.0
+offset_top = 555.0
+offset_right = 1102.0
+offset_bottom = 605.0
 theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
 text = "Back"
 
 [node name="Start" type="Button" parent="Room"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-offset_left = 728.0
-offset_top = 536.0
-offset_right = 928.0
-offset_bottom = 636.0
+offset_left = 686.0
+offset_top = 555.0
+offset_right = 886.0
+offset_bottom = 605.0
 theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
 text = "Start"
@@ -187,7 +195,7 @@ horizontal_alignment = 2
 layout_mode = 0
 offset_left = 872.0
 offset_top = 167.0
-offset_right = 1150.0
+offset_right = 1110.0
 offset_bottom = 195.0
 scale = Vector2(0.977749, 1.17928)
 theme = ExtResource("4_ja0lf")
@@ -200,7 +208,7 @@ max_length = 15
 layout_mode = 0
 offset_left = 648.0
 offset_top = 256.0
-offset_right = 1144.0
+offset_right = 1105.0
 offset_bottom = 512.0
 allow_search = false
 
@@ -264,22 +272,22 @@ layout_mode = 0
 [node name="ServerJoin" type="Button" parent="Server"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 0
-offset_left = 1044.0
-offset_top = 240.0
-offset_right = 1144.0
-offset_bottom = 290.0
+offset_left = 998.0
+offset_top = 245.0
+offset_right = 1098.0
+offset_bottom = 295.0
 theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
 disabled = true
 text = "Join"
 
 [node name="ServerBack" type="Button" parent="Server"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 0
-offset_left = 944.0
-offset_top = 536.0
-offset_right = 1144.0
-offset_bottom = 636.0
+offset_left = 896.0
+offset_top = 537.0
+offset_right = 1096.0
+offset_bottom = 587.0
 theme = ExtResource("6_f1sdw")
 theme_override_font_sizes/font_size = 18
 text = "Back"
@@ -298,7 +306,7 @@ text = "Direct Connect:"
 layout_mode = 0
 offset_left = 648.0
 offset_top = 168.0
-offset_right = 1155.0
+offset_right = 1107.0
 offset_bottom = 220.0
 scale = Vector2(0.977749, 1.17928)
 theme = ExtResource("4_ja0lf")
