@@ -11,6 +11,11 @@ func _ready():
 
 	create_notes()
 	$Countdown.start()
+	$ExitDialog.hide()
+	
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		$ExitDialog.show()
 
 func create_notes():
 	var notes = map[1]
@@ -72,6 +77,7 @@ func _on_countdown_timeout():
 
 func _on_finished():
 	print('win')
+	$Winning.show()
 
 func _on_player_health_changed(current_hp):
 	$HP.text = str(current_hp)
@@ -79,3 +85,7 @@ func _on_player_health_changed(current_hp):
 func _on_check_players_timeout():
 	if not GroupsManager.get_group('players'):
 		GameManager.end_game()
+
+
+func _on_no_button_down():
+	$ExitDialog.hide()
