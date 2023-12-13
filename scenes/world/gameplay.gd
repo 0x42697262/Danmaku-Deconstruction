@@ -3,6 +3,8 @@ extends Control
 @export var map = GameManager.get_map() as Array
 @export var is_playing = false as bool
 
+@export var music                 = AudioStreamPlayer.new() as AudioStreamPlayer
+
 var hitcircle = preload("res://scenes/entities/spawner/hitcircle.tscn")
 
 func _ready():
@@ -78,6 +80,7 @@ func _on_countdown_timeout():
 func _on_finished():
 	print('win')
 	$Winning.show()
+	$CheckPlayers.stop()
 
 func _on_player_health_changed(current_hp):
 	$HP.text = str(current_hp)
