@@ -107,7 +107,6 @@ func read_osu_file(song: DirAccess, osu: FileAccess):
 			"Metadata":
 				var key_value = line.split(':')
 				if len(key_value) == 2:
-					print(metadata)
 					metadata["Metadata"][key_value[0]] = key_value[1]
 
 			"HitObjects":
