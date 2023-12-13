@@ -132,6 +132,6 @@ text = "No"
 autostart = true
 
 [connection signal="timeout" from="Countdown" to="." method="_on_countdown_timeout"]
-[connection signal="button_down" from="ExitDialog/Yes" to="." method="_on_yes_button_down"]
+[connection signal="pressed" from="ExitDialog/Yes" to="." method="_on_yes_pressed"]
 [connection signal="button_down" from="ExitDialog/No" to="." method="_on_no_button_down"]
 [connection signal="timeout" from="CheckPlayers" to="." method="_on_check_players_timeout"]

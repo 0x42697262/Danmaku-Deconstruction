@@ -89,3 +89,11 @@ func _on_check_players_timeout():
 
 func _on_no_button_down():
 	$ExitDialog.hide()
+
+
+func _on_yes_pressed():
+	AudioManager.stop()
+	SceneManager.switch_to_main_menu()
+	multiplayer.multiplayer_peer = null
+	get_node("/root/Gameplay").queue_free()
+	GameManager.hide_mouse(false)
