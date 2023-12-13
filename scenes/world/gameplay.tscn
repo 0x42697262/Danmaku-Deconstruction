@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/world/gameplay.gd" id="1_ggn7s"]
 [ext_resource type="Texture2D" uid="uid://djpbgww8jaq66" path="res://assets/Backgrounds/Lose Screen.png" id="2_bgpvg"]
 [ext_resource type="PackedScene" uid="uid://dwyg3mdsir4sp" path="res://scenes/world/gameover.tscn" id="2_o18ki"]
-[ext_resource type="PackedScene" uid="uid://eaxgwdiejk6y" path="res://scenes/world/winning.tscn" id="4_m7cjh"]
+[ext_resource type="PackedScene" path="res://scenes/world/winning.tscn" id="4_m7cjh"]
 [ext_resource type="Texture2D" uid="uid://brgj1rw7ekjsw" path="res://assets/Backgrounds/Subtract (1).png" id="4_pao8b"]
 [ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="5_vm12c"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="6_wwyvp"]
