@@ -14,7 +14,6 @@ func _ready():
 	Logger.console(-1, [self, $Timer, "started with lifetime", lifetime])
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if use_velocity:
 		position += velocity.normalized() * speed * delta
@@ -25,9 +24,6 @@ func _process(delta):
 
 func free_memory():
 	queue_free()
-	# self.monitoring = false
-	# self.monitorable = false
-	# self.visible = false
 
 func _on_timer_timeout():
 	Logger.console(-1, ["Freeing", self, "on _on_timer_timeout"])
@@ -35,7 +31,6 @@ func _on_timer_timeout():
  
 
 func _on_body_entered(body): 
-	# if body.name.to_int() in PlayerHPManager.player_health_points:
 	if body: 
 		body.take_damage()
 		Logger.console(0, [self, 'hit', body])
