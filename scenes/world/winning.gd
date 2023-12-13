@@ -5,3 +5,4 @@ func _on_return_button_down():
 	SceneManager.switch_to_main_menu()
 	multiplayer.multiplayer_peer = null
 	get_node("/root/Gameplay").queue_free()
+	GameManager.hide_mouse(false)
