@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://eaxgwdiejk6y"]
+[gd_scene load_steps=5 format=3 uid="uid://eaxgwdiejk6y"]
 
+[ext_resource type="Script" path="res://scenes/world/winning.gd" id="1_pp13a"]
 [ext_resource type="Texture2D" uid="uid://bwvbqdqif7n51" path="res://assets/Backgrounds/Subtract(2).png" id="1_wom70"]
 [ext_resource type="FontFile" uid="uid://bjbpwr6l3g772" path="res://assets/Fonts/Broken-Console-Bold.ttf" id="2_bhqqd"]
 [ext_resource type="Theme" uid="uid://dacmty5ntaml6" path="res://assets/themes/landingbutton.tres" id="3_gmkoe"]
@@ -13,6 +14,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pp13a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_wom70")
@@ -39,3 +41,5 @@ offset_bottom = 80.0
 grow_horizontal = 2
 theme = ExtResource("3_gmkoe")
 text = "Return "
+
+[connection signal="button_down" from="Return" to="." method="_on_return_button_down"]

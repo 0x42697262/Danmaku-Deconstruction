@@ -77,6 +77,7 @@ func _on_countdown_timeout():
 
 func _on_finished():
 	print('win')
+	$Winning.show()
 
 func _on_player_health_changed(current_hp):
 	$HP.text = str(current_hp)
@@ -84,3 +85,7 @@ func _on_player_health_changed(current_hp):
 func _on_check_players_timeout():
 	if not GroupsManager.get_group('players'):
 		GameManager.end_game()
+
+
+func _on_no_button_down():
+	$ExitDialog.hide()

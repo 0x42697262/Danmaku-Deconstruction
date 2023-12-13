@@ -75,8 +75,7 @@ offset_bottom = 248.0
 scale = Vector2(0.977749, 1.17928)
 theme = ExtResource("4_ja0lf")
 theme_override_fonts/font = ExtResource("7_gumfl")
-text = "TYPE YOUR NICKNAME"
-placeholder_text = "nickname"
+placeholder_text = "TYPE YOUR NICKNAME"
 alignment = 1
 
 [node name="Host" type="Button" parent="choice"]
