@@ -13,6 +13,18 @@ func _ready():
 	Logger.console(0, ["Game Started"])
 	handle_connecting_signal()
 
+## Escape closes an open sub-menu, or quits the game from the landing page so
+## there is always a keyboard way to leave the game (issue #41).
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		if OptionMenu.visible:
+			on_exit_options_menu()
+		elif TutorialMenu.visible:
+			on_exit_tutorial()
+		else:
+			on_exit_press()
+		get_viewport().set_input_as_handled()
+
 func on_play_press() -> void:
 	SceneManager.switch_to_multiplayer_lobby()
 

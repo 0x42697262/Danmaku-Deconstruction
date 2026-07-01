@@ -2,7 +2,8 @@ extends Control
 
 func _on_return_button_down():
 	AudioManager.stop()
-	SceneManager.switch_to_main_menu()
 	multiplayer.multiplayer_peer = null
-	get_node("/root/Gameplay").queue_free()
 	GameManager.hide_mouse(false)
+	if has_node("/root/Gameplay"):
+		get_node("/root/Gameplay").queue_free()
+	SceneManager.switch_to_main_menu()

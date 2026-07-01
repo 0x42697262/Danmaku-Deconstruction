@@ -5,16 +5,18 @@ signal exit
 
 func exit_game():
 		AudioManager.stop()
-		SceneManager.switch_to_main_menu()
 		multiplayer.multiplayer_peer = null
-		get_node("/root/Gameplay").queue_free()
+		GameManager.hide_mouse(false)
+		if has_node("/root/Gameplay"):
+			get_node("/root/Gameplay").queue_free()
+		SceneManager.switch_to_main_menu()
 
 func _on_spectate_button_down():
 	self.hide()
 
 func _on_exit_button_down():
-	if not GroupsManager.get_group('players'):
-		exit_game()
-
-	if not multiplayer.is_server():
+	# The host may only leave once the match is over (no players remain),
+	# otherwise leaving would tear the game down for everyone still playing.
+	# Non-host players can always leave.
+	if not GroupsManager.get_group('players') or not multiplayer.is_server():
 		exit_game()

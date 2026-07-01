@@ -11,7 +11,12 @@ func _ready():
 	if str(name).is_valid_int():
 		set_multiplayer_authority(str(name).to_int())
 		Logger.console(0, ["[Game Manager] Set", self, "Multiplayer Authority to", name])
-		$sprite.texture = TextureManager.get_planet(randi_range(1,8))
+		# Pick the sprite deterministically from the peer id so every device
+		# renders the same planet for a given player. Using randi_range() here
+		# meant each peer rolled its own sprite, so a player looked different on
+		# every screen (issue #38).
+		var planet_idx = (abs(str(name).hash()) % 8) + 1
+		$sprite.texture = TextureManager.get_planet(planet_idx)
 		GameManager.hide_mouse(true)
 	
 func _input(event):

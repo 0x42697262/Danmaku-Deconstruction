@@ -17,8 +17,9 @@ func get_ipv4_address() -> String:
 
 
 func broadcast_address() -> String:
-	var address = get_ipv4_address()
-	var parts = address.split('.')
-	parts[3] = '255'
-
-	return '.'.join(parts)
+	# Use the limited (link-local) broadcast address instead of a /24 directed
+	# broadcast. Computing "x.x.x.255" only reaches hosts on a /24 subnet, so
+	# discovery failed on larger private ranges such as 172.16.0.0/12 or
+	# 10.0.0.0/8 (issue #51). 255.255.255.255 reaches every host on the local
+	# link regardless of the subnet mask.
+	return "255.255.255.255"

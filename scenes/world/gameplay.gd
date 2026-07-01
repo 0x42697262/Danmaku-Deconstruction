@@ -17,7 +17,36 @@ func _ready():
 	
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		$ExitDialog.show()
+		if $ExitDialog.visible:
+			_hide_exit_dialog()
+		else:
+			_show_exit_dialog()
+
+## Returns the player node controlled on this device, or null if it no longer
+## exists (i.e. the local player has died and is spectating).
+func _get_local_player():
+	var players = GroupsManager.get_group('players')
+	for player in players:
+		if multiplayer.multiplayer_peer == null or str(player.name) == str(multiplayer.get_unique_id()):
+			return player
+	return null
+
+func _is_local_player_alive() -> bool:
+	return _get_local_player() != null
+
+func _show_exit_dialog():
+	$ExitDialog.show()
+	GameManager.hide_mouse(false)
+	var player = _get_local_player()
+	if player:
+		player.visible = false
+
+func _hide_exit_dialog():
+	$ExitDialog.hide()
+	var player = _get_local_player()
+	if player:
+		player.visible = true
+		GameManager.hide_mouse(true)
 
 func create_notes():
 	var notes = map[1]
@@ -78,8 +107,11 @@ func _on_countdown_timeout():
 		note.start()
 
 func _on_finished():
-	print('win')
-	$Winning.show()
+	# The song reached its end: everyone still alive has survived the beatmap.
+	# Dead players are spectating and should keep seeing the game-over screen
+	# instead of the congratulations screen (issue #62).
+	if _is_local_player_alive():
+		$Winning.show()
 	$CheckPlayers.stop()
 
 func _on_player_health_changed(current_hp):
@@ -87,11 +119,19 @@ func _on_player_health_changed(current_hp):
 	
 func _on_check_players_timeout():
 	if not GroupsManager.get_group('players'):
-		GameManager.end_game()
+		# Everyone has been eliminated. Instead of snapping straight back to the
+		# main menu, end the round and show the game-over end screen so there is
+		# a proper transition with a Return/Exit button (issues #44/#50).
+		$CheckPlayers.stop()
+		AudioManager.stop()
+		is_playing = false
+		$Winning.hide()
+		$ExitDialog.hide()
+		$Gameover.show()
 
 
 func _on_no_button_down():
-	$ExitDialog.hide()
+	_hide_exit_dialog()
 
 
 func _on_yes_pressed():
