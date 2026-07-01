@@ -40,7 +40,7 @@ func _ready():
 	if is_star:
 		$supernova.start()
 	
-	Logger.console(0, ['Instantiated', self, "with supernova time of", supernova_time, 
+	GameLogger.console(0, ['Instantiated', self, "with supernova time of", supernova_time, 
 						"seconds -- despawn time", despawn_time, "seconds -- spawn rate of", spawn_rate, "seconds"])
 						
 func _process(delta):
@@ -51,7 +51,7 @@ func random_rotations():
 	rotations = []
 	for _i in range(0, number_of_bullets):
 		rotations.append(randi_range(min_rotation, max_rotation))
-	Logger.console(-1, [self, "using random rotations with values:", rotations])
+	GameLogger.console(-1, [self, "using random rotations with values:", rotations])
 
 func distributed_rotations():
 	rotations = []
@@ -60,7 +60,7 @@ func distributed_rotations():
 		var difference = max_rotation - min_rotation
 		rotations.append((fraction * difference) + min_rotation + rotation_degrees)
 	
-	Logger.console(-1, [self, "using distributed rotations with values:", rotations])
+	GameLogger.console(-1, [self, "using distributed rotations with values:", rotations])
 
 func spawn_bullets():
 	if (is_random):
@@ -92,7 +92,7 @@ func spawn_bullets():
 			#get_parent().add_child(spawned_bullets[i])
 			get_node("/root/Gameplay/Bullets").add_child(spawned_bullets[i])
 		if (log_to_console):
-			Logger.console(0, ["Bullet", i, "@", rotations[i], "degree"])
+			GameLogger.console(0, ["Bullet", i, "@", rotations[i], "degree"])
 	
 	return spawned_bullets
 
@@ -109,7 +109,7 @@ func _on_timer_timeout():
 		free_memory()
 	
 	if (log_to_console):
-		Logger.console(0, ['Spawned Bullets'])
+		GameLogger.console(0, ['Spawned Bullets'])
 
 func custom_spawn_bullets():
 	spawn_bullets()
@@ -124,12 +124,12 @@ func _on_supernova_timeout():
 	$despawn.start()
 	spawn_bullets()
 	remaining_spawns -= 1
-	Logger.console(0, [self, 'has exploded!'])
+	GameLogger.console(0, [self, 'has exploded!'])
 
 
 func _on_despawn_timeout():
 	free_memory()
-	Logger.console(0, ["Auto despawned", self])
+	GameLogger.console(0, ["Auto despawned", self])
 
 
 func _on_area_body_entered(body):
@@ -137,6 +137,6 @@ func _on_area_body_entered(body):
 	# play some animation here that a star just sparkles
 		free_memory()
 		body.heal()
-		Logger.console(0, [body, "entered.", "Safely despawned", self])
+		GameLogger.console(0, [body, "entered.", "Safely despawned", self])
 	
 

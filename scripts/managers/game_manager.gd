@@ -60,11 +60,11 @@ func register_player(new_player_name: String):
 			}
 		player_list_changed.emit()
 
-		Logger.console(3, ["[Game Manager] Registered player:", player_name, player_id])
+		GameLogger.console(3, ["[Game Manager] Registered player:", player_name, player_id])
 
 func unregister_player(player_id: int):
 	if players.has(player_id):
-		Logger.console(3, ["[Game Manager] Unregistered player:", players[player_id]['name'], player_id])
+		GameLogger.console(3, ["[Game Manager] Unregistered player:", players[player_id]['name'], player_id])
 
 		players.erase(player_id)
 		player_list_changed.emit()
@@ -78,7 +78,7 @@ func end_game():
 		game_ended.emit()
 		players.clear()
 		hide_mouse(false)
-		Logger.console(3, ["[Game Manager] Game has ended."])
+		GameLogger.console(3, ["[Game Manager] Game has ended."])
 
 func host_game(new_player_name):
 	player_name   = new_player_name
@@ -86,7 +86,7 @@ func host_game(new_player_name):
 	peer.create_server(PORT, MAX_PEERS)
 	multiplayer.set_multiplayer_peer(peer)
 
-	Logger.console(3, ["[Game Manager] Hosted game on", IP.get_local_addresses()[0]])
+	GameLogger.console(3, ["[Game Manager] Hosted game on", IP.get_local_addresses()[0]])
 
 func join_game(ip, new_player_name):
 	player_name   = new_player_name
@@ -94,7 +94,7 @@ func join_game(ip, new_player_name):
 	peer.create_client(ip, PORT)
 	multiplayer.set_multiplayer_peer(peer)
 
-	Logger.console(3, ["[Game Manager]", new_player_name, "(", ip, ") is trying to join the game..."])
+	GameLogger.console(3, ["[Game Manager]", new_player_name, "(", ip, ") is trying to join the game..."])
 
 @rpc("call_local")
 func load_world():
@@ -129,7 +129,7 @@ func begin_game():
 		# player.get_node('sprite').texture   = TextureManager.get_planet(_index)
 
 		world.get_node("Players").add_child(player)
-		Logger.console(3, ["Spawned player", player.name])
+		GameLogger.console(3, ["Spawned player", player.name])
 
 		_index += 1
 	hide_mouse(true)
@@ -138,15 +138,15 @@ func begin_game():
 func hide_mouse(value: bool):
 	if value == true:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		Logger.console(1, ["[Game Manager]", self, "mouse cursor set to HIDDEN"])
+		GameLogger.console(1, ["[Game Manager]", self, "mouse cursor set to HIDDEN"])
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		Logger.console(1, ["[Game Manager]", self, "mouse cursor set to VISIBLE"])
+		GameLogger.console(1, ["[Game Manager]", self, "mouse cursor set to VISIBLE"])
 
 # ---- Multiplayer related functions ---- #
 
 func _player_connected(id):
-		Logger.console(3, ["[Game Manager] Player", player_name, id, "connected." ])
+		GameLogger.console(3, ["[Game Manager] Player", player_name, id, "connected." ])
 		register_player.rpc_id(id, player_name)
 
 func _player_disconnected(id):
@@ -162,7 +162,7 @@ func _connected_ok():
 		connection_succeeded.emit()
 
 func _connected_fail():
-		multiplayer.set_network_peer(null)
+		multiplayer.multiplayer_peer = null
 		connection_failed.emit()
 
 func _server_disconnected():

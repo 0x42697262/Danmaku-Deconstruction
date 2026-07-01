@@ -10,7 +10,7 @@ signal health_changed(current_hp)
 func _ready():
 	if str(name).is_valid_int():
 		set_multiplayer_authority(str(name).to_int())
-		Logger.console(0, ["[Game Manager] Set", self, "Multiplayer Authority to", name])
+		GameLogger.console(0, ["[Game Manager] Set", self, "Multiplayer Authority to", name])
 		# Pick the sprite deterministically from the peer id so every device
 		# renders the same planet for a given player. Using randi_range() here
 		# meant each peer rolled its own sprite, so a player looked different on
@@ -34,7 +34,7 @@ func take_damage(damage: int = 3):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points -= damage
 		clamp(self.health_points, 0, 1000)
-		Logger.console(1, ["Decreased HP for", self.name, "New HP:", self.health_points])
+		GameLogger.console(1, ["Decreased HP for", self.name, "New HP:", self.health_points])
 		health_changed.emit(self.health_points)
 	if self.health_points <= 0:
 		dead.rpc()
@@ -44,7 +44,7 @@ func heal(hp: int = 1):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		self.health_points += hp
 		clamp(self.health_points, 0, 1000)
-		Logger.console(1, ["Increased HP for", self.name, "New HP:", self.health_points])
+		GameLogger.console(1, ["Increased HP for", self.name, "New HP:", self.health_points])
 		health_changed.emit(self.health_points)
 
 @rpc("any_peer", "call_local")

@@ -8,7 +8,7 @@ extends Node
 @export var groups = ['players', 'servers', 'notes'] as Array
 
 func _ready():
-	Logger.console(3, ["[Group Manager] Ready."])
+	GameLogger.console(3, ["[Group Manager] Ready."])
 
 
 func get_group(group: String) -> Array:

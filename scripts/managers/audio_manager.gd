@@ -21,7 +21,7 @@ func _ready():
 func play(audio_path: String):
 	var stream = _load_stream(audio_path)
 	if stream == null:
-		Logger.console(3, ["[Audio Manager] Failed to load audio:", audio_path])
+		GameLogger.console(3, ["[Audio Manager] Failed to load audio:", audio_path])
 		return
 	music.stream = stream
 	music.play()
@@ -29,7 +29,7 @@ func play(audio_path: String):
 	self.is_currently_playing = true
 	self.current_music = audio_path
 
-	Logger.console(3, ["[Audio Manager] Currently playing:", self.current_music])
+	GameLogger.console(3, ["[Audio Manager] Currently playing:", self.current_music])
 
 ## Loads an audio stream, supporting user-supplied songs that were never
 ## imported by the editor. Godot's load() only works on imported resources, so
@@ -60,14 +60,14 @@ func _load_stream(audio_path: String) -> AudioStream:
 		"ogg", "oga":
 			return AudioStreamOggVorbis.load_from_buffer(bytes)
 
-	Logger.console(3, ["[Audio Manager] Unsupported audio format:", path])
+	GameLogger.console(3, ["[Audio Manager] Unsupported audio format:", path])
 	return null
 
 	
 func stop():
 	music.stop()
 	stopped.emit()
-	Logger.console(3, ["[Audio Manager] Stopped:", self.current_music])
+	GameLogger.console(3, ["[Audio Manager] Stopped:", self.current_music])
 
 func _on_music_finished():
 	finished.emit()

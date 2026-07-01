@@ -32,7 +32,7 @@ func _ready():
 	$IPAddress.text = NetworkManager.get_ipv4_address()
 	
 	if listener_ok != OK:
-		Logger.console(3, ["Failed to bind listener port (error)"])
+		GameLogger.console(3, ["Failed to bind listener port (error)"])
 		$Room/Broadcast.button_pressed = false
 	
 	refresh_songs_list()
@@ -75,7 +75,7 @@ func _on_import_button_pressed():
 func _on_osz_selected(path: String):
 	var folder = BeatmapManager.import_osz(path)
 	if folder == "":
-		Logger.console(3, ["[Multiplayer Lobby] Failed to import beatmap:", path])
+		GameLogger.console(3, ["[Multiplayer Lobby] Failed to import beatmap:", path])
 		return
 	refresh_songs_list()
 	# Auto-select the freshly imported beatmap.
@@ -84,7 +84,7 @@ func _on_osz_selected(path: String):
 			$Room/SongsList.select(i)
 			_on_songs_list_item_selected(i)
 			break
-	Logger.console(3, ["[Multiplayer Lobby] Imported beatmap:", folder])
+	GameLogger.console(3, ["[Multiplayer Lobby] Imported beatmap:", folder])
 
 func _on_host_pressed():
 	$choice.hide()
@@ -143,7 +143,7 @@ func _on_game_ended():
 
 func _on_game_error(error_message):
 	SceneManager.switch_to_main_menu()
-	Logger.console(3, ["[Multiplayer Lobby] Error:", error_message])
+	GameLogger.console(3, ["[Multiplayer Lobby] Error:", error_message])
 
 func refresh_lobby():
 	var players = GameManager.get_player_list()
@@ -181,7 +181,7 @@ func _on_broadcast_address_text_changed(new_text):
 		broadcast_address = new_text
 
 func start_broadcasting():
-	Logger.console(3, ["Bound to Listener Port", listen_port, "Successful"])
+	GameLogger.console(3, ["Bound to Listener Port", listen_port, "Successful"])
 	
 	room_info.name          = GameManager.player_name + "'s Server"
 	room_info.player_count  = GameManager.get_player_count()
@@ -200,16 +200,16 @@ func start_broadcasting():
 	var broadcaster_ok = broadcaster.bind(broadcast_port)
 	
 	if broadcaster_ok != OK:
-		Logger.console(3, ["Failed to bind broadcast port (error)"])
+		GameLogger.console(3, ["Failed to bind broadcast port (error)"])
 		$Room/Broadcast.button_pressed = false
 		
 		return
-	Logger.console(3, ["Bound to Broadcast Port", broadcast_port, "Successful"])
+	GameLogger.console(3, ["Bound to Broadcast Port", broadcast_port, "Successful"])
 	
 	$Room/Broadcaster.start()
 	$Room/Broadcasting.text = "Broadcasting..."
 	
-	Logger.console(3, ["Started Broadcast Timer on", broadcast_address])
+	GameLogger.console(3, ["Started Broadcast Timer on", broadcast_address])
 
 func stop_broadcasting():
 	$Room/Broadcast.button_pressed = false
@@ -221,7 +221,7 @@ func stop_broadcasting():
 		broadcaster.close()
 		$Room/Broadcasting.text = ""
 		
-		Logger.console(3, ["Stopped broadcasting server"])
+		GameLogger.console(3, ["Stopped broadcasting server"])
 
 
 func _on_ip_address_text_changed(new_text):
@@ -280,8 +280,8 @@ func _on_lobby_scanner_timeout():
 				return
 			server_list.add_child(new_server)
 			new_server.joined.connect(_on_server_join_pressed)
-			Logger.console(1, ["Added a new server to the list:", server_ip])
-		Logger.console(0, ["Scanning for IP Addresses..."])
+			GameLogger.console(1, ["Added a new server to the list:", server_ip])
+		GameLogger.console(0, ["Scanning for IP Addresses..."])
 
 
 func _on_lobby_ip_cleaner_timeout():

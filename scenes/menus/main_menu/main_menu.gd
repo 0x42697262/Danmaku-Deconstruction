@@ -10,7 +10,7 @@ extends Control
 @onready var margin_container   = $MarginContainer as MarginContainer
 
 func _ready():
-	Logger.console(0, ["Game Started"])
+	GameLogger.console(0, ["Game Started"])
 	handle_connecting_signal()
 
 ## Escape closes an open sub-menu, or quits the game from the landing page so
@@ -50,7 +50,7 @@ func on_exit_tutorial () -> void:
 	TutorialMenu.visible= false	
 	
 func handle_connecting_signal()->void:
-	Logger.console(0, [self, "connecting signals..."])
+	GameLogger.console(0, [self, "connecting signals..."])
 	
 	PlayButton.button_down.connect(on_play_press)
 	OptionsButton.button_down.connect (on_option_press)
@@ -59,6 +59,6 @@ func handle_connecting_signal()->void:
 	Tutorial.button_down.connect(on_tutorial_press)
 	TutorialMenu.exit_tutorial.connect(on_exit_tutorial)
 	
-	Logger.console(0, [self, "connecting signals... done!"])
+	GameLogger.console(0, [self, "connecting signals... done!"])
 
 	

@@ -21,14 +21,14 @@ var dir: DirAccess            = DirAccess.open(".")
 var songs_dir: DirAccess
 
 func _ready():
-	Logger.console(3, ['Beatmap Manager Started'])
+	GameLogger.console(3, ['Beatmap Manager Started'])
 	if "Songs" not in dir.get_directories():
-		Logger.console(3, ['Songs directory does not exist. Creating...'])
+		GameLogger.console(3, ['Songs directory does not exist. Creating...'])
 		dir.make_dir("Songs/")
 		if "Songs" in dir.get_directories():
-			Logger.console(3, ['Successfully created Songs directory.'])
+			GameLogger.console(3, ['Successfully created Songs directory.'])
 		else:
-			Logger.console(3, ['Fail to create Songs directory.'])
+			GameLogger.console(3, ['Fail to create Songs directory.'])
 	else:
 		songs_dir = DirAccess.open("Songs/")
 
@@ -36,7 +36,7 @@ func _ready():
 	
 func read_songs_directory():
 	if songs_dir:
-		Logger.console(3, ["Reading Songs directory..."])
+		GameLogger.console(3, ["Reading Songs directory..."])
 		return songs_dir.get_directories()
 
 func read_song(path: String):
@@ -148,7 +148,7 @@ func play_all_songs():
 					file.close()
 
 		send_maps.emit(maps)
-		Logger.console(3, ["Playing all", len(songs), "songs for match."])
+		GameLogger.console(3, ["Playing all", len(songs), "songs for match."])
 
 func concat_paths(paths: Array) -> String:
 	return "/".join(paths)
@@ -166,7 +166,7 @@ func concat_paths(paths: Array) -> String:
 func import_osz(osz_path: String) -> String:
 	var reader = ZIPReader.new()
 	if reader.open(osz_path) != OK:
-		Logger.console(3, ["[Beatmap Manager] Could not open archive:", osz_path])
+		GameLogger.console(3, ["[Beatmap Manager] Could not open archive:", osz_path])
 		return ""
 
 	var files = reader.get_files()
@@ -183,7 +183,7 @@ func import_osz(osz_path: String) -> String:
 				audio_names[audio.to_lower()] = true
 
 	if osu_files.is_empty():
-		Logger.console(3, ["[Beatmap Manager] No .osu beatmap found in", osz_path])
+		GameLogger.console(3, ["[Beatmap Manager] No .osu beatmap found in", osz_path])
 		reader.close()
 		return ""
 
@@ -225,14 +225,14 @@ func import_osz(osz_path: String) -> String:
 	reader.close()
 
 	if not wrote_beatmap:
-		Logger.console(3, ["[Beatmap Manager] Failed to write beatmap from", osz_path])
+		GameLogger.console(3, ["[Beatmap Manager] Failed to write beatmap from", osz_path])
 		return ""
 	if not wrote_audio:
-		Logger.console(3, ["[Beatmap Manager] Warning: no audio extracted from", osz_path])
+		GameLogger.console(3, ["[Beatmap Manager] Warning: no audio extracted from", osz_path])
 
 	# Refresh the cached Songs directory handle so the new folder is listed.
 	songs_dir = DirAccess.open(songs_directory)
-	Logger.console(3, ["[Beatmap Manager] Imported beatmap into", dest])
+	GameLogger.console(3, ["[Beatmap Manager] Imported beatmap into", dest])
 	return dest.get_file()
 
 ## Reads the AudioFilename entry from raw .osu file text.

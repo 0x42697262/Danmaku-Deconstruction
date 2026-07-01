@@ -9,9 +9,9 @@ extends Area2D
 
 
 func _ready():
-	Logger.console(-1, ['Instantiated', self])
+	GameLogger.console(-1, ['Instantiated', self])
 	$Timer.start(lifetime)
-	Logger.console(-1, [self, $Timer, "started with lifetime", lifetime])
+	GameLogger.console(-1, [self, $Timer, "started with lifetime", lifetime])
 
 
 func _process(delta):
@@ -26,18 +26,18 @@ func free_memory():
 	queue_free()
 
 func _on_timer_timeout():
-	Logger.console(-1, ["Freeing", self, "on _on_timer_timeout"])
+	GameLogger.console(-1, ["Freeing", self, "on _on_timer_timeout"])
 	free_memory()
  
 
 func _on_body_entered(body): 
 	if body: 
 		body.take_damage()
-		Logger.console(0, [self, 'hit', body])
+		GameLogger.console(0, [self, 'hit', body])
 	free_memory()
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	if free_on_leave == true:
-		Logger.console(-1, ["Freeing", self, "on _on_visible_on_screen_notifier_2d_screen_exited"])
+		GameLogger.console(-1, ["Freeing", self, "on _on_visible_on_screen_notifier_2d_screen_exited"])
 		free_memory()
