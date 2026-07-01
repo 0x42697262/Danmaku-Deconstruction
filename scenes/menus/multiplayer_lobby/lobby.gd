@@ -11,6 +11,9 @@ var server_info     : PackedScene
 var song_list_index : int
 var song_path       : String
 
+var import_button   : Button
+var import_dialog   : FileDialog
+
 @export var address             = NetworkManager.get_ipv4_address() as String
 @export var port                = NetworkManager.PORT
 @export var broadcast_address   = NetworkManager.broadcast_address() as String
@@ -32,11 +35,56 @@ func _ready():
 		Logger.console(3, ["Failed to bind listener port (error)"])
 		$Room/Broadcast.button_pressed = false
 	
+	refresh_songs_list()
+	$Room/BroadcastAddress.text = broadcast_address
+	_setup_import_ui()
+
+## (Re)populates the songs list from the Songs directory.
+func refresh_songs_list():
 	songs_list = BeatmapManager.read_songs_directory()
 	$Room/SongsList.clear()
-	for song in songs_list:
-		$Room/SongsList.add_item(song)
-	$Room/BroadcastAddress.text = broadcast_address
+	if songs_list:
+		for song in songs_list:
+			$Room/SongsList.add_item(song)
+
+## Builds the host-only "Import Beatmap" button and its file dialog in code so
+## players can add their own osu! beatmaps (.osz) from anywhere on disk.
+func _setup_import_ui():
+	import_dialog = FileDialog.new()
+	import_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	import_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	import_dialog.filters = PackedStringArray(["*.osz ; osu! Beatmap Archive"])
+	import_dialog.use_native_dialog = true
+	import_dialog.title = "Import osu! beatmap (.osz)"
+	import_dialog.file_selected.connect(_on_osz_selected)
+	add_child(import_dialog)
+
+	import_button = Button.new()
+	import_button.text = "Import Beatmap"
+	import_button.theme = load("res://assets/themes/landingbutton.tres")
+	import_button.add_theme_font_size_override("font_size", 18)
+	import_button.position = Vector2(648, 516)
+	import_button.size = Vector2(200, 36)
+	import_button.visible = false
+	import_button.pressed.connect(_on_import_button_pressed)
+	$Room.add_child(import_button)
+
+func _on_import_button_pressed():
+	import_dialog.popup_centered(Vector2i(800, 600))
+
+func _on_osz_selected(path: String):
+	var folder = BeatmapManager.import_osz(path)
+	if folder == "":
+		Logger.console(3, ["[Multiplayer Lobby] Failed to import beatmap:", path])
+		return
+	refresh_songs_list()
+	# Auto-select the freshly imported beatmap.
+	for i in $Room/SongsList.item_count:
+		if $Room/SongsList.get_item_text(i) == folder:
+			$Room/SongsList.select(i)
+			_on_songs_list_item_selected(i)
+			break
+	Logger.console(3, ["[Multiplayer Lobby] Imported beatmap:", folder])
 
 func _on_host_pressed():
 	$choice.hide()
@@ -46,7 +94,8 @@ func _on_host_pressed():
 	$Room/Text.show()
 	$Room/BroadcastAddress.show()
 	$Room/Broadcasting.show()
-	
+	import_button.show()
+
 	song_path = $Room/SongsList.get_item_text(0)
 	_on_play_song_timeout()
 
@@ -82,7 +131,8 @@ func _on_connection_success():
 	$Room/Text.hide()
 	$Room/BroadcastAddress.hide()
 	$Room/Broadcasting.hide()
-	
+	import_button.hide()
+
 func _on_connection_failed():
 	$Server/IPAddress.text = "connection failed"
 
